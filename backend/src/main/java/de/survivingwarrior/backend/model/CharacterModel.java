@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Document("Characters")
 public class CharacterModel {
 
     private String name;
@@ -20,6 +21,6 @@ public class CharacterModel {
     private int intelligenz;
     private int dexterity;
     private int gold;
-    private Items[] inventory = new Items[6];
+    private Item[] inventory = new Item[6];
 
 }
