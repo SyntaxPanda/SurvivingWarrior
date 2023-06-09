@@ -24,12 +24,12 @@ export default function NewGamePage() {
     }
 
     function startNewGame() {
-        axios.post("/api/character/newgame", {
+        axios.post("/api/character/newGame", {
             name: name
         })
             .catch(error => console.error(error.message))
 
-        axios.post("/api/story/mode", {
+        axios.post("/api/story/choseMode", {
             storyMode: storyMode
         })
             .catch(error => console.error(error.message))
