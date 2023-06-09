@@ -5,16 +5,16 @@ import StartPage from "./page/StartPage";
 import NewGamePage from "./page/NewGamePage";
 
 function App() {
-  return (
-    <div className="App">
+    return (
+        <div className="App">
 
-      <Routes>
-        <Route path={"/"} element={<StartPage/>}/>
-          <Route path={"/newgame"} element={<NewGamePage/>}/>
-      </Routes>
+            <Routes>
+                <Route path={"/"} element={<StartPage/>}/>
+                <Route path={"/newgame"} element={<NewGamePage/>}/>
+            </Routes>
 
-    </div>
-  );
+        </div>
+    );
 }
 
 export default App;
