@@ -17,5 +17,4 @@ public class Item {
     private int effect;
     private int gold;
     private String image;
-
 }
