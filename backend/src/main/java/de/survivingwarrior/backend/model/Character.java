@@ -3,6 +3,7 @@ package de.survivingwarrior.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
@@ -18,5 +19,4 @@ public class Character {
     private double damage = 3;
     private int gold = 0;
     private Item[] inventory = new Item[6];
-
 }
