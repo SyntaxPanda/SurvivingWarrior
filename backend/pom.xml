@@ -56,6 +56,11 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.sirayan.genericdb-mongo</groupId>
+            <artifactId>generic-db</artifactId>
+            <version>0.0.3</version>
+        </dependency>
     </dependencies>
 
     <build>
