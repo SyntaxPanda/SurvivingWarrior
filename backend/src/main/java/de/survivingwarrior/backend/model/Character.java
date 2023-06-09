@@ -8,19 +8,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document("Characters")
-public class CharacterModel {
+public class Character {
 
     private String name;
     private String id;
-    private int level;
-    private int exp;
-    private int leben;
-    private int schaden;
-    private int vitality;
-    private int strength;
-    private int intelligenz;
-    private int dexterity;
-    private int gold;
+    private int level = 1;
+    private int exp = 0;
+    private int life = 15;
+    private double damage = 3;
+    private int gold = 0;
     private Item[] inventory = new Item[6];
 
 }
