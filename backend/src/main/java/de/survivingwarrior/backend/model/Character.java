@@ -13,10 +13,10 @@ public class Character {
 
     private String name;
     private String id;
-    private int level = 1;
-    private int exp = 0;
-    private int life = 15;
-    private double damage = 3;
-    private int gold = 0;
+    private int level;
+    private int exp;
+    private int life;
+    private int damage;
+    private int gold;
     private Item[] inventory = new Item[6];
 }
