@@ -3,11 +3,13 @@ package de.survivingwarrior.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Items {
+@Document("Items")
+public class Item {
 
     private String name;
     private String id;
