@@ -2,7 +2,6 @@ export type Story = {
     chapter:string,
     name:string,
     id:string,
-    storyMode:string,
     image:string,
     storyText:string,
     option1:string,
