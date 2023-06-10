@@ -6,31 +6,15 @@ export default function NewGamePage() {
     const [name, setName] =
         useState("")
 
-    const [storyMode, setStoryMode] =
-        useState("")
-
     const navigate = useNavigate();
 
     function setCharacterName(e: ChangeEvent<HTMLInputElement>) {
         setName(e.target.value)
     }
 
-    function choseCaveMode() {
-        setStoryMode("Cave")
-    }
-
-    function choseForrestMode() {
-        setStoryMode("Forrest")
-    }
-
     function startNewGame() {
         axios.post("/api/character/newGame", {
-            name: name
-        })
-            .catch(error => console.error(error.message))
-
-        axios.post("/api/story/choseMode", {
-            storyMode: storyMode
+            name
         })
             .catch(error => console.error(error.message))
 
@@ -44,8 +28,7 @@ export default function NewGamePage() {
                     <input type="text" placeholder={"Character Name"} onInput={setCharacterName}/>
                 </div>
                 <div>
-                    <button onClick={choseCaveMode}>Cave</button>
-                    <button onClick={choseForrestMode}>Forrest</button>
+                    Story: Cave
                 </div>
                 <div>
                     <button>Start Game</button>
