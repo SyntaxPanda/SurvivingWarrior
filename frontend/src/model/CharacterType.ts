@@ -5,9 +5,6 @@ export type Character = {
     exp:number,
     life:number,
     damage:number,
-    vitality:number,
-    strength:number,
-    intelligenz:number
-    dexterity:number,
-    gold:number
+    gold:number,
+    actualChapter:string
 }
