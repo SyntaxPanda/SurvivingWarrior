@@ -3,7 +3,7 @@ import {Story} from "./StoryType";
 
 export type Game ={
     id:string,
-    name:string,
+    gameName:string,
     character:Character,
     story:Story
 }
