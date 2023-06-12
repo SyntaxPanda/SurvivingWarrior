@@ -18,6 +18,5 @@ public class Character {
     private int life;
     private int damage;
     private int gold;
-    private String actualChapter;
     private Item[] inventory = new Item[6];
 }
