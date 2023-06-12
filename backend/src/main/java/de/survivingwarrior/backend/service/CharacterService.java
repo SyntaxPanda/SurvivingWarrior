@@ -23,7 +23,6 @@ public class CharacterService {
                 15,
                 3,
                 0,
-                "1-1",
                 inventory
         );
         characterRepo.insert(newCharacter);
