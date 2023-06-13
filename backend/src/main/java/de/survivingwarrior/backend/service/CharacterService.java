@@ -13,7 +13,7 @@ public class CharacterService {
     private final CharacterRepo characterRepo;
     private final GernerateUUID gernerateUUID;
 
-    public void newGameCharacterName(String characterName) {
+    public Character newGameCharacterName(String characterName) {
         Item[] inventory = new Item[6];
         Character newCharacter = new Character(
                 characterName,
@@ -25,6 +25,6 @@ public class CharacterService {
                 0,
                 inventory
         );
-        characterRepo.insert(newCharacter);
+        return characterRepo.insert(newCharacter);
     }
 }
