@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("StoryChapters")
 public class Story {
 
-    private String chapter;
     private String Name;
     private String id;
     private String storyMode;
