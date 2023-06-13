@@ -13,8 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Character {
 
     private String name;
-    @Id
-    private String characterId;
+    private String id;
     private int level;
     private int exp;
     private int life;

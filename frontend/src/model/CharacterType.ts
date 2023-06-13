@@ -2,7 +2,7 @@ import {Item} from "./ItemType";
 
 export type Character = {
     name:string,
-    characterId:string,
+    id:string,
     level:number,
     exp:number,
     life:number,

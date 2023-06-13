@@ -9,29 +9,18 @@ export default function NewGamePage() {
     const [gameName, setGameName] =
     useState("")
 
-    const [characterId, setCharacterId] =
-    useState("")
-
     const [storyId, setStoryId] =
     useState("")
 
     const navigate = useNavigate();
 
-    function setCharacterName(e: ChangeEvent<HTMLInputElement>) {
-        setName(e.target.value)
+    function setCharacterName(es: ChangeEvent<HTMLInputElement>) {
+        setName(es.target.value)
     }
 
-    function setNameGameName(e: ChangeEvent<HTMLInputElement>){
+    function setNameOfGame(e: ChangeEvent<HTMLInputElement>){
         setGameName(e.target.value)
-    }
-
-    function createCharacter(){
-        axios.post("/api/character/newchar", {
-            name
-        })
-            .then(response =>{
-                setCharacterId(response.data.characterId)
-            })
+        console.log(e.target.value)
     }
 
     function newStory(){
@@ -42,26 +31,41 @@ export default function NewGamePage() {
     }
 
     function startNewGame(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        createCharacter()
-        axios.post('/api/game/new', {
-            gameName: gameName,
-            characterId: characterId,
-            storyId: storyId
+        e.preventDefault();
+
+        axios.post("/api/character/newchar", {
+            name
         })
-            .then(response =>
-                navigate("/game/" + response.data.gameId)
-            )
+            .then(response => {
+
+                axios.post('/api/game/new', {
+                    gameName,
+                    characterId: response.data.id,
+                    storyId
+                })
+                    .then(response => {
+                        navigate("/game/" + response.data.gameId);
+                    })
+                    .catch(error => {
+                        // Fehlerbehandlung für den zweiten Axios-Aufruf
+                        console.error(error);
+                    });
+            })
+            .catch(error => {
+                // Fehlerbehandlung für den ersten Axios-Aufruf
+                console.error(error);
+            });
     }
+
 
     return (
         <div>
             <form onSubmit={startNewGame}>
                 <div>
-                    <input type="text" placeholder={"Game Name"} onInput={setNameGameName}/>
+                    <input type="text" placeholder={"Character Name"} value={name} onInput={setCharacterName}/>
                 </div>
                 <div>
-                    <input type="text" placeholder={"Character Name"} onInput={setCharacterName}/>
+                    <input type="text" placeholder={"Game Name"} value={gameName} onInput={setNameOfGame}/>
                 </div>
                 <div>
                     Story: Cave

@@ -19,7 +19,7 @@ export default function GamePage() {
             damage: 0,
             exp: 0,
             gold: 0,
-            characterId: "",
+            id: "",
             level: 0,
             life: 0,
             name: "",
@@ -55,7 +55,7 @@ export default function GamePage() {
     }
 
     useEffect(() => {
-        axios.get("/api/character/" + charId)
+        axios.get("/api/character/" + game.characterId)
             .then(response => {
                 setCharacter(response.data)
             })

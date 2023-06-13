@@ -3,10 +3,9 @@ package de.survivingwarrior.backend.controller;
 import de.survivingwarrior.backend.model.Character;
 import de.survivingwarrior.backend.service.CharacterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/character")
@@ -18,6 +17,11 @@ public class CharacterController {
     @PostMapping("/newchar")
     public Character newGameCharacterName(@RequestBody String characterName){
         return characterService.newGameCharacterName(characterName);
+    }
+
+    @GetMapping("")
+    public Optional<Character> getCharacterById(@RequestBody String id){
+        return characterService.getCharacterById(id);
     }
 
 }

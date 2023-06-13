@@ -15,7 +15,7 @@ public class GameController {
     private final GameService gameService;
 
     @PostMapping("/new")
-    public Game newGame(@RequestBody String gameName, String characterId, String story){
+    public Game newGame(@RequestBody String gameName, @RequestBody String characterId, @RequestBody String story){
         return gameService.newGame(gameName, characterId, story);
     }
 

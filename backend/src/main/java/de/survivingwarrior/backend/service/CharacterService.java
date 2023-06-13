@@ -6,6 +6,8 @@ import de.survivingwarrior.backend.repo.CharacterRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CharacterService {
@@ -26,5 +28,9 @@ public class CharacterService {
                 inventory
         );
         return characterRepo.insert(newCharacter);
+    }
+
+    public Optional<Character> getCharacterById(String id) {
+        return characterRepo.findById(id);
     }
 }
