@@ -1,5 +1,6 @@
 package de.survivingwarrior.backend.controller;
 
+import de.survivingwarrior.backend.model.Character;
 import de.survivingwarrior.backend.service.CharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +15,9 @@ public class CharacterController {
 
     private final CharacterService characterService;
 
-    @PostMapping("/newGame")
-    public void newGameCharacterName(@RequestBody String characterName){
-        characterService.newGameCharacterName(characterName);
+    @PostMapping("/newchar")
+    public Character newGameCharacterName(@RequestBody String characterName){
+        return characterService.newGameCharacterName(characterName);
     }
 
 }
