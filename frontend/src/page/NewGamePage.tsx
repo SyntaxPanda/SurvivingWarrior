@@ -1,9 +1,6 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {Game} from "../model/GameType";
-import {Story} from "../model/StoryType";
-import {Character} from "../model/CharacterType";
 
 export default function NewGamePage() {
     const [name, setName] =
@@ -12,32 +9,11 @@ export default function NewGamePage() {
     const [gameName, setGameName] =
     useState("")
 
-    const [character, setCharacter] =
-    useState<Character>({
-        actualChapter: "",
-        damage: 0,
-        exp: 0,
-        gold: 0,
-        id: "",
-        level: 0,
-        life: 0,
-        name: ""})
+    const [characterId, setCharacterId] =
+    useState("")
 
-    const [story, setStory] =
-    useState<Story>({
-        chapter: "",
-        id: "",
-        image: "",
-        name: "",
-        option1: "",
-        option2: "",
-        option3: "",
-        option4: "",
-        storyText: ""
-    })
-
-    const [game, setGame] =
-    useState<Game>({character: character, story: story, id: "", gameName:""})
+    const [storyId, setStoryId] =
+    useState("")
 
     const navigate = useNavigate();
 
@@ -49,30 +25,33 @@ export default function NewGamePage() {
         setGameName(e.target.value)
     }
 
-    function startNewGame() {
-        axios.post("/api/character/newGame", {
+    function createCharacter(){
+        axios.post("/api/character/newchar", {
             name
         })
             .then(response =>{
-                setCharacter(response.data)
+                setCharacterId(response.data.characterId)
             })
-            .catch(error => console.error(error.message))
+    }
 
+    function newStory(){
         axios.get("/api/story/newStory")
             .then(response =>
-            setStory(response.data)
+                setStoryId(response.data.id)
             )
+    }
 
-        axios.post("/api/game/newGame", {
-            gameName,
-            character,
-            story
+    function startNewGame(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        createCharacter()
+        axios.post('/api/game/new', {
+            gameName: gameName,
+            characterId: characterId,
+            storyId: storyId
         })
-            .then(response =>{
-                setGame(response.data)
-            })
-
-        navigate("/game/" + game.id)
+            .then(response =>
+                navigate("/game/" + response.data.gameId)
+            )
     }
 
     return (
