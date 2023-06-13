@@ -3,6 +3,7 @@ package de.survivingwarrior.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -12,7 +13,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Character {
 
     private String name;
-    private String id;
+    @Id
+    private String characterId;
     private int level;
     private int exp;
     private int life;
