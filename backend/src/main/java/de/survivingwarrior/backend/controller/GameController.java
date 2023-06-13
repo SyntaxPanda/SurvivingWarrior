@@ -1,14 +1,11 @@
 package de.survivingwarrior.backend.controller;
 
-import de.survivingwarrior.backend.model.Character;
 import de.survivingwarrior.backend.model.Game;
-import de.survivingwarrior.backend.model.Story;
 import de.survivingwarrior.backend.service.GameService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,9 +14,14 @@ public class GameController {
 
     private final GameService gameService;
 
-    @PostMapping("/newGame")
-    public Game newGame(@RequestBody String gameName, @RequestBody Character character, @RequestBody Story story){
-        return gameService.newGame(gameName, character, story);
+    @PostMapping("/new")
+    public Game newGame(@RequestBody String gameName, String characterId, String story){
+        return gameService.newGame(gameName, characterId, story);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Game> getGameById(@PathVariable String id){
+        return gameService.getGameById(id);
     }
 
 }
