@@ -1,9 +1,6 @@
-import {Character} from "./CharacterType";
-import {Story} from "./StoryType";
-
 export type Game ={
-    id:string,
+    gameId:string,
     gameName:string,
-    character:Character,
-    story:Story
+    characterId:string,
+    story:string
 }
