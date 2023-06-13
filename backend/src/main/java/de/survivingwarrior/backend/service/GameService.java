@@ -14,13 +14,8 @@ public class GameService {
     private final GameRepo gameRepo;
     private final GernerateUUID gernerateUUID;
 
-    public Game newGame(String gameName, String characterId, String story) {
-        Game game = new Game(
-                gernerateUUID.generateUUID(),
-                gameName,
-                characterId,
-                story
-        );
+    public Game newGame(Game game) {
+        game.setGameId(gernerateUUID.generateUUID());
         return gameRepo.insert(game);
     }
 
