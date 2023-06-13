@@ -9,9 +9,6 @@ export default function NewGamePage() {
     const [gameName, setGameName] =
     useState("")
 
-    const [storyId, setStoryId] =
-    useState("")
-
     const navigate = useNavigate();
 
     function setCharacterName(es: ChangeEvent<HTMLInputElement>) {
@@ -21,13 +18,6 @@ export default function NewGamePage() {
     function setNameOfGame(e: ChangeEvent<HTMLInputElement>){
         setGameName(e.target.value)
         console.log(e.target.value)
-    }
-
-    function newStory(){
-        axios.get("/api/story/newStory")
-            .then(response =>
-                setStoryId(response.data.id)
-            )
     }
 
     function startNewGame(e: FormEvent<HTMLFormElement>) {
@@ -41,7 +31,7 @@ export default function NewGamePage() {
                 axios.post('/api/game/new', {
                     gameName,
                     characterId: response.data.id,
-                    storyId
+                    story: "1-1"
                 })
                     .then(response => {
                         navigate("/game/" + response.data.gameId);

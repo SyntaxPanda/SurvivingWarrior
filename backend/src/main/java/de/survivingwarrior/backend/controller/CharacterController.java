@@ -15,12 +15,12 @@ public class CharacterController {
     private final CharacterService characterService;
 
     @PostMapping("/newchar")
-    public Character newGameCharacterName(@RequestBody String characterName){
-        return characterService.newGameCharacterName(characterName);
+    public Character newGameCharacterName(@RequestBody Character character){
+        return characterService.newGameCharacterName(character);
     }
 
-    @GetMapping("")
-    public Optional<Character> getCharacterById(@RequestBody String id){
+    @GetMapping("/{id}")
+    public Optional<Character> getCharacterById(@PathVariable String id){
         return characterService.getCharacterById(id);
     }
 

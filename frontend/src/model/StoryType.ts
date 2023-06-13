@@ -1,5 +1,4 @@
 export type Story = {
-    chapter:string,
     name:string,
     id:string,
     image:string,

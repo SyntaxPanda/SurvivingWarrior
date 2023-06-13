@@ -28,10 +28,9 @@ export default function GamePage() {
 
     const [story, setStory] =
         useState<Story>({
-            chapter: "",
+            name: "",
             id: "",
             image: "",
-            name: "",
             option1: "",
             option2: "",
             option3: "",
@@ -49,26 +48,20 @@ export default function GamePage() {
         axios.get("/api/game/" + gameId)
             .then(response =>
                 setGame(response.data))
+            .then(() =>
+            setCharId(game.characterId))
+
+            axios.get("/api/character/" + charId)
+                .then(response =>
+                setCharacter(response.data))
+            .then(() =>
+            setStoryId(game.story))
+
+                axios.get("/api/story/" + storyId)
+                    .then(response =>
+                    setStory(response.data))
             .catch(error => console.error(error))
-        setCharId(game.characterId)
-        setStoryId(game.story)
     }
-
-    useEffect(() => {
-        axios.get("/api/character/" + game.characterId)
-            .then(response => {
-                setCharacter(response.data)
-            })
-    })
-
-    useEffect(() => {
-        axios.get("/api/story/" + storyId)
-            .then(response => {
-                setStory(response.data)
-            })
-    })
-
-    useEffect(getGameById)
 
     return (
         <div>

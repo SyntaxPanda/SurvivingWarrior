@@ -15,19 +15,11 @@ public class CharacterService {
     private final CharacterRepo characterRepo;
     private final GernerateUUID gernerateUUID;
 
-    public Character newGameCharacterName(String characterName) {
+    public Character newGameCharacterName(Character character) {
         Item[] inventory = new Item[6];
-        Character newCharacter = new Character(
-                characterName,
-                gernerateUUID.generateUUID(),
-                1,
-                0,
-                15,
-                3,
-                0,
-                inventory
-        );
-        return characterRepo.insert(newCharacter);
+        character.setId(gernerateUUID.generateUUID());
+        character.setInventory(inventory);
+        return characterRepo.insert(character);
     }
 
     public Optional<Character> getCharacterById(String id) {

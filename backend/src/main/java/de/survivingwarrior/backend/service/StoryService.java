@@ -5,13 +5,15 @@ import de.survivingwarrior.backend.repo.StoryRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class StoryService {
 
     private final StoryRepo storyRepo;
 
-    //public Story getStoryChapterById() {
-    //   return storyRepo.findById("1-1");
-    //}
+    public Optional<Story> getStoryChapterById(String id) {
+       return storyRepo.findById(id);
+    }
 }
