@@ -3,6 +3,7 @@ package de.survivingwarrior.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -11,8 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("SaveGames")
 public class Game {
 
-    private String id;
+    @Id
+    private String gameId;
     private String gameName;
-    private Character character;
-    private Story story;
+    private String characterId;
+    private String story;
 }
