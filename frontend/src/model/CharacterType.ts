@@ -1,10 +1,12 @@
+import {Item} from "./ItemType";
+
 export type Character = {
     name:string,
-    id:string,
+    characterId:string,
     level:number,
     exp:number,
     life:number,
     damage:number,
     gold:number,
-    actualChapter:string
+    item:Item[]
 }
