@@ -16,5 +16,5 @@ public class Game {
     private String gameId;
     private String gameName;
     private String characterId;
-    private String story;
+    private String storyId;
 }

@@ -13,6 +13,10 @@ public class StoryService {
 
     private final StoryRepo storyRepo;
 
+    public Story createNewStoryChapter(Story story) {
+        return storyRepo.insert(story);
+    }
+
     public Optional<Story> getStoryChapterById(String id) {
        return storyRepo.findById(id);
     }
