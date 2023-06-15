@@ -13,11 +13,11 @@ import java.util.Optional;
 public class CharacterService {
 
     private final CharacterRepo characterRepo;
-    private final GernerateUUID gernerateUUID;
+    private final GenerateUUID generateUUID;
 
     public Character newGameCharacterName(Character character) {
         Item[] inventory = new Item[6];
-        character.setId(gernerateUUID.generateUUID());
+        character.setId(generateUUID.generateUUID());
         character.setInventory(inventory);
         return characterRepo.insert(character);
     }
