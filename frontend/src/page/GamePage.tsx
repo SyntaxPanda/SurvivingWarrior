@@ -5,8 +5,6 @@ import {Game} from "../model/GameType";
 import {Character} from "../model/CharacterType";
 import {Story} from "../model/StoryType";
 import "../css/GamePage.css"
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 export default function GamePage() {
 
@@ -63,25 +61,25 @@ export default function GamePage() {
             .catch(error => console.error(error));
     }
 
-    function onClickGetNextStoryChapterOption1(){
+    function onClickGetNextStoryChapterOption1() {
         axios.get("/api/story/" + story.option1)
             .then(response =>
-            setStory(response.data))
+                setStory(response.data))
             .catch(error => console.error(error))
     }
 
     function onClickGetNextStoryChapterOption2(){
-        axios.get("/api/story/" + story.option2)
-            .then(response =>
-                setStory(response.data))
-            .catch(error => console.error(error))
+            axios.get("/api/story/" + story.option2)
+                .then(response =>
+                    setStory(response.data))
+                .catch(error => console.error(error))
     }
 
     function onClickGetNextStoryChapterOption3(){
-        axios.get("/api/story/" + story.option3)
-            .then(response =>
-                setStory(response.data))
-            .catch(error => console.error(error))
+            axios.get("/api/story/" + story.option3)
+                .then(response =>
+                    setStory(response.data))
+                .catch(error => console.error(error))
     }
 
     function onClickGetNextStoryChapterOption4(){
