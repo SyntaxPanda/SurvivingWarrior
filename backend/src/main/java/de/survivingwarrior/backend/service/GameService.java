@@ -12,10 +12,10 @@ import java.util.Optional;
 public class GameService {
 
     private final GameRepo gameRepo;
-    private final GernerateUUID gernerateUUID;
+    private final GenerateUUID generateUUID;
 
     public Game newGame(Game game) {
-        game.setGameId(gernerateUUID.generateUUID());
+        game.setGameId(generateUUID.generateUUID());
         return gameRepo.insert(game);
     }
 
