@@ -1,0 +1,41 @@
+[{
+  "_id": "1-1",
+  "name": "The Beginning",
+  "image": "frontend/src/image/BackgroundStory1-1.jpg",
+  "storyText": "Hi ich bin eine Test Story",
+  "option1": "Start",
+  "option2": "Back",
+  "option3": "",
+  "option4": "",
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "Start",
+  "name": "Option1",
+  "image": "",
+  "storyText": "Ich bin die Story von Option1",
+  "option1": "Weiter",
+  "option2": "Weiter2",
+  "option3": "Weiter3",
+  "option4": "Weiter4",
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "Back",
+  "name": "Option2",
+  "image": "",
+  "storyText": "Ich bin die Story von Option2",
+  "option1": "Menu",
+  "option2": "NewGame",
+  "option3": "Help",
+  "option4": "Nix",
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "Weiter",
+  "name": "Start",
+  "image": "",
+  "storyText": "Ich bin die Story von Weiter",
+  "option1": "WeiterWeiter",
+  "option2": "WeiterWeiter2",
+  "option3": "WeiterWeiter3",
+  "option4": "WeiterWeiter4",
+  "_class": "de.survivingwarrior.backend.model.Story"
+}]
