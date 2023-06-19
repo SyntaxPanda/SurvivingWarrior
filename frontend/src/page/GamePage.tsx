@@ -61,6 +61,34 @@ export default function GamePage() {
             .catch(error => console.error(error));
     }
 
+    function onClickGetNextStoryChapterOption1() {
+        axios.get("/api/story/" + story.option1)
+            .then(response =>
+                setStory(response.data))
+            .catch(error => console.error(error))
+    }
+
+    function onClickGetNextStoryChapterOption2(){
+            axios.get("/api/story/" + story.option2)
+                .then(response =>
+                    setStory(response.data))
+                .catch(error => console.error(error))
+    }
+
+    function onClickGetNextStoryChapterOption3(){
+            axios.get("/api/story/" + story.option3)
+                .then(response =>
+                    setStory(response.data))
+                .catch(error => console.error(error))
+    }
+
+    function onClickGetNextStoryChapterOption4(){
+        axios.get("/api/story/" + story.option4)
+            .then(response =>
+                setStory(response.data))
+            .catch(error => console.error(error))
+    }
+
     return (
         <div className={"gamePageBox"}>
             <div className={"menu"}>
@@ -86,16 +114,16 @@ export default function GamePage() {
                 </div>
                 <div className={"storyButtons"}>
                     <div className={"button1"}>
-                        <button className={"buttonHover"}>{story.option1}</button>
+                        <button className={"buttonHover"} onClick={onClickGetNextStoryChapterOption1}>{story.option1}</button>
                     </div>
                     <div className={"button2"}>
-                        <button className={"buttonHover"}>{story.option2}</button>
+                        <button className={"buttonHover"} onClick={onClickGetNextStoryChapterOption2}>{story.option2}</button>
                     </div>
                     <div className={"button3"}>
-                        <button className={"buttonHover"}>{story.option3}</button>
+                        <button className={"buttonHover"} onClick={onClickGetNextStoryChapterOption3}>{story.option3}</button>
                     </div>
                     <div className={"button4"}>
-                        <button className={"buttonHover"}>{story.option4}</button>
+                        <button className={"buttonHover"} onClick={onClickGetNextStoryChapterOption4}>{story.option4}</button>
                     </div>
                 </div>
             </div>
