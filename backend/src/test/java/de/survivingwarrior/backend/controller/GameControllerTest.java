@@ -89,4 +89,32 @@ class GameControllerTest {
                 .andExpect(content().json("[]"));
     }
 
+    @Test
+    @DirtiesContext
+    void saveGame() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/game/new")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        """
+                                {
+                                "gameName": "TestGame",
+                                "characterId": "1",
+                                "storyId": "1-1"
+                                }
+                                """
+                )).andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/game/save")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        """
+                                {
+                                "gameName": "TestGame",
+                                "characterId": "1",
+                                "storyId": "1-4"
+                                }
+                                """
+                ))
+                .andReturn();
+    }
 }
