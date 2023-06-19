@@ -80,4 +80,13 @@ class GameControllerTest {
                                 """
                 )).andExpect(jsonPath("$.gameId").value(game.getGameId()));
     }
+
+    @Test
+    @DirtiesContext
+    void getAllGamesWithEmptyList() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/game/all"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+
 }
