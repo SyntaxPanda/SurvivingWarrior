@@ -5,7 +5,9 @@ import {Game} from "../model/GameType";
 import {Character} from "../model/CharacterType";
 import {Story} from "../model/StoryType";
 import "../css/GamePage.css"
+import Modal from "react-modal";
 
+Modal.setAppElement('#root');
 export default function GamePage() {
     const navigate = useNavigate();
 
@@ -94,10 +96,23 @@ export default function GamePage() {
         navigate("/menu")
    }
 
+   const[isOpen, setIsOpen] = useState(false)
+
+    function openModal(){
+        setIsOpen(true)
+    }
+
+    function closeModal(){
+        setIsOpen(false)
+    }
+
     return (
         <div className={"gamePageBox"}>
+            <Modal isOpen={isOpen}>
+                <button onClick={closeModal}>close</button>
+            </Modal>
             <div className={"menu"}>
-                <button onClick={goToMenuPage}>Menu</button>
+                <button onClick={openModal}>Menu</button>
             </div>
             <div className={"lifeAndExpBox"}>
                 <div className={"lifeBox"}>
