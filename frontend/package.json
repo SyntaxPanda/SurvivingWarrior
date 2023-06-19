@@ -43,5 +43,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "@types/react-modal": "^3.16.0",
+    "react-modal": "^3.16.0"
+  }
 }
