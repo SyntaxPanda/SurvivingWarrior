@@ -30,4 +30,9 @@ public class GameController {
         return gameService.getAllGames();
     }
 
+    @PutMapping("/save")
+    public void saveGame(@RequestBody Game game){
+        gameService.saveGame(game);
+    }
+
 }
