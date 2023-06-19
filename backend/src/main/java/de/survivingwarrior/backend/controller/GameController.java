@@ -5,6 +5,7 @@ import de.survivingwarrior.backend.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -22,6 +23,11 @@ public class GameController {
     @GetMapping("/{id}")
     public Optional<Game> getGameById(@PathVariable String id){
         return gameService.getGameById(id);
+    }
+
+    @GetMapping("/all")
+    public List<Game> getAllGames(){
+        return gameService.getAllGames();
     }
 
 }
