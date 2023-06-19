@@ -102,6 +102,7 @@ export default function GamePage() {
 
     function openSaveGameModal(){
         setSaveGameModal(true)
+        getAllGames()
     }
 
     function closeSaveGameModal(){
