@@ -121,6 +121,13 @@ export default function GamePage() {
             navigate("/")
     }
 
+    const[games, setGames] = useState<Game[]>([])
+    function getAllGames(){
+        axios.get("/api/game/all")
+            .then(response =>
+            setGames(response.data))
+    }
+
     const [saveGameModal ,setSaveGameModal] = useState(false)
 
     return (
@@ -128,7 +135,14 @@ export default function GamePage() {
             <Modal isOpen={isOpen}>
                 <button onClick={openSaveGameModal}>Save</button>
                 <Modal isOpen={saveGameModal}>
-
+                    {games.map((game) => {
+                        return (
+                            <div className={"post-content"}>
+                                    <h3>{game.gameName}</h3>
+                                    <p>{game.storyId}</p>
+                            </div>
+                        );
+                    })}
                     <button onClick={saveGame}>Save now</button>
                     <button onClick={closeSaveGameModal}>Close</button>
                 </Modal>
