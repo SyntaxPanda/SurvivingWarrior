@@ -8,8 +8,15 @@ import "../css/GamePage.css"
 import Modal from "react-modal";
 
 Modal.setAppElement('#root');
+
 export default function GamePage() {
+    const navigate = useNavigate()
+
+    const[games, setGames] = useState<Game[]>([])
+
     const[isOpen, setIsOpen] = useState(false)
+
+    const [saveGameModal ,setSaveGameModal] = useState(false)
 
     const [character, setCharacter] =
         useState<Character>({
@@ -109,8 +116,6 @@ export default function GamePage() {
         setSaveGameModal(false)
     }
 
-    const navigate = useNavigate()
-
     function saveGame(){
         axios.put("/api/game/save", {
             gameId: game.gameId,
@@ -122,14 +127,11 @@ export default function GamePage() {
             navigate("/")
     }
 
-    const[games, setGames] = useState<Game[]>([])
     function getAllGames(){
         axios.get("/api/game/all")
             .then(response =>
             setGames(response.data))
     }
-
-    const [saveGameModal ,setSaveGameModal] = useState(false)
 
     function goToMenu(){
         navigate("/")
