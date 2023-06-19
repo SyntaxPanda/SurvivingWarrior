@@ -27,4 +27,8 @@ public class GameService {
     public List<Game> getAllGames() {
         return gameRepo.findAll();
     }
+
+    public void saveGame(Game game) {
+        gameRepo.save(game);
+    }
 }
