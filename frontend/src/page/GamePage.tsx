@@ -131,6 +131,10 @@ export default function GamePage() {
 
     const [saveGameModal ,setSaveGameModal] = useState(false)
 
+    function goToMenu(){
+        navigate("/")
+    }
+
     return (
         <div className={"gamePageBox"}>
             <Modal isOpen={isOpen}>
@@ -147,6 +151,7 @@ export default function GamePage() {
                     <button onClick={saveGame}>Save now</button>
                     <button onClick={closeSaveGameModal}>Close</button>
                 </Modal>
+                <button onClick={goToMenu}>Menu</button>
                 <button onClick={closeModal}>close</button>
             </Modal>
             <div className={"menu"}>
