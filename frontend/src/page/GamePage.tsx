@@ -9,7 +9,7 @@ import Modal from "react-modal";
 
 Modal.setAppElement('#root');
 export default function GamePage() {
-    const navigate = useNavigate();
+    const[isOpen, setIsOpen] = useState(false)
 
     const [character, setCharacter] =
         useState<Character>({
@@ -92,12 +92,6 @@ export default function GamePage() {
             .catch(error => console.error(error))
     }
 
-   function goToMenuPage(){
-        navigate("/menu")
-   }
-
-   const[isOpen, setIsOpen] = useState(false)
-
     function openModal(){
         setIsOpen(true)
     }
@@ -106,9 +100,38 @@ export default function GamePage() {
         setIsOpen(false)
     }
 
+    function openSaveGameModal(){
+        setSaveGameModal(true)
+    }
+
+    function closeSaveGameModal(){
+        setSaveGameModal(false)
+    }
+
+    const navigate = useNavigate()
+
+    function saveGame(){
+        axios.put("/api/game/save", {
+            gameId: game.gameId,
+            gameName: game.gameName,
+            characterId: character.id,
+            storyId: story.id
+        })
+            .then()
+            navigate("/")
+    }
+
+    const [saveGameModal ,setSaveGameModal] = useState(false)
+
     return (
         <div className={"gamePageBox"}>
             <Modal isOpen={isOpen}>
+                <button onClick={openSaveGameModal}>Save</button>
+                <Modal isOpen={saveGameModal}>
+
+                    <button onClick={saveGame}>Save now</button>
+                    <button onClick={closeSaveGameModal}>Close</button>
+                </Modal>
                 <button onClick={closeModal}>close</button>
             </Modal>
             <div className={"menu"}>
