@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {Game} from "../model/GameType";
 import {Character} from "../model/CharacterType";
@@ -7,6 +7,7 @@ import {Story} from "../model/StoryType";
 import "../css/GamePage.css"
 
 export default function GamePage() {
+    const navigate = useNavigate();
 
     const [character, setCharacter] =
         useState<Character>({
@@ -89,10 +90,14 @@ export default function GamePage() {
             .catch(error => console.error(error))
     }
 
+   function goToMenuPage(){
+        navigate("/menu")
+   }
+
     return (
         <div className={"gamePageBox"}>
             <div className={"menu"}>
-                <button>Menu</button>
+                <button onClick={goToMenuPage}>Menu</button>
             </div>
             <div className={"lifeAndExpBox"}>
                 <div className={"lifeBox"}>
