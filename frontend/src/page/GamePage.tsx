@@ -6,17 +6,18 @@ import {Character} from "../model/CharacterType";
 import {Story} from "../model/StoryType";
 import "../css/GamePage.css"
 import Modal from "react-modal";
+import {Kobold} from "../model/KoboldType";
 
 Modal.setAppElement('#root');
 
 export default function GamePage() {
     const navigate = useNavigate()
 
-    const[games, setGames] = useState<Game[]>([])
+    const [games, setGames] = useState<Game[]>([])
 
-    const[isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
-    const [saveGameModal ,setSaveGameModal] = useState(false)
+    const [saveGameModal, setSaveGameModal] = useState(false)
 
     const [character, setCharacter] =
         useState<Character>({
@@ -30,16 +31,18 @@ export default function GamePage() {
             item: []
         })
 
+    const [kobolds, setKobolds] =
+        useState<Kobold[]>([])
+
     const [story, setStory] =
         useState<Story>({
             name: "",
             id: "",
-            image: "",
             storyText: "",
             option1: "",
             option2: "",
             option3: "",
-            option4: "",
+            enemies: []
         })
 
     const [game, setGame] =
@@ -48,75 +51,105 @@ export default function GamePage() {
     const params = useParams()
     const gameId: string | undefined = params.id;
 
-    useEffect(() => {getGameById()
+    useEffect(() => {
+        getGameById()
     }, []);
 
     function getGameById() {
         let charId = ""
-        let storyId = ""
         axios.get("/api/game/" + gameId)
             .then(response => {
                 setGame(response.data);
                 charId = response.data.characterId
-                storyId = response.data.storyId
             })
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
                 setCharacter(response.data);
             })
-            .then(() =>  axios.get("/api/story/" + storyId))
-                .then(response =>{
-                    setStory(response.data)
-                })
+            .then(() => axios.get("/api/story/" + randomStory))
+            .then(response => {
+                setStory(response.data)
+                setKobolds(response.data.enemies)
+            })
             .catch(error => console.error(error));
     }
 
+    const story1 = ["1-1", "1-2", "1-3", "1-4"]
+    const story2 = ["2-1", "2-2", "2-3", "2-4"]
+    const story3 = ["3-1", "3-2", "3-3", "3-4"]
+
+    let storyCount = 1
+
+    const [randomStory, setRandomStory] =
+        useState("")
+
+    function getRandomStoryById() {
+        if (storyCount === 1) {
+            const randomIndex = Math.floor(Math.random() * story1.length);
+            setRandomStory(story1[randomIndex])
+        } else if (storyCount === 2) {
+            const randomIndex = Math.floor(Math.random() * story2.length);
+            setRandomStory(story2[randomIndex])
+        } else if (storyCount === 3) {
+            const randomIndex = Math.floor(Math.random() * story3.length);
+            setRandomStory(story3[randomIndex])
+        }
+    }
+
     function onClickGetNextStoryChapterOption1() {
-        axios.get("/api/story/" + story.option1)
+        if (story.option1 === "Hit") {
+            // @ts-ignore
+            if (kobolds.at(1).life > 0) {
+                // @ts-ignore
+                kobolds.at(1).life = kobolds.at(0).life - character.damage
+            } // @ts-ignore
+            else if (kobolds.at(2).life > 0) {
+                // @ts-ignore
+                kobolds.at(2).life = kobolds.at(2).life - character.damage
+            }// @ts-ignore
+            else if (kobolds.at(3).life > 0) {
+                // @ts-ignore
+                kobolds.at(3).life = kobolds.at(3).life - character.damage
+            } else {
+                storyCount = storyCount + 1
+            }
+        } else if (story.option1 === "Search1") {
+            storyCount = storyCount + 1
+        }
+    }
+
+    function onClickGetNextStoryChapterOption2() {
+        axios.get("/api/story/" + story.option2)
             .then(response =>
                 setStory(response.data))
             .catch(error => console.error(error))
     }
 
-    function onClickGetNextStoryChapterOption2(){
-            axios.get("/api/story/" + story.option2)
-                .then(response =>
-                    setStory(response.data))
-                .catch(error => console.error(error))
-    }
-
-    function onClickGetNextStoryChapterOption3(){
-            axios.get("/api/story/" + story.option3)
-                .then(response =>
-                    setStory(response.data))
-                .catch(error => console.error(error))
-    }
-
-    function onClickGetNextStoryChapterOption4(){
-        axios.get("/api/story/" + story.option4)
+    function onClickGetNextStoryChapterOption3() {
+        axios.get("/api/story/" + story.option3)
             .then(response =>
                 setStory(response.data))
             .catch(error => console.error(error))
     }
 
-    function openModal(){
+    function openModal() {
         setIsOpen(true)
     }
 
-    function closeModal(){
+    function closeModal() {
         setIsOpen(false)
     }
 
-    function openSaveGameModal(){
+    function openSaveGameModal() {
         setSaveGameModal(true)
         getAllGames()
     }
 
-    function closeSaveGameModal(){
+    function closeSaveGameModal() {
         setSaveGameModal(false)
     }
 
-    function saveGame(){
+    function saveGame() {
         axios.put("/api/game/save", {
             gameId: game.gameId,
             gameName: game.gameName,
@@ -124,16 +157,16 @@ export default function GamePage() {
             storyId: story.id
         })
             .then()
-            navigate("/")
+        navigate("/")
     }
 
-    function getAllGames(){
+    function getAllGames() {
         axios.get("/api/game/all")
             .then(response =>
-            setGames(response.data))
+                setGames(response.data))
     }
 
-    function goToMenu(){
+    function goToMenu() {
         navigate("/")
     }
 
@@ -145,8 +178,8 @@ export default function GamePage() {
                     {games.map((game) => {
                         return (
                             <div className={"post-content"}>
-                                    <h3>{game.gameName}</h3>
-                                    <p>{game.storyId}</p>
+                                <h3>{game.gameName}</h3>
+                                <p>{game.storyId}</p>
                             </div>
                         );
                     })}
@@ -159,9 +192,21 @@ export default function GamePage() {
             <div className={"menu"}>
                 <button onClick={openModal}>Menu</button>
             </div>
+            <div className={"enemies"}>
+                {kobolds.map((kobold: Kobold) => {
+                    return (
+                        <div className={"koboldInfos"}>
+                            <div className={"enemy1"}>
+                                {kobold.name}
+                                {kobold.life}
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
             <div className={"lifeAndExpBox"}>
                 <div className={"lifeBox"}>
-                    {character.life} /  {character.life}
+                    {character.life} / {character.life}
                 </div>
                 <div className={"expBox"}>
                     {character.exp} / 10
@@ -172,23 +217,22 @@ export default function GamePage() {
                     {story.name}
                 </div>
                 <div className={"storyImage"}>
-                    <img src={story.image} alt="Bild"/>
                 </div>
                 <div className={"storyText"}>
                     <p>{story.storyText}</p>
                 </div>
                 <div className={"storyButtons"}>
                     <div className={"button1"}>
-                        <button className={"buttonHover"} onClick={onClickGetNextStoryChapterOption1}>{story.option1}</button>
+                        <button className={"buttonHover"}
+                                onClick={onClickGetNextStoryChapterOption1}>{story.option1}</button>
                     </div>
                     <div className={"button2"}>
-                        <button className={"buttonHover"} onClick={onClickGetNextStoryChapterOption2}>{story.option2}</button>
+                        <button className={"buttonHover"}
+                                onClick={onClickGetNextStoryChapterOption2}>{story.option2}</button>
                     </div>
                     <div className={"button3"}>
-                        <button className={"buttonHover"} onClick={onClickGetNextStoryChapterOption3}>{story.option3}</button>
-                    </div>
-                    <div className={"button4"}>
-                        <button className={"buttonHover"} onClick={onClickGetNextStoryChapterOption4}>{story.option4}</button>
+                        <button className={"buttonHover"}
+                                onClick={onClickGetNextStoryChapterOption3}>{story.option3}</button>
                     </div>
                 </div>
             </div>
@@ -201,7 +245,7 @@ export default function GamePage() {
                         Level:
                     </div>
                     <div className={"levelStat"}>
-                   {character.level}
+                        {character.level}
                     </div>
                 </div>
                 <div className={"characterLifeBox"}>
@@ -209,9 +253,9 @@ export default function GamePage() {
                         Character-Life:
                     </div>
                     <div className={"characterLifeStat"}>
-                    {character.life}
+                        {character.life}
                     </div>
-                        <div className={"buttonLifeUp"}>
+                    <div className={"buttonLifeUp"}>
                         <button>+</button>
                     </div>
                 </div>
@@ -220,7 +264,7 @@ export default function GamePage() {
                         Character-Damage:
                     </div>
                     <div className={"characterDmg"}>
-                    {character.damage}
+                        {character.damage}
                     </div>
                     <div className={"buttonDmgUp"}>
                         <button>+</button>
