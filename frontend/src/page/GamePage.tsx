@@ -7,6 +7,8 @@ import {Story} from "../model/StoryType";
 import "../css/GamePage.css"
 import Modal from "react-modal";
 import {Kobold} from "../model/KoboldType";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 Modal.setAppElement('#root');
 
@@ -330,8 +332,7 @@ export default function GamePage() {
             life: character.life,
             damage: character.damage,
             gold: character.gold
-        }).then(r =>
-        setCharacter(r.data))
+        }).catch(error => console.log(error))
 
         axios.put("/api/game/save", {
             gameId: game.gameId,
