@@ -13,10 +13,9 @@ public class Story {
 
     private String name;
     private String id;
-    private String image;
     private String storyText;
     private String option1;
     private String option2;
     private String option3;
-    private String option4;
+    private Enemy[] enemies;
 }
