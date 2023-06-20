@@ -24,4 +24,14 @@ public class CharacterController {
         return characterService.getCharacterById(id);
     }
 
+    @PutMapping("/{id}")
+    public void characterSave(@RequestBody Character character){
+        characterService.characterSave(character);
+    }
+
+    @DeleteMapping("/lost/{id}")
+    public void lostTheGame(@PathVariable String id){
+        characterService.lostTheGame(id);
+    }
+
 }
