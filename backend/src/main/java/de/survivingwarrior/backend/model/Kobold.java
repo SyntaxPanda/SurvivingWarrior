@@ -1,10 +1,6 @@
 package de.survivingwarrior.backend.model;
 
-import de.survivingwarrior.backend.service.GenerateUUID;
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Random;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
