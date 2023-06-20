@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,5 +20,5 @@ public class Story {
     private String option1;
     private String option2;
     private String option3;
-    private Enemy[] enemies;
+    private List<Enemy> enemies;
 }
