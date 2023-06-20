@@ -105,18 +105,33 @@ export default function GamePage() {
                 kobolds.at(1).life = kobolds.at(1).life - character.damage
                 // @ts-ignore
                 character.life = character.life - kobolds.at(1).damage
+                // @ts-ignore
+                if(kobolds.at(1).life <= 0){
+                    // @ts-ignore
+                    character.gold = character.gold + kobolds.at(1).gold
+                }
             } // @ts-ignore
             else if (kobolds.at(2).life > 0) {
                 // @ts-ignore
                 kobolds.at(2).life = kobolds.at(2).life - character.damage
                 // @ts-ignore
                 character.life = character.life - kobolds.at(2).damage
+                // @ts-ignore
+                if(kobolds.at(2).life <= 0){
+                    // @ts-ignore
+                    character.gold = character.gold + kobolds.at(2).gold
+                }
             }// @ts-ignore
             else if (kobolds.at(3).life > 0) {
                 // @ts-ignore
                 kobolds.at(3).life = kobolds.at(3).life - character.damage
                 // @ts-ignore
                 character.life = character.life - kobolds.at(3).damage
+                // @ts-ignore
+                if(kobolds.at(3).life <= 0){
+                    // @ts-ignore
+                    character.gold = character.gold + kobolds.at(3).gold
+                }
             } else {
                 storyCount = storyCount + 1
                 getRandomStoryById()
@@ -226,6 +241,17 @@ export default function GamePage() {
     }
 
     function saveGame() {
+        axios.put("/api/character/" + character.id, {
+            name: character.name,
+            id: character.id,
+            level: character.level,
+            exp: character.exp,
+            life: character.life,
+            damage: character.damage,
+            gold: character.gold
+        }).then(r =>
+        setCharacter(r.data))
+
         axios.put("/api/game/save", {
             gameId: game.gameId,
             gameName: game.gameName,
