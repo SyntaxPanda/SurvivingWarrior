@@ -80,4 +80,41 @@ class GameControllerTest {
                                 """
                 )).andExpect(jsonPath("$.gameId").value(game.getGameId()));
     }
+
+    @Test
+    @DirtiesContext
+    void getAllGamesWithEmptyList() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/game/all"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+
+    @Test
+    @DirtiesContext
+    void saveGame() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/game/new")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        """
+                                {
+                                "gameName": "TestGame",
+                                "characterId": "1",
+                                "storyId": "1-1"
+                                }
+                                """
+                )).andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/game/save")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        """
+                                {
+                                "gameName": "TestGame",
+                                "characterId": "1",
+                                "storyId": "1-4"
+                                }
+                                """
+                ))
+                .andReturn();
+    }
 }

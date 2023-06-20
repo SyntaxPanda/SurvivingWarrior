@@ -1,12 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {Game} from "../model/GameType";
 import {Character} from "../model/CharacterType";
 import {Story} from "../model/StoryType";
 import "../css/GamePage.css"
+import Modal from "react-modal";
+
+Modal.setAppElement('#root');
 
 export default function GamePage() {
+    const navigate = useNavigate()
+
+    const[games, setGames] = useState<Game[]>([])
+
+    const[isOpen, setIsOpen] = useState(false)
+
+    const [saveGameModal ,setSaveGameModal] = useState(false)
 
     const [character, setCharacter] =
         useState<Character>({
@@ -89,10 +99,65 @@ export default function GamePage() {
             .catch(error => console.error(error))
     }
 
+    function openModal(){
+        setIsOpen(true)
+    }
+
+    function closeModal(){
+        setIsOpen(false)
+    }
+
+    function openSaveGameModal(){
+        setSaveGameModal(true)
+        getAllGames()
+    }
+
+    function closeSaveGameModal(){
+        setSaveGameModal(false)
+    }
+
+    function saveGame(){
+        axios.put("/api/game/save", {
+            gameId: game.gameId,
+            gameName: game.gameName,
+            characterId: character.id,
+            storyId: story.id
+        })
+            .then()
+            navigate("/")
+    }
+
+    function getAllGames(){
+        axios.get("/api/game/all")
+            .then(response =>
+            setGames(response.data))
+    }
+
+    function goToMenu(){
+        navigate("/")
+    }
+
     return (
         <div className={"gamePageBox"}>
+            <Modal isOpen={isOpen}>
+                <button onClick={openSaveGameModal}>Save</button>
+                <Modal isOpen={saveGameModal}>
+                    {games.map((game) => {
+                        return (
+                            <div className={"post-content"}>
+                                    <h3>{game.gameName}</h3>
+                                    <p>{game.storyId}</p>
+                            </div>
+                        );
+                    })}
+                    <button onClick={saveGame}>Save now</button>
+                    <button onClick={closeSaveGameModal}>Close</button>
+                </Modal>
+                <button onClick={goToMenu}>Menu</button>
+                <button onClick={closeModal}>close</button>
+            </Modal>
             <div className={"menu"}>
-                <button>Menu</button>
+                <button onClick={openModal}>Menu</button>
             </div>
             <div className={"lifeAndExpBox"}>
                 <div className={"lifeBox"}>

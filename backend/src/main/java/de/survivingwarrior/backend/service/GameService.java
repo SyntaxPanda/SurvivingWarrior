@@ -5,6 +5,7 @@ import de.survivingwarrior.backend.repo.GameRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,5 +22,13 @@ public class GameService {
 
     public Optional<Game> getGameById(String id) {
         return gameRepo.findById(id);
+    }
+
+    public List<Game> getAllGames() {
+        return gameRepo.findAll();
+    }
+
+    public void saveGame(Game game) {
+        gameRepo.save(game);
     }
 }
