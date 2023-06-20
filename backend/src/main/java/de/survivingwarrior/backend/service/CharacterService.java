@@ -25,4 +25,12 @@ public class CharacterService {
     public Optional<Character> getCharacterById(String id) {
         return characterRepo.findById(id);
     }
+
+    public void characterSave(Character character) {
+        characterRepo.save(character);
+    }
+
+    public void lostTheGame(String id) {
+        characterRepo.deleteById(id);
+    }
 }
