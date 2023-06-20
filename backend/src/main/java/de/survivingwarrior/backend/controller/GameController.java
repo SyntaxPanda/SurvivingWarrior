@@ -35,4 +35,9 @@ public class GameController {
         gameService.saveGame(game);
     }
 
+    @DeleteMapping("/lost/{id}")
+    public void lostTheGame(@PathVariable String id){
+        gameService.lostTheGame(id);
+    }
+
 }
