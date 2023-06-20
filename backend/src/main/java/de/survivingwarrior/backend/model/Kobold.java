@@ -1,9 +1,10 @@
 package de.survivingwarrior.backend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import de.survivingwarrior.backend.service.GenerateUUID;
+import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Random;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -11,5 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Kobold extends Enemy{
 
+    private String id;
     private String name;
+    private int damage;
+    private int life;
+    private int gold;
 }
