@@ -110,6 +110,15 @@ export default function GamePage() {
                     // @ts-ignore
                     character.gold = character.gold + kobolds.at(1).gold
                 }
+                else if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
+                }
             } // @ts-ignore
             else if (kobolds.at(2).life > 0) {
                 // @ts-ignore
@@ -121,6 +130,15 @@ export default function GamePage() {
                     // @ts-ignore
                     character.gold = character.gold + kobolds.at(2).gold
                 }
+                else if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
+                }
             }// @ts-ignore
             else if (kobolds.at(3).life > 0) {
                 // @ts-ignore
@@ -131,6 +149,15 @@ export default function GamePage() {
                 if(kobolds.at(3).life <= 0){
                     // @ts-ignore
                     character.gold = character.gold + kobolds.at(3).gold
+                }
+                else if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
                 }
             } else {
                 storyCount = storyCount + 1
@@ -158,14 +185,41 @@ export default function GamePage() {
             if (kobolds.at(1).life > 0) {
                 // @ts-ignore
                 character.life = character.life - (kobolds.at(1).damage - 2)
+            if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
+                }
             } // @ts-ignore
             else if (kobolds.at(2).life > 0) {
                 // @ts-ignore
                 character.life = character.life - (kobolds.at(2).damage - 2)
+                if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
+                }
             }// @ts-ignore
             else if (kobolds.at(3).life > 0) {
                 // @ts-ignore
                 character.life = character.life - (kobolds.at(3).damage - 2)
+                if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
+                }
             } else {
                 storyCount = storyCount + 1
                 getRandomStoryById()
