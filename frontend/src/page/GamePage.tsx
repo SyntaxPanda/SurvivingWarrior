@@ -65,6 +65,7 @@ export default function GamePage() {
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
                 setCharacter(response.data);
+                getRandomStoryById()
             })
             .then(() => axios.get("/api/story/" + randomStory))
             .then(response => {
@@ -101,35 +102,110 @@ export default function GamePage() {
             // @ts-ignore
             if (kobolds.at(1).life > 0) {
                 // @ts-ignore
-                kobolds.at(1).life = kobolds.at(0).life - character.damage
+                kobolds.at(1).life = kobolds.at(1).life - character.damage
+                // @ts-ignore
+                character.life = character.life - kobolds.at(1).damage
             } // @ts-ignore
             else if (kobolds.at(2).life > 0) {
                 // @ts-ignore
                 kobolds.at(2).life = kobolds.at(2).life - character.damage
+                // @ts-ignore
+                character.life = character.life - kobolds.at(2).damage
             }// @ts-ignore
             else if (kobolds.at(3).life > 0) {
                 // @ts-ignore
                 kobolds.at(3).life = kobolds.at(3).life - character.damage
+                // @ts-ignore
+                character.life = character.life - kobolds.at(3).damage
             } else {
                 storyCount = storyCount + 1
+                getRandomStoryById()
+                axios.get("/api/story/" + randomStory)
+                    .then(response => {
+                        setStory(response.data)
+                        setKobolds(response.data.enemies)
+                    })
             }
         } else if (story.option1 === "Search1") {
             storyCount = storyCount + 1
+            getRandomStoryById()
+            axios.get("/api/story/" + randomStory)
+                .then(response => {
+                    setStory(response.data)
+                    setKobolds(response.data.enemies)
+                })
         }
     }
 
     function onClickGetNextStoryChapterOption2() {
-        axios.get("/api/story/" + story.option2)
-            .then(response =>
-                setStory(response.data))
-            .catch(error => console.error(error))
+        if (story.option2 === "Block") {
+            // @ts-ignore
+            if (kobolds.at(1).life > 0) {
+                // @ts-ignore
+                character.life = character.life - (kobolds.at(1).damage - 2)
+            } // @ts-ignore
+            else if (kobolds.at(2).life > 0) {
+                // @ts-ignore
+                character.life = character.life - (kobolds.at(2).damage - 2)
+            }// @ts-ignore
+            else if (kobolds.at(3).life > 0) {
+                // @ts-ignore
+                character.life = character.life - (kobolds.at(3).damage - 2)
+            } else {
+                storyCount = storyCount + 1
+                getRandomStoryById()
+                axios.get("/api/story/" + randomStory)
+                    .then(response => {
+                        setStory(response.data)
+                        setKobolds(response.data.enemies)
+                    })
+            }
+        } else if (story.option2 === "Search2") {
+            storyCount = storyCount + 1
+            getRandomStoryById()
+            axios.get("/api/story/" + randomStory)
+                .then(response => {
+                    setStory(response.data)
+                    setKobolds(response.data.enemies)
+                })
+        }
     }
 
     function onClickGetNextStoryChapterOption3() {
-        axios.get("/api/story/" + story.option3)
-            .then(response =>
-                setStory(response.data))
-            .catch(error => console.error(error))
+        if (story.option3 === "Item") {
+            // @ts-ignore
+            if (kobolds.at(1).life > 0) {
+                character.life = character.life + 3
+                // @ts-ignore
+                character.life = character.life - kobolds.at(1).damage
+            } // @ts-ignore
+            else if (kobolds.at(2).life > 0) {
+                character.life = character.life + 3
+                // @ts-ignore
+                character.life = character.life - kobolds.at(2).damage
+            }// @ts-ignore
+            else if (kobolds.at(3).life > 0) {
+                character.life = character.life + 3
+                // @ts-ignore
+                character.life = character.life - kobolds.at(3).damage
+            } else {
+                storyCount = storyCount + 1
+                getRandomStoryById()
+                axios.get("/api/story/" + randomStory)
+                    .then(response => {
+                        setStory(response.data)
+                        setKobolds(response.data.enemies)
+                    })
+            }
+        } else if (story.option3 === "Search3") {
+            storyCount = storyCount + 1
+            getRandomStoryById()
+            axios.get("/api/story/" + randomStory)
+                .then(response => {
+                    setStory(response.data)
+                    setKobolds(response.data.enemies)
+                })
+        }
     }
 
     function openModal() {
