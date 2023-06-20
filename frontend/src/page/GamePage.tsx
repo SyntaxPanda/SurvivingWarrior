@@ -7,8 +7,6 @@ import {Story} from "../model/StoryType";
 import "../css/GamePage.css"
 import Modal from "react-modal";
 import {Kobold} from "../model/KoboldType";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
 Modal.setAppElement('#root');
 
@@ -67,8 +65,9 @@ export default function GamePage() {
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
                 setCharacter(response.data);
-                getRandomStoryById()
             })
+            .then(() =>
+                getRandomStoryById())
             .then(() => axios.get("/api/story/" + randomStory))
             .then(response => {
                 setStory(response.data)
@@ -89,13 +88,13 @@ export default function GamePage() {
     function getRandomStoryById() {
         if (storyCount === 1) {
             const randomIndex = Math.floor(Math.random() * story1.length);
-            setRandomStory(story1[randomIndex])
+            return setRandomStory(story1[randomIndex])
         } else if (storyCount === 2) {
             const randomIndex = Math.floor(Math.random() * story2.length);
-            setRandomStory(story2[randomIndex])
+            return setRandomStory(story2[randomIndex])
         } else if (storyCount === 3) {
             const randomIndex = Math.floor(Math.random() * story3.length);
-            setRandomStory(story3[randomIndex])
+            return setRandomStory(story3[randomIndex])
         }
     }
 
