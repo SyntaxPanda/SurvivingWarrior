@@ -247,16 +247,43 @@ export default function GamePage() {
                 character.life = character.life + 3
                 // @ts-ignore
                 character.life = character.life - kobolds.at(1).damage
+                if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
+                }
             } // @ts-ignore
             else if (kobolds.at(2).life > 0) {
                 character.life = character.life + 3
                 // @ts-ignore
                 character.life = character.life - kobolds.at(2).damage
+                if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
+                }
             }// @ts-ignore
             else if (kobolds.at(3).life > 0) {
                 character.life = character.life + 3
                 // @ts-ignore
                 character.life = character.life - kobolds.at(3).damage
+                if(character.life <= 0){
+                    axios.delete("/api/character/lost/" + character.id)
+                        .then(() =>
+                            axios.delete("/api/game/lost" + game.gameId)
+                                .then(() =>
+                                    navigate("/")
+                                )
+                        )
+                }
             } else {
                 storyCount = storyCount + 1
                 getRandomStoryById()
