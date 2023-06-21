@@ -33,5 +33,4 @@ public class CharacterController {
     public void lostTheGame(@PathVariable String id){
         characterService.lostTheGame(id);
     }
-
 }

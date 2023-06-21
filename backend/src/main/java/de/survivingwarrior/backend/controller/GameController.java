@@ -4,7 +4,6 @@ import de.survivingwarrior.backend.model.Game;
 import de.survivingwarrior.backend.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -39,5 +38,4 @@ public class GameController {
     public void lostTheGame(@PathVariable String id){
         gameService.lostTheGame(id);
     }
-
 }
