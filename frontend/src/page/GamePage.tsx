@@ -57,21 +57,22 @@ export default function GamePage() {
 
     function getGameById() {
         let charId = ""
+        let storyId = ""
         axios.get("/api/game/" + gameId)
             .then(response => {
                 setGame(response.data);
                 charId = response.data.characterId
+                storyId = response.data.storyId
             })
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
                 setCharacter(response.data);
             })
-            .then(() =>
-                getRandomStoryById())
-            .then(() => axios.get("/api/story/" + randomStory))
+            .then(() => axios.get("/api/story/" + storyId))
             .then(response => {
                 setStory(response.data)
                 setKobolds(response.data.enemies)
+                setRandomStory("")
             })
             .catch(error => console.error(error));
     }
@@ -80,21 +81,23 @@ export default function GamePage() {
     const story2 = ["2-1", "2-2", "2-3", "2-4"]
     const story3 = ["3-1", "3-2", "3-3", "3-4"]
 
-    let storyCount = 1
+    let storyCount = 0
 
     const [randomStory, setRandomStory] =
         useState("")
 
+    function getRandomString(strings: string[]): string {
+        const randomString = strings[Math.floor(Math.random() * strings.length)];
+        return randomString;
+    }
+
     function getRandomStoryById() {
         if (storyCount === 1) {
-            const randomIndex = Math.floor(Math.random() * story1.length);
-            return setRandomStory(story1[randomIndex])
+            setRandomStory(getRandomString(story1))
         } else if (storyCount === 2) {
-            const randomIndex = Math.floor(Math.random() * story2.length);
-            return setRandomStory(story2[randomIndex])
+            setRandomStory(getRandomString(story2))
         } else if (storyCount === 3) {
-            const randomIndex = Math.floor(Math.random() * story3.length);
-            return setRandomStory(story3[randomIndex])
+            setRandomStory(getRandomString(story3))
         }
     }
 
@@ -114,7 +117,7 @@ export default function GamePage() {
                 else if(character.life <= 0){
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost" + gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
@@ -134,7 +137,7 @@ export default function GamePage() {
                 else if(character.life <= 0){
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost" + gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
@@ -154,7 +157,7 @@ export default function GamePage() {
                 else if(character.life <= 0){
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost" + gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
