@@ -23,9 +23,12 @@ public class StoryService {
     public Story createNewStoryChapter(Story story) {
         Kobold kobold1 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
         Kobold kobold2 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
+        //Kobold kobold3 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
+
         List<Enemy> enemies = new ArrayList<>();
         enemies.add(kobold1);
         enemies.add(kobold2);
+        //enemies.add(kobold3);
         story.setEnemies(enemies);
         return storyRepo.insert(story);
     }
