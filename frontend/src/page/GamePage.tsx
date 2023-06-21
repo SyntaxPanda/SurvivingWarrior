@@ -64,6 +64,8 @@ export default function GamePage() {
         getGameById()
     }, []);
 
+    const[maxHp, setMaxHp] = useState(0)
+
     function getGameById() {
         let charId = ""
         let storyId = ""
@@ -72,10 +74,12 @@ export default function GamePage() {
                 setGame(response.data);
                 charId = response.data.characterId
                 storyId = response.data.storyId
+
             })
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
                 setCharacter(response.data);
+                setMaxHp(character.life)
             })
             .then(() => axios.get("/api/story/" + storyId))
             .then(response => {
@@ -102,9 +106,9 @@ export default function GamePage() {
     const story2 = ["2-1", "2-2", "2-3", "2-4"]
     const story3 = ["3-1", "3-2", "3-3", "3-4"]
 
-    const[storyCount, setStoryCount] = useState(0)
+    let [storyCount, setStoryCount] = useState(0)
 
-    const [randomStory, setRandomStory] =
+    let [randomStory, setRandomStory] =
         useState("")
 
     function getRandomString(strings: string[]): string {
@@ -131,7 +135,7 @@ export default function GamePage() {
                 } else if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost/" + gameId)
+                            axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
@@ -387,7 +391,7 @@ export default function GamePage() {
             </div>
             <div className={"lifeAndExpBox"}>
                 <div className={"lifeBox"}>
-                    {character.life} / {character.life}
+                    {character.life} / {maxHp}
                 </div>
                 <div className={"expBox"}>
                     {character.exp} / 10
