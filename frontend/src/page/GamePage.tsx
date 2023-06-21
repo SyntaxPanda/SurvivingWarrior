@@ -64,7 +64,7 @@ export default function GamePage() {
         getGameById()
     }, []);
 
-    const[maxHp, setMaxHp] = useState(0)
+    const [maxHp, setMaxHp] = useState(0)
 
     function getGameById() {
         let charId = ""
@@ -91,39 +91,16 @@ export default function GamePage() {
     }
 
     useEffect(() => {
-        if(kobolds.at(0)) {
+        if (kobolds.at(0)) {
             setKobold1(kobolds[0])
             if (kobolds.at(1)) {
                 setKobold2(kobolds[1])
                 if (kobolds.at(2)) {
                     setKobold3(kobolds[2])
                 }
+            }
         }
-    }
     }, [kobolds])
-
-    const story1 = ["1-1", "1-2", "1-3", "1-4"]
-    const story2 = ["2-1", "2-2", "2-3", "2-4"]
-    const story3 = ["3-1", "3-2", "3-3", "3-4"]
-
-    let [storyCount, setStoryCount] = useState(0)
-
-    let [randomStory, setRandomStory] =
-        useState("")
-
-    function getRandomString(strings: string[]): string {
-        return strings[Math.floor(Math.random() * strings.length)];
-    }
-
-    function getRandomStoryById() {
-        if (storyCount === 1) {
-            setRandomStory(getRandomString(story1))
-        } else if (storyCount === 2) {
-            setRandomStory(getRandomString(story2))
-        } else if (storyCount === 3) {
-            setRandomStory(getRandomString(story3))
-        }
-    }
 
     function onClickGetNextStoryChapterOption1() {
         if (story.option1 === "Hit") {
@@ -178,14 +155,6 @@ export default function GamePage() {
                         setKobolds(response.data.enemies)
                     })
             }
-        } else if (story.option1 === "Search1") {
-            setStoryCount(storyCount + 1)
-            getRandomStoryById()
-            axios.get("/api/story/" + randomStory)
-                .then(response => {
-                    setStory(response.data)
-                    setKobolds(response.data.enemies)
-                })
         }
     }
 
@@ -233,14 +202,6 @@ export default function GamePage() {
                         setKobolds(response.data.enemies)
                     })
             }
-        } else if (story.option2 === "Search2") {
-            setStoryCount(storyCount + 1)
-            getRandomStoryById()
-            axios.get("/api/story/" + randomStory)
-                .then(response => {
-                    setStory(response.data)
-                    setKobolds(response.data.enemies)
-                })
         }
     }
 
@@ -291,14 +252,6 @@ export default function GamePage() {
                         setKobolds(response.data.enemies)
                     })
             }
-        } else if (story.option3 === "Search3") {
-            setStoryCount(storyCount + 1)
-            getRandomStoryById()
-            axios.get("/api/story/" + randomStory)
-                .then(response => {
-                    setStory(response.data)
-                    setKobolds(response.data.enemies)
-                })
         }
     }
 
