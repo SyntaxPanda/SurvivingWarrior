@@ -84,7 +84,6 @@ export default function GamePage() {
                 setKobolds(response.data.enemies)
             })
             .catch(error => console.error(error));
-        console.log(kobold1)
     }
 
     useEffect(() => {
@@ -103,7 +102,7 @@ export default function GamePage() {
     const story2 = ["2-1", "2-2", "2-3", "2-4"]
     const story3 = ["3-1", "3-2", "3-3", "3-4"]
 
-    let storyCount = 0
+    const[storyCount, setStoryCount] = useState(0)
 
     const [randomStory, setRandomStory] =
         useState("")
@@ -125,10 +124,10 @@ export default function GamePage() {
     function onClickGetNextStoryChapterOption1() {
         if (story.option1 === "Hit") {
             if (kobold1.life > 0) {
-                kobold1.life = kobold1.life - character.damage
-                character.life = character.life - kobold1.damage
+                setKobold1({...kobold1, life: kobold1.life - character.damage})
+                setCharacter({...character, life: character.life - kobold1.damage})
                 if (kobold1.life <= 0) {
-                    character.gold = character.gold + kobold1.gold
+                    setCharacter({...character, gold: character.gold + kobold1.gold})
                 } else if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -139,10 +138,10 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold2.life > 0) {
-                kobold2.life = kobold2.life - character.damage
-                character.life = character.life - kobold2.damage
+                setKobold2({...kobold2, life: kobold2.life - character.damage})
+                setCharacter({...character, life: character.life - kobold2.damage})
                 if (kobold2.life <= 0) {
-                    character.gold = character.gold + kobold2.gold
+                    setCharacter({...character, gold: character.gold + kobold2.gold})
                 } else if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -153,10 +152,10 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold3.life > 0) {
-                kobold3.life = kobold3.life - character.damage
-                character.life = character.life - kobold3.damage
+                setKobold3({...kobold3, life: kobold3.life - character.damage})
+                setCharacter({...character, life: character.life - kobold3.damage})
                 if (kobold3.life <= 0) {
-                    character.gold = character.gold + kobold3.gold
+                    setCharacter({...character, gold: character.gold + kobold3.gold})
                 } else if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -167,7 +166,7 @@ export default function GamePage() {
                         )
                 }
             } else {
-                storyCount = storyCount + 1
+                setStoryCount(storyCount + 1)
                 getRandomStoryById()
                 axios.get("/api/story/" + randomStory)
                     .then(response => {
@@ -176,7 +175,7 @@ export default function GamePage() {
                     })
             }
         } else if (story.option1 === "Search1") {
-            storyCount = storyCount + 1
+            setStoryCount(storyCount + 1)
             getRandomStoryById()
             axios.get("/api/story/" + randomStory)
                 .then(response => {
@@ -189,7 +188,7 @@ export default function GamePage() {
     function onClickGetNextStoryChapterOption2() {
         if (story.option2 === "Block") {
             if (kobold1.life > 0) {
-                character.life = character.life - (kobold1.damage - 2)
+                setCharacter({...character, life: character.life - (kobold1.damage - 2)})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -200,7 +199,7 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold2.life > 0) {
-                character.life = character.life - (kobold2.damage - 2)
+                setCharacter({...character, life: character.life - (kobold2.damage - 2)})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -211,7 +210,7 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold3.life > 0) {
-                character.life = character.life - (kobold3.damage - 2)
+                setCharacter({...character, life: character.life - (kobold3.damage - 2)})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -222,7 +221,7 @@ export default function GamePage() {
                         )
                 }
             } else {
-                storyCount = storyCount + 1
+                setStoryCount(storyCount + 1)
                 getRandomStoryById()
                 axios.get("/api/story/" + randomStory)
                     .then(response => {
@@ -231,7 +230,7 @@ export default function GamePage() {
                     })
             }
         } else if (story.option2 === "Search2") {
-            storyCount = storyCount + 1
+            setStoryCount(storyCount + 1)
             getRandomStoryById()
             axios.get("/api/story/" + randomStory)
                 .then(response => {
@@ -244,8 +243,8 @@ export default function GamePage() {
     function onClickGetNextStoryChapterOption3() {
         if (story.option3 === "Item") {
             if (kobold1.life > 0) {
-                character.life = character.life + 3
-                character.life = character.life - kobold1.damage
+                setCharacter({...character, life: character.life + 3})
+                setCharacter({...character, life: character.life - kobold1.damage})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -256,8 +255,8 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold2.life > 0) {
-                character.life = character.life + 3
-                character.life = character.life - kobold2.damage
+                setCharacter({...character, life: character.life + 3})
+                setCharacter({...character, life: character.life - kobold2.damage})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -268,8 +267,8 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold3.life > 0) {
-                character.life = character.life + 3
-                character.life = character.life - kobold3.damage
+                setCharacter({...character, life: character.life + 3})
+                setCharacter({...character, life: character.life - kobold3.damage})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -280,7 +279,7 @@ export default function GamePage() {
                         )
                 }
             } else {
-                storyCount = storyCount + 1
+                setStoryCount(storyCount + 1)
                 getRandomStoryById()
                 axios.get("/api/story/" + randomStory)
                     .then(response => {
@@ -289,7 +288,7 @@ export default function GamePage() {
                     })
             }
         } else if (story.option3 === "Search3") {
-            storyCount = storyCount + 1
+            setStoryCount(storyCount + 1)
             getRandomStoryById()
             axios.get("/api/story/" + randomStory)
                 .then(response => {
