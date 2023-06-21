@@ -117,4 +117,28 @@ class GameControllerTest {
                 ))
                 .andReturn();
     }
+
+    @Test
+    @DirtiesContext
+    void lostTheGameAndDeleteThisGame() throws Exception {
+        MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/api/game/new")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        """
+                                {
+                                "gameName": "TestGame",
+                                "characterId": "1",
+                                "storyId": "1-1"
+                                }
+                                """
+                )).andReturn();
+
+        String content = response.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        Game game = mapper.readValue(content, Game.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/game/lost/" + game.getGameId()))
+                .andExpect(status().isOk());
+    }
 }

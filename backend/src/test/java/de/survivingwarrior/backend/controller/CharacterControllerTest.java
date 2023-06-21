@@ -91,6 +91,55 @@ class CharacterControllerTest {
                 .andExpect(jsonPath("$.life").value(character.getLife()))
                 .andExpect(jsonPath("$.damage").value(character.getDamage()))
                 .andExpect(jsonPath("$.gold").value(character.getGold()));
+    }
 
+    @Test
+    @DirtiesContext
+    void characterSave() throws Exception {
+        MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/api/character/newchar")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        """
+                        {
+                        "name": "Hans"
+                        }"""
+                )).andReturn();
+
+        String content = response.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        Character character = mapper.readValue(content, Character.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/character/" + character.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "level": 2,
+                                "damage": 10
+                                }
+                                """))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    @DirtiesContext
+    void lostTheGameAndDeleteCharacter() throws Exception {
+        MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/api/character/newchar")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(
+                        """
+                        {
+                        "name": "Hans"
+                        }"""
+                )).andReturn();
+
+        String content = response.getResponse().getContentAsString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        Character character = mapper.readValue(content, Character.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/character/lost/" + character.getId()))
+                .andExpect(status().isOk());
     }
 }
