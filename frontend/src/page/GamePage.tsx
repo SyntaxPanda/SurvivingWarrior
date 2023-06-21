@@ -38,7 +38,7 @@ export default function GamePage() {
         useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
 
     const [kobold3, setKobold3] =
-        useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
+        useState<Kobold>({id: "", name: "", damage: 0, life: 0, gold: 0})
 
     const [kobolds, setKobolds] =
         useState<Kobold[]>([])
@@ -80,21 +80,24 @@ export default function GamePage() {
             .then(() => axios.get("/api/story/" + storyId))
             .then(response => {
                 setStory(response.data)
-                setKobolds(response.data.enemies)
                 setRandomStory("")
-                if (kobolds.at(0)) {
-                    setKobold1(kobolds.at(0))
-                    if (kobolds.at(1)) {
-                        setKobold2(kobolds.at(1))
-                        if (kobolds.at(2)) {
-                            setKobold3(kobolds.at(2))
-                        }
-                    }
-                }
+                setKobolds(response.data.enemies)
             })
             .catch(error => console.error(error));
-        console.log(kobold3)
+        console.log(kobold1)
     }
+
+    useEffect(() => {
+        if(kobolds.at(0)) {
+            setKobold1(kobolds[0])
+            if (kobolds.at(1)) {
+                setKobold2(kobolds[1])
+                if (kobolds.at(2)) {
+                    setKobold3(kobolds[2])
+                }
+        }
+    }
+    }, [kobolds])
 
     const story1 = ["1-1", "1-2", "1-3", "1-4"]
     const story2 = ["2-1", "2-2", "2-3", "2-4"]
@@ -106,8 +109,7 @@ export default function GamePage() {
         useState("")
 
     function getRandomString(strings: string[]): string {
-        const randomString = strings[Math.floor(Math.random() * strings.length)];
-        return randomString;
+        return strings[Math.floor(Math.random() * strings.length)];
     }
 
     function getRandomStoryById() {
@@ -197,8 +199,7 @@ export default function GamePage() {
                                 )
                         )
                 }
-            }
-            else if (kobold2.life > 0) {
+            } else if (kobold2.life > 0) {
                 character.life = character.life - (kobold2.damage - 2)
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
@@ -209,8 +210,7 @@ export default function GamePage() {
                                 )
                         )
                 }
-            }
-            else if (kobold3.life > 0) {
+            } else if (kobold3.life > 0) {
                 character.life = character.life - (kobold3.damage - 2)
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
@@ -255,8 +255,7 @@ export default function GamePage() {
                                 )
                         )
                 }
-            }
-            else if (kobold2.life > 0) {
+            } else if (kobold2.life > 0) {
                 character.life = character.life + 3
                 character.life = character.life - kobold2.damage
                 if (character.life <= 0) {
@@ -268,8 +267,7 @@ export default function GamePage() {
                                 )
                         )
                 }
-            }
-            else if (kobold3.life > 0) {
+            } else if (kobold3.life > 0) {
                 character.life = character.life + 3
                 character.life = character.life - kobold3.damage
                 if (character.life <= 0) {
@@ -299,23 +297,6 @@ export default function GamePage() {
                     setKobolds(response.data.enemies)
                 })
         }
-    }
-
-    function openModal() {
-        setIsOpen(true)
-    }
-
-    function closeModal() {
-        setIsOpen(false)
-    }
-
-    function openSaveGameModal() {
-        setSaveGameModal(true)
-        getAllGames()
-    }
-
-    function closeSaveGameModal() {
-        setSaveGameModal(false)
     }
 
     function saveGame() {
@@ -349,6 +330,23 @@ export default function GamePage() {
         navigate("/")
     }
 
+    function openModal() {
+        setIsOpen(true)
+    }
+
+    function closeModal() {
+        setIsOpen(false)
+    }
+
+    function openSaveGameModal() {
+        setSaveGameModal(true)
+        getAllGames()
+    }
+
+    function closeSaveGameModal() {
+        setSaveGameModal(false)
+    }
+
     return (
         <div className={"gamePageBox"}>
             <Modal isOpen={isOpen}>
@@ -372,18 +370,21 @@ export default function GamePage() {
                 <button onClick={openModal}>Menu</button>
             </div>
             <div className={"enemies"}>
-                {kobolds.map((kobold: Kobold) => {
-                    if (kobold.life > 0) {
-                        return (
-                            <div className={"koboldInfos"}>
-                                <div className={"enemy1"}>
-                                    {kobold.name}
-                                    {kobold.life}
-                                </div>
-                            </div>
-                        )
-                    }
-                })}
+                {kobold1 && kobold1.life > 0 && (
+                    <div className={"kobold1"}>
+                        {kobold1.name} {kobold1.life}
+                    </div>
+                )}
+                {kobold2 && kobold2.life > 0 && (
+                    <div className={"kobold2"}>
+                        {kobold2.name} {kobold2.life}
+                    </div>
+                )}
+                {kobold3 && kobold3.life > 0 && (
+                    <div className={"kobold3"}>
+                        {kobold3.name} {kobold3.life}
+                    </div>
+                )}
             </div>
             <div className={"lifeAndExpBox"}>
                 <div className={"lifeBox"}>
