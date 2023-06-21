@@ -36,11 +36,8 @@ class CharacterControllerTest {
                         """
                         {
                             "name": "Hans",
-                            "level": 0,
+                            "level": 1,
                             "exp": 0,
-                            "life": 0,
-                            "damage": 0,
-                            "gold": 0,
                             "inventory": [
                                 null,
                                 null,
@@ -50,7 +47,10 @@ class CharacterControllerTest {
                                 null
                             ]
                         }"""
-                )).andExpect(jsonPath("$.id").isNotEmpty());
+                )).andExpect(jsonPath("$.id").isNotEmpty())
+                .andExpect(jsonPath("$.life").isNotEmpty())
+                .andExpect(jsonPath("$.damage").isNotEmpty())
+                .andExpect(jsonPath("$.gold").isNotEmpty());
     }
 
     @Test
@@ -76,11 +76,8 @@ class CharacterControllerTest {
                         """
                         {
                             "name": "Hans",
-                            "level": 0,
+                            "level": 1,
                             "exp": 0,
-                            "life": 0,
-                            "damage": 0,
-                            "gold": 0,
                             "inventory": [
                                 null,
                                 null,
@@ -90,7 +87,10 @@ class CharacterControllerTest {
                                 null
                             ]
                         }"""
-                )).andExpect(jsonPath("$.id").value(character.getId()));
+                )).andExpect(jsonPath("$.id").value(character.getId()))
+                .andExpect(jsonPath("$.life").value(character.getLife()))
+                .andExpect(jsonPath("$.damage").value(character.getDamage()))
+                .andExpect(jsonPath("$.gold").value(character.getGold()));
 
     }
 }

@@ -20,16 +20,16 @@ public class StoryService {
     private final Random random = new Random();
 
     public Story createNewStoryChapter(Story story) {
-        Kobold kobold1 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
-        Kobold kobold2 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
+        //Kobold kobold1 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
+        //Kobold kobold2 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
         //Kobold kobold3 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
         //This is for my storyInput with Postman, at the end of my story i will delete this.
 
-        List<Enemy> enemies = new ArrayList<>();
-        enemies.add(kobold1);
-        enemies.add(kobold2);
+        //List<Enemy> enemies = new ArrayList<>();
+        //enemies.add(kobold1);
+        //enemies.add(kobold2);
         //enemies.add(kobold3);
-        story.setEnemies(enemies);
+        //story.setEnemies(enemies);
         return storyRepo.insert(story);
     }
 
