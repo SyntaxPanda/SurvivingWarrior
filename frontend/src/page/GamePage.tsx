@@ -303,6 +303,29 @@ export default function GamePage() {
         setSaveGameModal(false)
     }
 
+    const story1 = ["1-1", "1-2", "1-3", "1-4"]
+    const story2 = ["2-1", "2-2", "2-3", "2-4"]
+    const story3 = ["3-1", "3-2", "3-3", "3-4"]
+
+    let [storyCount, setStoryCount] = useState(0)
+
+    let [randomStory, setRandomStory] =
+        useState("")
+
+    function getRandomString(strings: string[]): string {
+        return strings[Math.floor(Math.random() * strings.length)];
+    }
+
+    function getRandomStoryById() {
+        if (storyCount === 1) {
+            setRandomStory(getRandomString(story1))
+        } else if (storyCount === 2) {
+            setRandomStory(getRandomString(story2))
+        } else if (storyCount === 3) {
+            setRandomStory(getRandomString(story3))
+        }
+    }
+
     return (
         <div className={"gamePageBox"}>
             <Modal isOpen={isOpen}>
