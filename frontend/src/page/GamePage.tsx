@@ -31,6 +31,15 @@ export default function GamePage() {
             item: []
         })
 
+    const [kobold1, setKobold1] =
+        useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
+
+    const [kobold2, setKobold2] =
+        useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
+
+    const [kobold3, setKobold3] =
+        useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
+
     const [kobolds, setKobolds] =
         useState<Kobold[]>([])
 
@@ -73,8 +82,18 @@ export default function GamePage() {
                 setStory(response.data)
                 setKobolds(response.data.enemies)
                 setRandomStory("")
+                if (kobolds.at(0)) {
+                    setKobold1(kobolds.at(0))
+                    if (kobolds.at(1)) {
+                        setKobold2(kobolds.at(1))
+                        if (kobolds.at(2)) {
+                            setKobold3(kobolds.at(2))
+                        }
+                    }
+                }
             })
             .catch(error => console.error(error));
+        console.log(kobold3)
     }
 
     const story1 = ["1-1", "1-2", "1-3", "1-4"]
@@ -103,61 +122,43 @@ export default function GamePage() {
 
     function onClickGetNextStoryChapterOption1() {
         if (story.option1 === "Hit") {
-            // @ts-ignore
-            if (kobolds.at(1).life > 0) {
-                // @ts-ignore
-                kobolds.at(1).life = kobolds.at(1).life - character.damage
-                // @ts-ignore
-                character.life = character.life - kobolds.at(1).damage
-                // @ts-ignore
-                if(kobolds.at(1).life <= 0){
-                    // @ts-ignore
-                    character.gold = character.gold + kobolds.at(1).gold
-                }
-                else if(character.life <= 0){
+            if (kobold1.life > 0) {
+                kobold1.life = kobold1.life - character.damage
+                character.life = character.life - kobold1.damage
+                if (kobold1.life <= 0) {
+                    character.gold = character.gold + kobold1.gold
+                } else if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + gameId)
+                            axios.delete("/api/game/lost/" + gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
                         )
                 }
-            } // @ts-ignore
-            else if (kobolds.at(2).life > 0) {
-                // @ts-ignore
-                kobolds.at(2).life = kobolds.at(2).life - character.damage
-                // @ts-ignore
-                character.life = character.life - kobolds.at(2).damage
-                // @ts-ignore
-                if(kobolds.at(2).life <= 0){
-                    // @ts-ignore
-                    character.gold = character.gold + kobolds.at(2).gold
-                }
-                else if(character.life <= 0){
+            } else if (kobold2.life > 0) {
+                kobold2.life = kobold2.life - character.damage
+                character.life = character.life - kobold2.damage
+                if (kobold2.life <= 0) {
+                    character.gold = character.gold + kobold2.gold
+                } else if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + gameId)
+                            axios.delete("/api/game/lost/" + gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
                         )
                 }
-            }// @ts-ignore
-            else if (kobolds.at(3).life > 0) {
-                // @ts-ignore
-                kobolds.at(3).life = kobolds.at(3).life - character.damage
-                // @ts-ignore
-                character.life = character.life - kobolds.at(3).damage
-                // @ts-ignore
-                if(kobolds.at(3).life <= 0){
-                    // @ts-ignore
-                    character.gold = character.gold + kobolds.at(3).gold
-                }
-                else if(character.life <= 0){
+            } else if (kobold3.life > 0) {
+                kobold3.life = kobold3.life - character.damage
+                character.life = character.life - kobold3.damage
+                if (kobold3.life <= 0) {
+                    character.gold = character.gold + kobold3.gold
+                } else if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + gameId)
+                            axios.delete("/api/game/lost/" + gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
@@ -185,40 +186,36 @@ export default function GamePage() {
 
     function onClickGetNextStoryChapterOption2() {
         if (story.option2 === "Block") {
-            // @ts-ignore
-            if (kobolds.at(1).life > 0) {
-                // @ts-ignore
-                character.life = character.life - (kobolds.at(1).damage - 2)
-            if(character.life <= 0){
+            if (kobold1.life > 0) {
+                character.life = character.life - (kobold1.damage - 2)
+                if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
                         )
                 }
-            } // @ts-ignore
-            else if (kobolds.at(2).life > 0) {
-                // @ts-ignore
-                character.life = character.life - (kobolds.at(2).damage - 2)
-                if(character.life <= 0){
+            }
+            else if (kobold2.life > 0) {
+                character.life = character.life - (kobold2.damage - 2)
+                if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
                         )
                 }
-            }// @ts-ignore
-            else if (kobolds.at(3).life > 0) {
-                // @ts-ignore
-                character.life = character.life - (kobolds.at(3).damage - 2)
-                if(character.life <= 0){
+            }
+            else if (kobold3.life > 0) {
+                character.life = character.life - (kobold3.damage - 2)
+                if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
@@ -246,43 +243,39 @@ export default function GamePage() {
 
     function onClickGetNextStoryChapterOption3() {
         if (story.option3 === "Item") {
-            // @ts-ignore
-            if (kobolds.at(1).life > 0) {
+            if (kobold1.life > 0) {
                 character.life = character.life + 3
-                // @ts-ignore
-                character.life = character.life - kobolds.at(1).damage
-                if(character.life <= 0){
+                character.life = character.life - kobold1.damage
+                if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
                         )
                 }
-            } // @ts-ignore
-            else if (kobolds.at(2).life > 0) {
+            }
+            else if (kobold2.life > 0) {
                 character.life = character.life + 3
-                // @ts-ignore
-                character.life = character.life - kobolds.at(2).damage
-                if(character.life <= 0){
+                character.life = character.life - kobold2.damage
+                if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
                         )
                 }
-            }// @ts-ignore
-            else if (kobolds.at(3).life > 0) {
+            }
+            else if (kobold3.life > 0) {
                 character.life = character.life + 3
-                // @ts-ignore
-                character.life = character.life - kobolds.at(3).damage
-                if(character.life <= 0){
+                character.life = character.life - kobold3.damage
+                if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
-                            axios.delete("/api/game/lost" + game.gameId)
+                            axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
                                     navigate("/")
                                 )
@@ -380,14 +373,16 @@ export default function GamePage() {
             </div>
             <div className={"enemies"}>
                 {kobolds.map((kobold: Kobold) => {
-                    return (
-                        <div className={"koboldInfos"}>
-                            <div className={"enemy1"}>
-                                {kobold.name}
-                                {kobold.life}
+                    if (kobold.life > 0) {
+                        return (
+                            <div className={"koboldInfos"}>
+                                <div className={"enemy1"}>
+                                    {kobold.name}
+                                    {kobold.life}
+                                </div>
                             </div>
-                        </div>
-                    )
+                        )
+                    }
                 })}
             </div>
             <div className={"lifeAndExpBox"}>
