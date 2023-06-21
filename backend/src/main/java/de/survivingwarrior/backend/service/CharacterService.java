@@ -22,7 +22,7 @@ public class CharacterService {
         character.setId(generateUUID.generateUUID());
         character.setInventory(inventory);
         character.setGold(random.nextInt(11) + 4);
-        character.setDamage(random.nextInt(6) +1);
+        character.setDamage(random.nextInt(6) +3);
         character.setLife(random.nextInt(21) + 13);
         character.setLevel(1);
         return characterRepo.insert(character);
