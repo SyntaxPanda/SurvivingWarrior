@@ -31,7 +31,7 @@ export default function NewGamePage() {
                 axios.post('/api/game/new', {
                     gameName,
                     characterId: response.data.id,
-                    storyId: "1-1"
+                    storyId: "1"
                 })
                     .then(response => {
                         navigate("/game/" + response.data.gameId);

@@ -31,12 +31,10 @@ class StoryControllerTest {
                             {
                             "name": "Test",
                             "id": "1-1",
-                            "image": "",
                             "storyText": "TextTest",
                             "option1": "",
                             "option2": "",
-                            "option3": "",
-                            "option4": ""
+                            "option3": ""
                             }
                             """
             )).andExpect(status().isOk())
@@ -46,43 +44,36 @@ class StoryControllerTest {
     @Test
     @DirtiesContext
     void getStoryChapterById() throws Exception {
-        MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/api/story/newstory")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/story/newstory")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                         """
                                 {
                                 "name": "Test",
                                 "id": "1-1",
-                                "image": "",
                                 "storyText": "TextTest",
                                 "option1": "",
                                 "option2": "",
                                 "option3": "",
-                                "option4": ""
+                                "enemies": []
                                 }
                                 """
                 )).andReturn();
 
-        String content = response.getResponse().getContentAsString();
-
-        ObjectMapper mapper = new ObjectMapper();
-        Story story = mapper.readValue(content, Story.class);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/story/" + story.getId()))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/story/1-1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
                         """
                                 {
                                 "name": "Test",
                                 "id": "1-1",
-                                "image": "",
                                 "storyText": "TextTest",
                                 "option1": "",
                                 "option2": "",
                                 "option3": "",
-                                "option4": ""
+                                "enemies": []
                                 }
                                 """
-                )).andExpect(jsonPath("$.id").value(story.getId()));
+                )).andExpect(jsonPath("$.id").value("1-1"));
     }
 }

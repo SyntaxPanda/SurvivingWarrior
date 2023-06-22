@@ -4,7 +4,6 @@ import de.survivingwarrior.backend.model.Story;
 import de.survivingwarrior.backend.service.StoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
