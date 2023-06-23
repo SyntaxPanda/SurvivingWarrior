@@ -77,4 +77,47 @@ class UserControllerTest {
                         .with(csrf()))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    @DirtiesContext
+    @WithMockUser()
+    void getMeControllerOnly() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "username": "Tim",
+                                        "password": "123"
+                                        }
+                                        """
+                        ).with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/me")
+                        .with(csrf()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DirtiesContext
+    @WithMockUser()
+    void logout() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "username": "Tim",
+                                        "password": "123"
+                                        }
+                                        """
+                        ).with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/logout")
+                        .with(csrf()))
+                .andExpect(status().isOk());
+    }
+
 }
