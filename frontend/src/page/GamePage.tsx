@@ -107,7 +107,7 @@ export default function GamePage() {
             if (kobold1.life > 0) {
                 setKobold1({...kobold1, life: kobold1.life - character.damage})
                 setCharacter({...character, life: character.life - kobold1.damage})
-                if (kobold1.life <= 0) {
+                if (kobold1.life < 1) {
                     setCharacter({...character, gold: character.gold + kobold1.gold})
                 } else if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
@@ -147,13 +147,8 @@ export default function GamePage() {
                         )
                 }
             } else {
+                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold})
                 setStoryCount(storyCount + 1)
-                getRandomStoryById()
-                axios.get("/api/story/" + randomStory)
-                    .then(response => {
-                        setStory(response.data)
-                        setKobolds(response.data.enemies)
-                    })
             }
         }
     }
@@ -195,12 +190,6 @@ export default function GamePage() {
                 }
             } else {
                 setStoryCount(storyCount + 1)
-                getRandomStoryById()
-                axios.get("/api/story/" + randomStory)
-                    .then(response => {
-                        setStory(response.data)
-                        setKobolds(response.data.enemies)
-                    })
             }
         }
     }
@@ -208,8 +197,7 @@ export default function GamePage() {
     function onClickGetNextStoryChapterOption3() {
         if (story.option3 === "Item") {
             if (kobold1.life > 0) {
-                setCharacter({...character, life: character.life + 3})
-                setCharacter({...character, life: character.life - kobold1.damage})
+                setCharacter({...character, life: (character.life + 3) - kobold1.damage})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -220,8 +208,7 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold2.life > 0) {
-                setCharacter({...character, life: character.life + 3})
-                setCharacter({...character, life: character.life - kobold2.damage})
+                setCharacter({...character, life: (character.life + 3) - kobold2.damage})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -232,8 +219,7 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold3.life > 0) {
-                setCharacter({...character, life: character.life + 3})
-                setCharacter({...character, life: character.life - kobold3.damage})
+                setCharacter({...character, life: (character.life + 3) - kobold3.damage})
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -245,12 +231,6 @@ export default function GamePage() {
                 }
             } else {
                 setStoryCount(storyCount + 1)
-                getRandomStoryById()
-                axios.get("/api/story/" + randomStory)
-                    .then(response => {
-                        setStory(response.data)
-                        setKobolds(response.data.enemies)
-                    })
             }
         }
     }
@@ -307,22 +287,43 @@ export default function GamePage() {
     const story2 = ["2-1", "2-2", "2-3", "2-4"]
     const story3 = ["3-1", "3-2", "3-3", "3-4"]
 
-    let [storyCount, setStoryCount] = useState(0)
+    const [storyCount, setStoryCount] = useState(0)
 
-    let [randomStory, setRandomStory] =
-        useState("")
+    const [randomStory, setRandomStory] =
+        useState<String | undefined>("")
 
-    function getRandomString(strings: string[]): string {
-        return strings[Math.floor(Math.random() * strings.length)];
-    }
+    useEffect(() => {
+        if (storyCount !== 0) {
+            const newRandomStory = getRandomStoryById();
+            setRandomStory(newRandomStory);
+        }
+    }, [storyCount]);
+
+    useEffect(() => {
+        if (randomStory) {
+            axios.get("/api/story/" + randomStory)
+                .then(response => {
+                    setStory(response.data);
+                    setKobolds(response.data.enemies);
+                })
+                .catch(error => {
+                    console.error(error)
+                });
+        }
+    }, [randomStory]);
 
     function getRandomStoryById() {
+        let randomIndex;
+
         if (storyCount === 1) {
-            setRandomStory(getRandomString(story1))
+            randomIndex = Math.floor(Math.random() * story1.length);
+            return story1[randomIndex];
         } else if (storyCount === 2) {
-            setRandomStory(getRandomString(story2))
+            randomIndex = Math.floor(Math.random() * story2.length);
+            return story2[randomIndex];
         } else if (storyCount === 3) {
-            setRandomStory(getRandomString(story3))
+            randomIndex = Math.floor(Math.random() * story3.length);
+            return story3[randomIndex];
         }
     }
 
@@ -333,7 +334,7 @@ export default function GamePage() {
                 <Modal isOpen={saveGameModal}>
                     {games.map((game) => {
                         return (
-                            <div className={"post-content"}>
+                            <div className={"enemy-content"}>
                                 <h3>{game.gameName}</h3>
                                 <p>{game.storyId}</p>
                             </div>
@@ -345,23 +346,38 @@ export default function GamePage() {
                 <button onClick={goToMenu}>Menu</button>
                 <button onClick={closeModal}>close</button>
             </Modal>
-            <div className={"menu"}>
-                <button onClick={openModal}>Menu</button>
-            </div>
-            <div className={"enemies"}>
+            <div className={"header"}>
+                <div className={"menu"}>
+                    <button onClick={openModal}>Menu</button>
+                </div>
                 {kobold1 && kobold1.life > 0 && (
                     <div className={"kobold1"}>
-                        {kobold1.name} {kobold1.life}
+                        <div>
+                            {kobold1.name}
+                        </div>
+                        <div>
+                            {kobold1.life}
+                        </div>
                     </div>
                 )}
                 {kobold2 && kobold2.life > 0 && (
                     <div className={"kobold2"}>
-                        {kobold2.name} {kobold2.life}
+                        <div>
+                            {kobold2.name}
+                        </div>
+                        <div>
+                            {kobold2.life}
+                        </div>
                     </div>
                 )}
                 {kobold3 && kobold3.life > 0 && (
                     <div className={"kobold3"}>
-                        {kobold3.name} {kobold3.life}
+                        <div>
+                            {kobold3.name}
+                        </div>
+                        <div>
+                            {kobold3.life}
+                        </div>
                     </div>
                 )}
             </div>
