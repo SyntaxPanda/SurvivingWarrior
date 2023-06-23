@@ -64,6 +64,14 @@ export default function GamePage() {
         getGameById()
     }, []);
 
+    useEffect(() => {
+        setCharacterHpToMaxHp()
+    }, [character.id])
+
+    function setCharacterHpToMaxHp(){
+        setMaxHp(character.life)
+    }
+
     const [maxHp, setMaxHp] = useState(0)
 
     function getGameById() {
@@ -79,7 +87,6 @@ export default function GamePage() {
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
                 setCharacter(response.data);
-                setMaxHp(character.life)
             })
             .then(() => axios.get("/api/story/" + storyId))
             .then(response => {
@@ -198,7 +205,11 @@ export default function GamePage() {
     function onClickGetNextStoryChapterOption3() {
         if (story.option3 === "Item") {
             if (kobold1.life > 0) {
-                setCharacter({...character, life: (character.life + 3) - kobold1.damage})
+                if(character.life < maxHp){
+                    setCharacter({...character, life: (character.life + 3) - kobold1.damage})
+                }else{
+                    setCharacter({...character, life: character.life - kobold1.damage})
+                }
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -209,7 +220,11 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold2.life > 0) {
-                setCharacter({...character, life: (character.life + 3) - kobold2.damage})
+                if(character.life < maxHp){
+                    setCharacter({...character, life: (character.life + 3) - kobold2.damage})
+                }else{
+                    setCharacter({...character, life: character.life - kobold2.damage})
+                }
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -220,7 +235,11 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold3.life > 0) {
-                setCharacter({...character, life: (character.life + 3) - kobold3.damage})
+                if(character.life < maxHp){
+                    setCharacter({...character, life: (character.life + 3) - kobold3.damage})
+                }else{
+                    setCharacter({...character, life: character.life - kobold3.damage})
+                }
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -346,6 +365,7 @@ export default function GamePage() {
         if(skillPoints > 0){
             setCharacter({...character, life: character.life + 1})
             setSkillPoints(skillPoints - 1)
+            setMaxHp(maxHp + 1)
         }
     }
 
