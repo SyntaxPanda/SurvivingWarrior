@@ -35,7 +35,6 @@ export default function StartPage() {
     axios.get("/api/game/all/" + username)
         .then(response =>
         setGames(response.data))
-        setUsername("")
     }
 
     function openLoadGameModal(){
@@ -47,6 +46,17 @@ export default function StartPage() {
         setModalOpen(false)
     }
 
+    const logout = async () => {
+        try {
+            await axios.post('/api/user/logout')
+                .then(() =>{
+                    navigate("/")
+                })
+        } catch (error) {
+        }
+    };
+
+
     return (
         <div>
             <div className={"NewGameButton"}>
@@ -54,6 +64,9 @@ export default function StartPage() {
             </div>
             <div>
                 <button onClick={openLoadGameModal}>Load Game</button>
+            </div>
+            <div>
+                <button onClick={logout}>Logout</button>
             </div>
             <Modal isOpen={modalOpen}>
                 {games.map((game) => {

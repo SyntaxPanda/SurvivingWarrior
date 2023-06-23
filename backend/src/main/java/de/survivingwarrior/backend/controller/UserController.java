@@ -3,6 +3,7 @@ package de.survivingwarrior.backend.controller;
 import de.survivingwarrior.backend.model.UserA;
 import de.survivingwarrior.backend.model.UserDTO;
 import de.survivingwarrior.backend.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +37,12 @@ public class UserController {
             return principal.getName();
         }
         return "Pls Login";
+    }
+
+    @PostMapping("/logout")
+    String logout(HttpSession httpSession){
+        httpSession.invalidate();
+        SecurityContextHolder.clearContext();
+        return "Ur logout";
     }
 }

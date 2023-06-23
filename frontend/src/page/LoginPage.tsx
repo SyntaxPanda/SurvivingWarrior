@@ -18,6 +18,7 @@ export default function LoginPage(props:Props) {
             .then(() => {
                 navigate("/start")
             })
+            .catch(error => console.error(error))
     }
 
     function onInputPasswordHandler(e: ChangeEvent<HTMLInputElement>) {
