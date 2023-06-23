@@ -64,6 +64,14 @@ export default function GamePage() {
         getGameById()
     }, []);
 
+    useEffect(() => {
+        setCharacterHpToMaxHp()
+    }, [character.id])
+
+    function setCharacterHpToMaxHp(){
+        setMaxHp(character.life)
+    }
+
     const [maxHp, setMaxHp] = useState(0)
 
     function getGameById() {
@@ -79,7 +87,6 @@ export default function GamePage() {
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
                 setCharacter(response.data);
-                setMaxHp(character.life)
             })
             .then(() => axios.get("/api/story/" + storyId))
             .then(response => {
@@ -147,7 +154,7 @@ export default function GamePage() {
                         )
                 }
             } else {
-                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold})
+                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold, exp: character.exp + (3 * kobolds.length)})
                 setStoryCount(storyCount + 1)
             }
         }
@@ -189,6 +196,7 @@ export default function GamePage() {
                         )
                 }
             } else {
+                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold, exp: character.exp + (3 * kobolds.length)})
                 setStoryCount(storyCount + 1)
             }
         }
@@ -197,7 +205,11 @@ export default function GamePage() {
     function onClickGetNextStoryChapterOption3() {
         if (story.option3 === "Item") {
             if (kobold1.life > 0) {
-                setCharacter({...character, life: (character.life + 3) - kobold1.damage})
+                if(character.life < maxHp){
+                    setCharacter({...character, life: (character.life + 3) - kobold1.damage})
+                }else{
+                    setCharacter({...character, life: character.life - kobold1.damage})
+                }
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -208,7 +220,11 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold2.life > 0) {
-                setCharacter({...character, life: (character.life + 3) - kobold2.damage})
+                if(character.life < maxHp){
+                    setCharacter({...character, life: (character.life + 3) - kobold2.damage})
+                }else{
+                    setCharacter({...character, life: character.life - kobold2.damage})
+                }
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -219,7 +235,11 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold3.life > 0) {
-                setCharacter({...character, life: (character.life + 3) - kobold3.damage})
+                if(character.life < maxHp){
+                    setCharacter({...character, life: (character.life + 3) - kobold3.damage})
+                }else{
+                    setCharacter({...character, life: character.life - kobold3.damage})
+                }
                 if (character.life <= 0) {
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
@@ -230,6 +250,7 @@ export default function GamePage() {
                         )
                 }
             } else {
+                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold, exp: character.exp + (3 * kobolds.length)})
                 setStoryCount(storyCount + 1)
             }
         }
@@ -323,6 +344,35 @@ export default function GamePage() {
         } else if (storyCount === 3) {
             randomIndex = Math.floor(Math.random() * story3.length);
             return story3[randomIndex];
+        }
+    }
+
+    const[skillPoints, setSkillPoints] =
+        useState(0)
+
+    function getLevelUp(){
+        if(character.exp >= 10){
+            setCharacter({...character, level: character.level +1, exp: character.exp - 10})
+            setSkillPoints(skillPoints + 5)
+        }
+    }
+
+    useEffect(() => {
+        getLevelUp()
+    }, [character.exp])
+
+    function increaseCharacterLife(){
+        if(skillPoints > 0){
+            setCharacter({...character, life: character.life + 1})
+            setSkillPoints(skillPoints - 1)
+            setMaxHp(maxHp + 1)
+        }
+    }
+
+    function increaseCharacterDmg(){
+        if(skillPoints > 0){
+            setCharacter({...character, damage: character.damage + 1})
+            setSkillPoints(skillPoints - 1)
         }
     }
 
@@ -424,6 +474,14 @@ export default function GamePage() {
                         {character.level}
                     </div>
                 </div>
+                <div className={"skillPointBox"}>
+                    <div className={"skillPointsboxName"}>
+                        SkillPoints:
+                    </div>
+                    <div className={"skillPoints"}>
+                        {skillPoints}
+                    </div>
+                </div>
                 <div className={"characterLifeBox"}>
                     <div className={"characterLifeString"}>
                         Character-Life:
@@ -432,7 +490,7 @@ export default function GamePage() {
                         {character.life}
                     </div>
                     <div className={"buttonLifeUp"}>
-                        <button>+</button>
+                        <button onClick={increaseCharacterLife}>+</button>
                     </div>
                 </div>
                 <div className={"characterDmgBox"}>
@@ -443,7 +501,7 @@ export default function GamePage() {
                         {character.damage}
                     </div>
                     <div className={"buttonDmgUp"}>
-                        <button>+</button>
+                        <button onClick={increaseCharacterDmg}>+</button>
                     </div>
                 </div>
                 <div className={"characterGoldBox"}>
