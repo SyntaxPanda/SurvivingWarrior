@@ -245,7 +245,6 @@ export default function GamePage() {
             damage: character.damage,
             gold: character.gold
         }).catch(error => console.log(error))
-
         axios.put("/api/game/save", {
             gameId: game.gameId,
             gameName: game.gameName,
