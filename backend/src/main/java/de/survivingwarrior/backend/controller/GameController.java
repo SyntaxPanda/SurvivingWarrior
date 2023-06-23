@@ -25,8 +25,8 @@ public class GameController {
     }
 
     @GetMapping("/all")
-    public List<Game> getAllGames(){
-        return gameService.getAllGames();
+    public List<Game> getAllGames(@RequestBody String username){
+        return gameService.getAllGames(username);
     }
 
     @PutMapping("/save")

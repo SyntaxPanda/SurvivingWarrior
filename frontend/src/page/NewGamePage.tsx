@@ -1,6 +1,7 @@
-import React, {ChangeEvent, FormEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {UserDTO} from "../model/UserType";
 
 export default function NewGamePage() {
     const [name, setName] =
@@ -20,6 +21,20 @@ export default function NewGamePage() {
         console.log(e.target.value)
     }
 
+    const[username, setUsername] =
+        useState("")
+
+    function getUserName(){
+        axios.get("/api/user/username")
+            .then(response => {
+                setUsername(response.data)
+            })
+    }
+
+    useEffect(() => {
+        getUserName()
+    }, [])
+
     function startNewGame(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
@@ -31,7 +46,8 @@ export default function NewGamePage() {
                 axios.post('/api/game/new', {
                     gameName,
                     characterId: response.data.id,
-                    storyId: "1"
+                    storyId: "1",
+                    username: username
                 })
                     .then(response => {
                         navigate("/game/" + response.data.gameId);
