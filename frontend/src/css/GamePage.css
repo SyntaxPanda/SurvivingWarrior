@@ -1,4 +1,4 @@
-.gamePageBox{
+.gamePageBox {
     display: grid;
     grid-template-rows: 10vh auto;
     grid-template-columns: 70vw auto;
@@ -8,22 +8,59 @@
     background-size: 100vw 100vh;
 }
 
-.menu{
+.header {
     display: grid;
-    justify-self: flex-start;
+    grid-template-columns: 20vw 17vw 17vw 17vw;
     align-self: center;
-    margin-left: 1vw;
+    margin-left: 3vw;
     height: 3vh;
-    width: 10vw;
+    width: 70vw;
 }
 
-.lifeAndExpBox{
+.menu {
+    display: grid;
+    justify-self: flex-start;
+    width: 7vw;
+    margin-right: 4vw;
+}
+
+.kobold1 {
+    display: grid;
+    grid-template-rows: auto auto;
+    width: 8vw;
+    border: solid 1px white;
+    border-radius: 10%;
+    background-color: lightgrey;
+    color: black;
+}
+
+.kobold2 {
+    display: grid;
+    grid-template-rows: auto auto;
+    width: 8vw;
+    border: solid 1px white;
+    border-radius: 10%;
+    background-color: lightgrey;
+    color: black;
+}
+
+.kobold3 {
+    display: grid;
+    grid-template-rows: auto auto;
+    width: 8vw;
+    border: solid 1px white;
+    border-radius: 10%;
+    background-color: lightgrey;
+    color: black;
+}
+
+.lifeAndExpBox {
     display: grid;
     grid-template-rows: auto auto;
     margin: 1vh 1vw;
 }
 
-.lifeBox{
+.lifeBox {
     display: grid;
     justify-self: center;
     align-items: center;
@@ -33,7 +70,7 @@
     background-color: red;
 }
 
-.expBox{
+.expBox {
     display: grid;
     justify-self: center;
     align-items: center;
@@ -42,94 +79,95 @@
     background-color: deepskyblue;
 }
 
-.storyBox{
+.storyBox {
     display: grid;
     justify-self: center;
     margin-left: 2vw;
     margin-bottom: 15vh;
-    margin-top: 1vh;
+    margin-top: 3vh;
+    height: 80vh;
 }
 
-    .storyName{
-        display: grid;
-        border-bottom: 1px solid black;
-        width: 8vw;
-        justify-self: center;
-    }
+.storyName {
+    display: grid;
+    border-bottom: 1px solid black;
+    width: 8vw;
+    justify-self: center;
+}
 
-    .storyImage{
-        display: grid;
-        border: 1px solid darkred;
-        height: 40vh;
-        width: 60vw;
-        margin-top: 1vh;
-        margin-bottom: 1vh;
-        border-radius: 2vh;
-    }
+.storyImage {
+    display: grid;
+    border: 1px solid darkred;
+    height: 40vh;
+    width: 60vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    border-radius: 2vh;
+}
 
-    .storyText{
-        display: grid;
-        border: 2px solid black;
-        height: 15vh;
-        align-items: center;
-        background-color: lightgrey;
-        border-radius: 2vh;
-    }
+.storyText {
+    display: grid;
+    border: 2px solid black;
+    height: 15vh;
+    align-items: center;
+    background-color: lightgrey;
+    border-radius: 2vh;
+}
 
-    .storyButtons{
-        display: grid;
-        justify-content: center;
-        align-content: center;
-        grid-template-rows: auto;
-        grid-template-columns: 15vw 15vw 15vw 15vw;
-        }
+.storyButtons {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-rows: auto;
+    grid-template-columns: 15vw 15vw 15vw;
+}
 
-        .button1{
-            display: grid;
-            height: 10vh;
-            width: 9vw;
-            margin-top: 1vh;
-            align-self: center;
-            justify-self: center;
-        }
+.button1 {
+    display: grid;
+    height: 10vh;
+    width: 9vw;
+    margin-top: 1vh;
+    align-self: center;
+    justify-self: center;
+}
 
-        .buttonHover{
-            border-radius: 2vh;
-            background-color: gold;
-        }
+.buttonHover {
+    border-radius: 2vh;
+    background-color: gold;
+}
 
-        .buttonHover:Hover{
-            background-color: #61dafb;
-        }
+.buttonHover:Hover {
+    background-color: #61dafb;
+}
 
-        .button2{
-            display: grid;
-            height: 10vh;
-            width: 9vw;
-            margin-top: 1vh;
-            align-self: center;
-            justify-self: center;
-        }
+.button2 {
+    display: grid;
+    height: 10vh;
+    width: 9vw;
+    margin-top: 1vh;
+    align-self: center;
+    justify-self: center;
+}
 
-        .button3{
-            display: grid;
-            height: 10vh;
-            width: 9vw;
-            margin-top: 1vh;
-            align-self: center;
-            justify-self: center;
-        }
+.button3 {
+    display: grid;
+    height: 10vh;
+    width: 9vw;
+    margin-top: 1vh;
+    align-self: center;
+    justify-self: center;
+}
 
-        .button4{
-            display: grid;
-            height: 10vh;
-            width: 9vw;
-            margin-top: 1vh;
-            align-self: center;
-            justify-self: center;
-        }
+.button4 {
+    display: grid;
+    height: 10vh;
+    width: 9vw;
+    margin-top: 1vh;
+    align-self: center;
+    justify-self: center;
+}
 
-.characterBox{
+.characterBox {
     display: grid;
     grid-template-rows: auto auto auto auto auto;
     justify-self: center;
@@ -142,7 +180,7 @@
     border-radius: 2vh;
 }
 
-.characterName{
+.characterName {
     display: grid;
     justify-self: center;
     align-items: center;
@@ -151,7 +189,7 @@
     height: 3vh;
 }
 
-.levelBox{
+.levelBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
     border: 1px solid black;
@@ -159,20 +197,20 @@
     height: 5vh;
 }
 
-.levelString{
+.levelString {
     display: grid;
     align-self: center;
     justify-self: flex-start;
     margin-left: 1vw;
 }
 
-.levelStat{
+.levelStat {
     display: grid;
     align-self: center;
     justify-self: center;
 }
 
-.characterLifeBox{
+.characterLifeBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
     border: 1px solid black;
@@ -180,20 +218,20 @@
     height: 5vh;
 }
 
-.characterLifeString{
+.characterLifeString {
     display: grid;
     justify-self: flex-start;
     align-self: center;
     margin-left: 1vw;
 }
 
-.characterLifeStat{
+.characterLifeStat {
     display: grid;
     justify-self: center;
     align-self: center;
 }
 
-.buttonLifeUp{
+.buttonLifeUp {
     display: grid;
     justify-self: center;
     align-self: center;
@@ -201,7 +239,7 @@
     width: 1vw;
 }
 
-.characterDmgBox{
+.characterDmgBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
     border: 1px solid black;
@@ -209,20 +247,20 @@
     height: 5vh;
 }
 
-.characterDmgString{
+.characterDmgString {
     display: grid;
     justify-self: flex-start;
     align-self: center;
     margin-left: 1vw;
 }
 
-.characterDmg{
+.characterDmg {
     display: grid;
     justify-self: center;
     align-self: center;
 }
 
-.buttonDmgUp{
+.buttonDmgUp {
     display: grid;
     justify-self: center;
     align-self: center;
@@ -230,7 +268,7 @@
     width: 1vw;
 }
 
-.characterGoldBox{
+.characterGoldBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
     border: 1px solid black;
@@ -238,14 +276,14 @@
     height: 5vh;
 }
 
-.characterGoldString{
+.characterGoldString {
     display: grid;
     align-self: center;
     justify-self: flex-start;
     margin-left: 1vw;
 }
 
-.characterGold{
+.characterGold {
     display: grid;
     align-self: center;
 }
