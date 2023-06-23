@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "../css/StartPage.css"
 import {Link, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
@@ -17,10 +17,25 @@ export default function StartPage() {
         navigate("/newgame")
     }
 
+    const [username, setUsername] =
+        useState("")
+
+    function setUsernameIfLogin(){
+        axios.get("/api/user/username")
+            .then(response =>{
+                setUsername(response.data)
+            })
+    }
+
+    useEffect(() =>{
+        setUsernameIfLogin()
+    }, [])
+
     function getAllGamesForLoadGame(){
-    axios.get("/api/game/all")
+    axios.get("/api/game/all/" + username)
         .then(response =>
         setGames(response.data))
+        setUsername("")
     }
 
     function openLoadGameModal(){

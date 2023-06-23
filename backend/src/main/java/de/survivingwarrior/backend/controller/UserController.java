@@ -1,8 +1,7 @@
 package de.survivingwarrior.backend.controller;
 
-import de.survivingwarrior.backend.model.User;
+import de.survivingwarrior.backend.model.UserA;
 import de.survivingwarrior.backend.model.UserDTO;
-import de.survivingwarrior.backend.security.SecurityConfig;
 import de.survivingwarrior.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +16,8 @@ public class UserController {
 
     private final UserService userService;
     @PostMapping("/register")
-    public UserDTO registerUser(@RequestBody User user){
-        return userService.registerUser(user);
+    public UserDTO registerUser(@RequestBody UserA userA){
+        return userService.registerUser(userA);
     }
 
     @PostMapping("/login")

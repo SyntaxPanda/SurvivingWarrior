@@ -16,7 +16,7 @@ export default function LoginPage(props:Props) {
         e.preventDefault()
         props.login(username, password)
             .then(() => {
-                navigate("/")
+                navigate("/start")
             })
     }
 

@@ -24,8 +24,8 @@ public class GameController {
         return gameService.getGameById(id);
     }
 
-    @GetMapping("/all")
-    public List<Game> getAllGames(@RequestBody String username){
+    @GetMapping("/all/{username}")
+    public List<Game> getAllGames(@PathVariable String username){
         return gameService.getAllGames(username);
     }
 

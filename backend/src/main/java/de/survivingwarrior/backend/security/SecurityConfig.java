@@ -33,7 +33,9 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests()
-                .requestMatchers("/api/user/**").authenticated()
+                .requestMatchers("/api/user/**").permitAll()
+                .requestMatchers("/api/game/**").authenticated()
+                .requestMatchers("/api/story/**").authenticated()
                 .anyRequest().authenticated()
                 .and().build();
     }
