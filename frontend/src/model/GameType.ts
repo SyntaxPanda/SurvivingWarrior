@@ -3,4 +3,5 @@ export type Game ={
     gameName:string,
     characterId:string,
     storyId:string
+    username:string
 }

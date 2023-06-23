@@ -17,4 +17,5 @@ public class Game {
     private String gameName;
     private String characterId;
     private String storyId;
+    private String username;
 }
