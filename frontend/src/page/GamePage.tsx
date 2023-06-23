@@ -147,7 +147,7 @@ export default function GamePage() {
                         )
                 }
             } else {
-                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold})
+                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold, exp: character.exp + (3 * kobolds.length)})
                 setStoryCount(storyCount + 1)
             }
         }
@@ -189,6 +189,7 @@ export default function GamePage() {
                         )
                 }
             } else {
+                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold, exp: character.exp + (3 * kobolds.length)})
                 setStoryCount(storyCount + 1)
             }
         }
@@ -230,6 +231,7 @@ export default function GamePage() {
                         )
                 }
             } else {
+                setCharacter({...character, gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold, exp: character.exp + (3 * kobolds.length)})
                 setStoryCount(storyCount + 1)
             }
         }
@@ -323,6 +325,34 @@ export default function GamePage() {
         } else if (storyCount === 3) {
             randomIndex = Math.floor(Math.random() * story3.length);
             return story3[randomIndex];
+        }
+    }
+
+    const[skillPoints, setSkillPoints] =
+        useState(0)
+
+    function getLevelUp(){
+        if(character.exp >= 10){
+            setCharacter({...character, level: character.level +1, exp: character.exp - 10})
+            setSkillPoints(skillPoints + 5)
+        }
+    }
+
+    useEffect(() => {
+        getLevelUp()
+    }, [character.exp])
+
+    function increaseCharacterLife(){
+        if(skillPoints > 0){
+            setCharacter({...character, life: character.life + 1})
+            setSkillPoints(skillPoints - 1)
+        }
+    }
+
+    function increaseCharacterDmg(){
+        if(skillPoints > 0){
+            setCharacter({...character, damage: character.damage + 1})
+            setSkillPoints(skillPoints - 1)
         }
     }
 
@@ -424,6 +454,14 @@ export default function GamePage() {
                         {character.level}
                     </div>
                 </div>
+                <div className={"skillPointBox"}>
+                    <div className={"skillPointsboxName"}>
+                        SkillPoints:
+                    </div>
+                    <div className={"skillPoints"}>
+                        {skillPoints}
+                    </div>
+                </div>
                 <div className={"characterLifeBox"}>
                     <div className={"characterLifeString"}>
                         Character-Life:
@@ -432,7 +470,7 @@ export default function GamePage() {
                         {character.life}
                     </div>
                     <div className={"buttonLifeUp"}>
-                        <button>+</button>
+                        <button onClick={increaseCharacterLife}>+</button>
                     </div>
                 </div>
                 <div className={"characterDmgBox"}>
@@ -443,7 +481,7 @@ export default function GamePage() {
                         {character.damage}
                     </div>
                     <div className={"buttonDmgUp"}>
-                        <button>+</button>
+                        <button onClick={increaseCharacterDmg}>+</button>
                     </div>
                 </div>
                 <div className={"characterGoldBox"}>
