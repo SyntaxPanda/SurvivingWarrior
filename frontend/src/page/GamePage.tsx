@@ -55,7 +55,7 @@ export default function GamePage() {
         })
 
     const [game, setGame] =
-        useState<Game>({gameId: "", gameName: "", characterId: "", storyId: ""})
+        useState<Game>({username: "", gameId: "", gameName: "", characterId: "", storyId: ""})
 
     const params = useParams()
     const gameId: string | undefined = params.id;
@@ -121,7 +121,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -135,7 +135,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -149,7 +149,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -169,7 +169,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -180,7 +180,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -191,7 +191,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -215,7 +215,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -230,7 +230,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -245,7 +245,7 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/")
+                                    navigate("/start")
                                 )
                         )
                 }
@@ -270,20 +270,21 @@ export default function GamePage() {
             gameId: game.gameId,
             gameName: game.gameName,
             characterId: character.id,
-            storyId: story.id
+            storyId: story.id,
+            username: game.username
         })
             .then()
-        navigate("/")
+        navigate("/start")
     }
 
     function getAllGames() {
-        axios.get("/api/game/all")
+        axios.get("/api/game/all/" + game.username)
             .then(response =>
                 setGames(response.data))
     }
 
     function goToMenu() {
-        navigate("/")
+        navigate("/start")
     }
 
     function openModal() {

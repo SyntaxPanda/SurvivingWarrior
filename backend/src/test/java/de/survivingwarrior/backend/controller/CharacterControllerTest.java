@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -22,31 +25,32 @@ class CharacterControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser()
     void newGameCharacterName() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/character/newchar")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(
-                        """
-                        {
-                        "name": "Hans"
-                        }"""
-                ))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "name": "Hans"
+                                        }"""
+                        ).with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
                         """
-                        {
-                            "name": "Hans",
-                            "level": 1,
-                            "exp": 0,
-                            "inventory": [
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                null
-                            ]
-                        }"""
+                                {
+                                    "name": "Hans",
+                                    "level": 1,
+                                    "exp": 0,
+                                    "inventory": [
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null
+                                    ]
+                                }"""
                 )).andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(jsonPath("$.life").isNotEmpty())
                 .andExpect(jsonPath("$.damage").isNotEmpty())
@@ -55,17 +59,20 @@ class CharacterControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser()
     void getCharacterById() throws Exception {
-       MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/api/character/newchar")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(
-                        """
-                        {
-                        "name": "Hans"
-                        }"""
-                )).andReturn();
+        MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/api/character/newchar")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "name": "Hans"
+                                        }"""
+                        )
+                        .with(csrf()))
+                .andReturn();
 
-       String content = response.getResponse().getContentAsString();
+        String content = response.getResponse().getContentAsString();
 
         ObjectMapper mapper = new ObjectMapper();
         Character character = mapper.readValue(content, Character.class);
@@ -74,19 +81,19 @@ class CharacterControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(
                         """
-                        {
-                            "name": "Hans",
-                            "level": 1,
-                            "exp": 0,
-                            "inventory": [
-                                null,
-                                null,
-                                null,
-                                null,
-                                null,
-                                null
-                            ]
-                        }"""
+                                {
+                                    "name": "Hans",
+                                    "level": 1,
+                                    "exp": 0,
+                                    "inventory": [
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null
+                                    ]
+                                }"""
                 )).andExpect(jsonPath("$.id").value(character.getId()))
                 .andExpect(jsonPath("$.life").value(character.getLife()))
                 .andExpect(jsonPath("$.damage").value(character.getDamage()))
@@ -95,15 +102,17 @@ class CharacterControllerTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser()
     void characterSave() throws Exception {
         MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/api/character/newchar")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                         """
-                        {
-                        "name": "Hans"
-                        }"""
-                )).andReturn();
+                                {
+                                "name": "Hans"
+                                }"""
+                ).with(csrf())
+        ).andReturn();
 
         String content = response.getResponse().getContentAsString();
 
@@ -117,29 +126,30 @@ class CharacterControllerTest {
                                 "level": 2,
                                 "damage": 10
                                 }
-                                """))
+                                """).with(csrf()))
                 .andExpect(status().isOk());
 
     }
 
     @Test
     @DirtiesContext
+    @WithMockUser()
     void lostTheGameAndDeleteCharacter() throws Exception {
         MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/api/character/newchar")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
                         """
-                        {
-                        "name": "Hans"
-                        }"""
-                )).andReturn();
+                                {
+                                "name": "Hans"
+                                }"""
+                ).with(csrf())).andReturn();
 
         String content = response.getResponse().getContentAsString();
 
         ObjectMapper mapper = new ObjectMapper();
         Character character = mapper.readValue(content, Character.class);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/character/lost/" + character.getId()))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/character/lost/" + character.getId()).with(csrf()))
                 .andExpect(status().isOk());
     }
 }

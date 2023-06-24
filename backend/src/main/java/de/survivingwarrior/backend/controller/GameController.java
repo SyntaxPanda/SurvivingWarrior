@@ -24,9 +24,9 @@ public class GameController {
         return gameService.getGameById(id);
     }
 
-    @GetMapping("/all")
-    public List<Game> getAllGames(){
-        return gameService.getAllGames();
+    @GetMapping("/all/{username}")
+    public List<Game> getAllGames(@PathVariable String username){
+        return gameService.getAllGames(username);
     }
 
     @PutMapping("/save")

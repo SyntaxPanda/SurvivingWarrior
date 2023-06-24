@@ -24,8 +24,8 @@ public class GameService {
         return gameRepo.findById(id);
     }
 
-    public List<Game> getAllGames() {
-        return gameRepo.findAll();
+    public List<Game> getAllGames(String username) {
+        return gameRepo.findAllByUsername(username);
     }
 
     public void saveGame(Game game) {
