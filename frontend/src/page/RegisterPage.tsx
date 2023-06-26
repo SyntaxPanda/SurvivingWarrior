@@ -30,6 +30,10 @@ export default function RegisterPage() {
         setPassword(e.target.value)
     }
 
+    function backOnClickHandler(){
+        navigate("/")
+    }
+
     return (
         <div className={"registerPage"}>
             <form onSubmit={registerUser}>
@@ -41,6 +45,7 @@ export default function RegisterPage() {
                 </div>
                 <button>Register</button>
             </form>
+            <button onClick={backOnClickHandler}>Back</button>
         </div>
     );
 }
