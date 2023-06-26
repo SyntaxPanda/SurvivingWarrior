@@ -1,8 +1,7 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {UserDTO} from "../model/UserType";
-
+import "../css/NewGamePage.css"
 export default function NewGamePage() {
     const [name, setName] =
         useState("")
@@ -65,7 +64,7 @@ export default function NewGamePage() {
 
 
     return (
-        <div>
+        <div className={"newGamePage"}>
             <form onSubmit={startNewGame}>
                 <div>
                     <input type="text" placeholder={"Character Name"} value={name} onInput={setCharacterName}/>
