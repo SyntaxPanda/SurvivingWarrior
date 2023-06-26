@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
+import "../css/FirstPage.css"
 
 export default function FirstPage() {
     const navigate = useNavigate()
@@ -13,7 +14,7 @@ export default function FirstPage() {
     }
 
     return (
-        <div>
+        <div className={"firstPage"}>
             <div>
                 <button onClick={onClickLoginHandler}>Login</button>
             </div>

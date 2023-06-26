@@ -1,5 +1,6 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import "../css/LoginPage.css"
 
 type Props={
     login: (username:string, password:string) => Promise<void>
@@ -30,7 +31,7 @@ export default function LoginPage(props:Props) {
     }
 
     return (
-        <div>
+        <div className={"loginPage"}>
             <form onSubmit={userLogin}>
                 <div>
                     <input type="text" placeholder={"UserName"} onInput={onInputUserNameHandler}/>

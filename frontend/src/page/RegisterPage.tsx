@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import "../css/RegisterPage.css"
 
 export default function RegisterPage() {
 
@@ -30,7 +31,7 @@ export default function RegisterPage() {
     }
 
     return (
-        <div>
+        <div className={"registerPage"}>
             <form onSubmit={registerUser}>
                 <div>
                     <input type="text" placeholder={"Username"} onInput={setUsernameHandler}/>
