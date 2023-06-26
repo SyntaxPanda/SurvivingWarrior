@@ -379,12 +379,12 @@ export default function GamePage() {
 
     return (
         <div className={"gamePageBox"}>
-            <Modal isOpen={isOpen}>
+            <Modal className={"modalMenu"} isOpen={isOpen}>
                 <button onClick={openSaveGameModal}>Save</button>
-                <Modal isOpen={saveGameModal}>
+                <Modal className={"modalSave"} isOpen={saveGameModal}>
                     {games.map((game) => {
                         return (
-                            <div className={"enemy-content"}>
+                            <div className={"save-content"}>
                                 <h3>{game.gameName}</h3>
                                 <p>{game.storyId}</p>
                             </div>
@@ -402,8 +402,12 @@ export default function GamePage() {
                 </div>
                 {kobold1 && kobold1.life > 0 && (
                     <div className={"kobold1"}>
+                        <div className={"koboldImage"}>
+                        </div>
                         <div>
                             {kobold1.name}
+                        </div>
+                        <div>
                         </div>
                         <div>
                             {kobold1.life}
@@ -412,9 +416,12 @@ export default function GamePage() {
                 )}
                 {kobold2 && kobold2.life > 0 && (
                     <div className={"kobold2"}>
+                        <div className={"koboldImage"}>
+                        </div>
                         <div>
                             {kobold2.name}
                         </div>
+                        <div></div>
                         <div>
                             {kobold2.life}
                         </div>
@@ -422,9 +429,12 @@ export default function GamePage() {
                 )}
                 {kobold3 && kobold3.life > 0 && (
                     <div className={"kobold3"}>
+                        <div className={"koboldImage"}>
+                        </div>
                         <div>
                             {kobold3.name}
                         </div>
+                        <div></div>
                         <div>
                             {kobold3.life}
                         </div>
