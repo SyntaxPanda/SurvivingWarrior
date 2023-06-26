@@ -30,6 +30,10 @@ export default function LoginPage(props:Props) {
         setUserName(e.target.value)
     }
 
+    function backMenuHandler(){
+        navigate("/")
+    }
+
     return (
         <div className={"loginPage"}>
             <form onSubmit={userLogin}>
@@ -41,6 +45,7 @@ export default function LoginPage(props:Props) {
                 </div>
                 <button>Login</button>
             </form>
+            <button onClick={backMenuHandler}>Back</button>
         </div>
     );
 }
