@@ -4,8 +4,44 @@
     grid-template-columns: 70vw auto;
     height: 100vh;
     width: 100vw;
-    background-image: url("../image/BackgroundGamePageCave.jpg");
+    background-image: url("../../src/image/GamePage.jpg");
     background-size: 100vw 100vh;
+}
+
+.modalMenu {
+    display: grid;
+    background-image: url("../image/backgroundButtonKobold.jpg");
+    height: 70vh;
+    width: 30vw;
+    color: white;
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    border: 2px solid white;
+}
+
+.modalSave {
+    display: grid;
+    background-image: url("../image/backgroundButtonKobold.jpg");
+    height: 40vh;
+    width: 20vw;
+    color: white;
+    position: absolute;
+    top: 28%;
+    left: 35%;
+    border: 2px solid white;
+    overflow: auto;
+}
+
+.save-content {
+    grid-template-columns: auto auto;
+    align-self: center;
+    border: 1px solid grey;
+}
+
+button {
+    background-image: url("../image/backgroundButtonKobold.jpg");
+    color: white;
 }
 
 .header {
@@ -24,34 +60,46 @@
     margin-right: 4vw;
 }
 
+.koboldImage {
+    background-image: url("../image/koboldForSurvivingWarrior.jpg");
+    background-position: center;
+    background-size: 4vw 7vh;
+    background-repeat: no-repeat;
+}
+
 .kobold1 {
     display: grid;
     grid-template-rows: auto auto;
-    width: 8vw;
+    grid-template-columns: auto auto;
+    width: 10vw;
+    height: 8vh;
     border: solid 1px white;
     border-radius: 10%;
-    background-color: lightgrey;
-    color: black;
+    color: white;
+    background-image: url("../image/backgroundButtonKobold.jpg");
+
 }
 
 .kobold2 {
     display: grid;
     grid-template-rows: auto auto;
-    width: 8vw;
+    grid-template-columns: auto auto;
+    width: 10vw;
     border: solid 1px white;
     border-radius: 10%;
-    background-color: lightgrey;
-    color: black;
+    color: white;
+    background-image: url("../image/backgroundButtonKobold.jpg");
 }
 
 .kobold3 {
     display: grid;
     grid-template-rows: auto auto;
-    width: 8vw;
+    grid-template-columns: auto auto;
+    width: 10vw;
     border: solid 1px white;
     border-radius: 10%;
-    background-color: lightgrey;
-    color: black;
+    color: white;
+    background-image: url("../image/backgroundButtonKobold.jpg");
 }
 
 .lifeAndExpBox {
@@ -86,6 +134,7 @@
     margin-bottom: 15vh;
     margin-top: 3vh;
     height: 80vh;
+    color: white;
 }
 
 .storyName {
@@ -110,8 +159,10 @@
     border: 2px solid black;
     height: 15vh;
     align-items: center;
-    background-color: lightgrey;
     border-radius: 2vh;
+    color: white;
+    background-image: url("../image/backgroundButtonKobold.jpg");
+    background-size: auto 15vh;
 }
 
 .storyButtons {
@@ -158,15 +209,6 @@
     justify-self: center;
 }
 
-.button4 {
-    display: grid;
-    height: 10vh;
-    width: 9vw;
-    margin-top: 1vh;
-    align-self: center;
-    justify-self: center;
-}
-
 .characterBox {
     display: grid;
     grid-template-rows: auto auto auto auto auto;
@@ -175,16 +217,17 @@
     padding: 1vh;
     height: 65vh;
     width: 20vw;
-    background-color: lightgrey;
+    background-image: url("../image/backgroundButtonKobold.jpg");
     margin-top: 4vh;
     border-radius: 2vh;
+    color: white;
 }
 
 .characterName {
     display: grid;
     justify-self: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid grey;
     width: 5vw;
     height: 3vh;
 }
@@ -192,7 +235,7 @@
 .levelBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
-    border: 1px solid black;
+    border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
 }
@@ -213,7 +256,7 @@
 .characterLifeBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
-    border: 1px solid black;
+    border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
 }
@@ -242,7 +285,7 @@
 .characterDmgBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
-    border: 1px solid black;
+    border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
 }
@@ -271,7 +314,7 @@
 .characterGoldBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
-    border: 1px solid black;
+    border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
 }

@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import Modal from "react-modal";
 import {Game} from "../model/GameType";
 import axios from "axios";
+import "../css/StartPage.css"
 
 export default function StartPage() {
     const navigate = useNavigate();
@@ -57,14 +58,14 @@ export default function StartPage() {
     };
 
     return (
-        <div>
+        <div className={"startPage"}>
             <div className={"NewGameButton"}>
                 <button onClick={onClickNavigateToNewGamePage}>New Game</button>
             </div>
-            <div>
+            <div className={"loadGameButton"}>
                 <button onClick={openLoadGameModal}>Load Game</button>
             </div>
-            <div>
+            <div className={"logoutGameButton"}>
                 <button onClick={logout}>Logout</button>
             </div>
             <Modal isOpen={modalOpen}>

@@ -1,8 +1,7 @@
 import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {UserDTO} from "../model/UserType";
-
+import "../css/NewGamePage.css"
 export default function NewGamePage() {
     const [name, setName] =
         useState("")
@@ -63,23 +62,30 @@ export default function NewGamePage() {
             });
     }
 
+    function backToMenu(){
+        navigate("/start")
+    }
+
 
     return (
-        <div>
-            <form onSubmit={startNewGame}>
-                <div>
+        <div className={"newGamePage"}>
+            <form className={"formNewGamePage"} onSubmit={startNewGame}>
+                <div className={"characterNameNewGamePage"}>
                     <input type="text" placeholder={"Character Name"} value={name} onInput={setCharacterName}/>
                 </div>
-                <div>
+                <div className={"gameNameNewGamePage"}>
                     <input type="text" placeholder={"Game Name"} value={gameName} onInput={setNameOfGame}/>
                 </div>
-                <div>
+                <div className={"storyPlaceNewGamePage"}>
                     Story: Cave
                 </div>
-                <div>
+                <div className={"startGameNewGamePage"}>
                     <button>Start Game</button>
                 </div>
             </form>
+            <div className={"backButtonNewGamePage"}>
+               <button onClick={backToMenu}>Back</button>
+            </div>
         </div>
     );
 }

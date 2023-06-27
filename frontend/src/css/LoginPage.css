@@ -1,0 +1,47 @@
+.loginPage{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../../src/image/SurvivingWarrior.jpg");
+    background-size: 100vw 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    grid-template-rows: 50vh 50vh;
+}
+
+.formLoginPage{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    justify-items: flex-start;
+    margin-left: 10vw;
+    margin-top: 5vh;
+    align-items: flex-end;
+}
+
+.usernameLoginPage{
+    margin-top: 15vh;
+    display: grid;
+    width: 10vw;
+    height: 5vh;
+}
+
+.passwordLoginPage{
+    display: grid;
+    width: 10vw;
+    height: 5vh;
+}
+
+.loginButtonLoginPage{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+}
+
+.backButtonLoginPage{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+    margin-left: 10vw;
+    align-self: flex-start;
+    margin-top: 2vh;
+}
