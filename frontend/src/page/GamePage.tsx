@@ -62,10 +62,12 @@ export default function GamePage() {
     const params = useParams()
     const gameId: string | undefined = params.id;
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         getGameById()
     }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         setCharacterHpToMaxHp()
     }, [character.id])
@@ -379,6 +381,7 @@ export default function GamePage() {
     const [randomStory, setRandomStory] =
         useState<String | undefined>("")
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         if (storyCount !== 0) {
             const newRandomStory = getRandomStoryById();
@@ -424,6 +427,7 @@ export default function GamePage() {
         }
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         getLevelUp()
     }, [character.exp])
