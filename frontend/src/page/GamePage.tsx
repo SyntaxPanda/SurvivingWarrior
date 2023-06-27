@@ -64,10 +64,12 @@ export default function GamePage() {
 
     useEffect(() => {
         getGameById()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         setCharacterHpToMaxHp()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.id])
 
     function setCharacterHpToMaxHp() {
@@ -384,6 +386,7 @@ export default function GamePage() {
             const newRandomStory = getRandomStoryById();
             setRandomStory(newRandomStory);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [storyCount]);
 
     useEffect(() => {
@@ -426,6 +429,7 @@ export default function GamePage() {
 
     useEffect(() => {
         getLevelUp()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.exp])
 
     function increaseCharacterLife() {
