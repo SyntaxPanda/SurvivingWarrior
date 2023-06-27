@@ -5,21 +5,23 @@ import "../css/FirstPage.css"
 export default function FirstPage() {
     const navigate = useNavigate()
 
-    function onClickLoginHandler(){
+    function onClickLoginHandler() {
         navigate("/login")
     }
 
-    function onClickRegisterHandler(){
+    function onClickRegisterHandler() {
         navigate("/register")
     }
 
     return (
         <div className={"firstPage"}>
-            <div>
-                <button onClick={onClickLoginHandler}>Login</button>
-            </div>
-            <div>
-                <button onClick={onClickRegisterHandler}>Register</button>
+            <div className={"buttonGroup"}>
+                <div className={"loginButton"}>
+                    <button onClick={onClickLoginHandler}>Login</button>
+                </div>
+                <div className={"registerButton"}>
+                    <button onClick={onClickRegisterHandler}>Register</button>
+                </div>
             </div>
         </div>
     );

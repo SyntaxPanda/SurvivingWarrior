@@ -2,10 +2,10 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import "../css/LoginPage.css"
 
-type Props={
-    login: (username:string, password:string) => Promise<void>
+type Props = {
+    login: (username: string, password: string) => Promise<void>
 }
-export default function LoginPage(props:Props) {
+export default function LoginPage(props: Props) {
     const [username, setUserName] =
         useState("")
     const [password, setPassword] =
@@ -30,22 +30,26 @@ export default function LoginPage(props:Props) {
         setUserName(e.target.value)
     }
 
-    function backMenuHandler(){
+    function backMenuHandler() {
         navigate("/")
     }
 
     return (
         <div className={"loginPage"}>
-            <form onSubmit={userLogin}>
-                <div>
+            <form className={"formLoginPage"} onSubmit={userLogin}>
+                <div className={"usernameLoginPage"}>
                     <input type="text" placeholder={"UserName"} onInput={onInputUserNameHandler}/>
                 </div>
-                <div>
+                <div className={"passwordLoginPage"}>
                     <input type="password" placeholder={"Password"} onInput={onInputPasswordHandler}/>
                 </div>
-                <button>Login</button>
+                <div className={"loginButtonLoginPage"}>
+                    <button>Login</button>
+                </div>
             </form>
-            <button onClick={backMenuHandler}>Back</button>
+            <div className={"backButtonLoginPage"}>
+                <button onClick={backMenuHandler}>Back</button>
+            </div>
         </div>
     );
 }

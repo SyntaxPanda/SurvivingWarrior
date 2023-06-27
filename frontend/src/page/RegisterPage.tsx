@@ -5,13 +5,13 @@ import "../css/RegisterPage.css"
 
 export default function RegisterPage() {
 
-    const[username, setUsername] =
+    const [username, setUsername] =
         useState("")
-    const[password, setPassword] =
+    const [password, setPassword] =
         useState("")
     const navigate = useNavigate()
 
-    function registerUser(e: FormEvent<HTMLFormElement>){
+    function registerUser(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
         axios.post("/api/user/register", {
             username,
@@ -22,30 +22,34 @@ export default function RegisterPage() {
             })
     }
 
-    function setUsernameHandler(e: ChangeEvent<HTMLInputElement>){
+    function setUsernameHandler(e: ChangeEvent<HTMLInputElement>) {
         setUsername(e.target.value)
     }
 
-    function setPasswordHandler(e: ChangeEvent<HTMLInputElement>){
+    function setPasswordHandler(e: ChangeEvent<HTMLInputElement>) {
         setPassword(e.target.value)
     }
 
-    function backOnClickHandler(){
+    function backOnClickHandler() {
         navigate("/")
     }
 
     return (
         <div className={"registerPage"}>
-            <form onSubmit={registerUser}>
-                <div>
+            <form className={"formRegisterPage"} onSubmit={registerUser}>
+                <div className={"usernameRegisterPage"}>
                     <input type="text" placeholder={"Username"} onInput={setUsernameHandler}/>
                 </div>
-                <div>
+                <div className={"passwordRegisterPage"}>
                     <input type="password" placeholder={"Password"} onInput={setPasswordHandler}/>
                 </div>
-                <button>Register</button>
+                <div className={"registerButtonRegisterPage"}>
+                    <button>Register</button>
+                </div>
             </form>
-            <button onClick={backOnClickHandler}>Back</button>
+            <div className={"backButtonRegisterPage"}>
+                <button onClick={backOnClickHandler}>Back</button>
+            </div>
         </div>
     );
 }

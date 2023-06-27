@@ -62,10 +62,10 @@ export default function StartPage() {
             <div className={"NewGameButton"}>
                 <button onClick={onClickNavigateToNewGamePage}>New Game</button>
             </div>
-            <div>
+            <div className={"loadGameButton"}>
                 <button onClick={openLoadGameModal}>Load Game</button>
             </div>
-            <div>
+            <div className={"logoutGameButton"}>
                 <button onClick={logout}>Logout</button>
             </div>
             <Modal isOpen={modalOpen}>
