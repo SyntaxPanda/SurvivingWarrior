@@ -126,7 +126,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
@@ -143,7 +145,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
@@ -160,7 +164,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
@@ -189,7 +195,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
@@ -202,7 +210,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
@@ -215,7 +225,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
@@ -249,7 +261,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
@@ -269,7 +283,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
@@ -289,7 +305,9 @@ export default function GamePage() {
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
                                 .then(() =>
-                                    navigate("/start")
+                                    setTimeout(() => {
+                                        navigate("/start")
+                                    }, 2000)
                                 )
                         )
                 }
