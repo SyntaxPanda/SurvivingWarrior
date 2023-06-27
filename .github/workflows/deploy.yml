@@ -4,9 +4,8 @@ on:
   push:
     branches:
       - main
-    pull_request:
-        types: [ opened, synchronize, reopened ]
-
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   build-frontend:
     runs-on: ubuntu-latest
