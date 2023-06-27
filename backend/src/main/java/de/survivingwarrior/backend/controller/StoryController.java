@@ -13,11 +13,6 @@ public class StoryController {
 
     private final StoryService storyService;
 
-    @PostMapping("/newstory")
-    public Story createNewStoryChapter(@RequestBody Story story){
-        return storyService.createNewStoryChapter(story);
-    }
-
     @GetMapping("/{id}")
     public Optional<Story> getStoryChapterById(@PathVariable String id){
         return storyService.getStoryChapterById(id);
