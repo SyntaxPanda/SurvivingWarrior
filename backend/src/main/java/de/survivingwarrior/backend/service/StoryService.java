@@ -1,5 +1,6 @@
 package de.survivingwarrior.backend.service;
 
+import de.survivingwarrior.backend.model.Dragon;
 import de.survivingwarrior.backend.model.Enemy;
 import de.survivingwarrior.backend.model.Kobold;
 import de.survivingwarrior.backend.model.Story;
@@ -25,11 +26,13 @@ public class StoryService {
         //Kobold kobold3 = new Kobold(generateUUID.generateUUID(), "Kobold", random.nextInt(5) +1, random.nextInt(10) +5, random.nextInt(10) +1);
         //This is for my storyInput with Postman, at the end of my story i will delete this.
 
-        //List<Enemy> enemies = new ArrayList<>();
+        Dragon dragon = new Dragon(generateUUID.generateUUID(), "Dragon of Fire", random.nextInt(12) + 3, random.nextInt(50) + 35, random.nextInt(25) +10);
+        List<Enemy> enemies = new ArrayList<>();
+        enemies.add(dragon);
         //enemies.add(kobold1);
         //enemies.add(kobold2);
         //enemies.add(kobold3);
-        //story.setEnemies(enemies);
+        story.setEnemies(enemies);
         return storyRepo.insert(story);
     }
 
