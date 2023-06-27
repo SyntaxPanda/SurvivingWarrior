@@ -410,8 +410,7 @@ export default function GamePage() {
 
     function getLevelUp() {
         if (character.exp >= 10) {
-            setCharacter({...character, level: character.level + 1, exp: character.exp - 10})
-            setCharacter({...character, skillPoints: character.skillPoints +5})
+            setCharacter({...character, level: character.level + 1, exp: character.exp - 10, skillPoints: character.skillPoints + 5})
         }
     }
 
@@ -422,8 +421,7 @@ export default function GamePage() {
 
     function increaseCharacterLife() {
         if (character.skillPoints > 0) {
-            setCharacter({...character, life: character.life + 1, maxLife: character.maxLife + 1})
-            setCharacter({...character, skillPoints:character.skillPoints - 1})
+            setCharacter({...character, life: character.life + 1, maxLife: character.maxLife + 1, skillPoints: character.skillPoints - 1})
         }
     }
 
