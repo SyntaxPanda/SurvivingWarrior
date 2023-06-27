@@ -23,8 +23,9 @@ public class CharacterService {
         character.setInventory(inventory);
         character.setGold(random.nextInt(11) + 4);
         character.setDamage(random.nextInt(6) +3);
-        character.setLife(random.nextInt(21) + 13);
+        character.setLife(random.nextInt(35) + 22);
         character.setLevel(1);
+        character.setMaxLife(character.getLife());
         return characterRepo.insert(character);
     }
 

@@ -23,6 +23,8 @@ export default function GamePage() {
 
     const [character, setCharacter] =
         useState<Character>({
+            maxLife: 0,
+            skillPoints: 0,
             damage: 0,
             exp: 0,
             gold: 0,
@@ -66,17 +68,6 @@ export default function GamePage() {
         getGameById()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    useEffect(() => {
-        setCharacterHpToMaxHp()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [character.id])
-
-    function setCharacterHpToMaxHp() {
-        setMaxHp(character.life)
-    }
-
-    const [maxHp, setMaxHp] = useState(0)
 
     function getGameById() {
         let charId = ""
@@ -178,9 +169,7 @@ export default function GamePage() {
                     gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
                     exp: character.exp + (3 * kobolds.length)
                 })
-                let gold = 0;
-                gold = kobold1.gold + kobold2.gold + kobold3.gold
-                toast("U got " + gold + " Gold and " + kobolds.length * 3 + " Exp")
+                toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
                 setStoryCount(storyCount + 1)
             }
         }
@@ -247,7 +236,7 @@ export default function GamePage() {
     function onClickGetNextStoryChapterOption3() {
         if (story.option3 === "Item") {
             if (kobold1.life > 0) {
-                if (character.life < maxHp) {
+                if (character.life < character.maxLife) {
                     setCharacter({...character, life: (character.life + 3) - kobold1.damage})
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
                     toast("You heal ur self for " + 3 + " hp.")
@@ -270,7 +259,7 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold2.life > 0) {
-                if (character.life < maxHp) {
+                if (character.life < character.maxLife) {
                     setCharacter({...character, life: (character.life + 3) - kobold2.damage})
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
                     toast("You heal ur self for " + 3 + " hp.")
@@ -292,7 +281,7 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold3.life > 0) {
-                if (character.life < maxHp) {
+                if (character.life < character.maxLife) {
                     setCharacter({...character, life: (character.life + 3) - kobold3.damage})
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
                     toast("You heal ur self for " + 3 + " hp.")
@@ -330,7 +319,9 @@ export default function GamePage() {
             id: character.id,
             level: character.level,
             exp: character.exp,
+            skillPoints: character.skillPoints,
             life: character.life,
+            maxLife: character.maxLife,
             damage: character.damage,
             gold: character.gold
         }).catch(error => console.log(error))
@@ -417,13 +408,10 @@ export default function GamePage() {
         }
     }
 
-    const [skillPoints, setSkillPoints] =
-        useState(0)
-
     function getLevelUp() {
         if (character.exp >= 10) {
             setCharacter({...character, level: character.level + 1, exp: character.exp - 10})
-            setSkillPoints(skillPoints + 5)
+            setCharacter({...character, skillPoints: character.skillPoints +5})
         }
     }
 
@@ -433,17 +421,15 @@ export default function GamePage() {
     }, [character.exp])
 
     function increaseCharacterLife() {
-        if (skillPoints > 0) {
-            setCharacter({...character, life: character.life + 1})
-            setSkillPoints(skillPoints - 1)
-            setMaxHp(maxHp + 1)
+        if (character.skillPoints > 0) {
+            setCharacter({...character, life: character.life + 1, maxLife: character.maxLife + 1})
+            setCharacter({...character, skillPoints:character.skillPoints - 1})
         }
     }
 
     function increaseCharacterDmg() {
-        if (skillPoints > 0) {
-            setCharacter({...character, damage: character.damage + 1})
-            setSkillPoints(skillPoints - 1)
+        if (character.skillPoints > 0) {
+            setCharacter({...character, damage: character.damage + 1, skillPoints: character.skillPoints -1})
         }
     }
 
@@ -513,7 +499,7 @@ export default function GamePage() {
             </div>
             <div className={"lifeAndExpBox"}>
                 <div className={"lifeBox"}>
-                    {character.life} / {maxHp}
+                    {character.life} / {character.maxLife}
                 </div>
                 <div className={"expBox"}>
                     {character.exp} / 10
@@ -531,7 +517,7 @@ export default function GamePage() {
                 <div className={"storyButtons"}>
                     <div className={"button1"}>
                         <button className={"buttonHover"}
-                                onClick={onClickGetNextStoryChapterOption1} >{story.option1}
+                                onClick={onClickGetNextStoryChapterOption1}>{story.option1}
                         </button>
                     </div>
                     <div className={"button2"}>
@@ -561,7 +547,7 @@ export default function GamePage() {
                         SkillPoints:
                     </div>
                     <div className={"skillPoints"}>
-                        {skillPoints}
+                        {character.skillPoints}
                     </div>
                 </div>
                 <div className={"characterLifeBox"}>

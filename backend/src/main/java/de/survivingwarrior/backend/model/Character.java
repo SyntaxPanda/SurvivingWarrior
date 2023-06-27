@@ -15,7 +15,9 @@ public class Character {
     private String id;
     private int level;
     private int exp;
+    private int skillPoints;
     private int life;
+    private int maxLife;
     private int damage;
     private int gold;
     private Item[] inventory = new Item[6];
