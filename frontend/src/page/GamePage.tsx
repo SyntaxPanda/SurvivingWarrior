@@ -600,6 +600,7 @@ export default function GamePage() {
                 pauseOnFocusLoss
                 pauseOnHover
                 theme="dark"
+                style={{width: "13vw"}}
             />
         </div>
     );
