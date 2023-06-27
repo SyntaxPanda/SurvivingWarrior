@@ -121,6 +121,7 @@ export default function GamePage() {
                 if (kobold1.life < 1) {
                     setCharacter({...character, gold: character.gold + kobold1.gold})
                 } else if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
@@ -137,6 +138,7 @@ export default function GamePage() {
                 if (kobold2.life <= 0) {
                     setCharacter({...character, gold: character.gold + kobold2.gold})
                 } else if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + gameId)
@@ -153,6 +155,7 @@ export default function GamePage() {
                 if (kobold3.life <= 0) {
                     setCharacter({...character, gold: character.gold + kobold3.gold})
                 } else if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + gameId)
@@ -179,7 +182,9 @@ export default function GamePage() {
         if (story.option2 === "Block") {
             if (kobold1.life > 0) {
                 setCharacter({...character, life: character.life - (kobold1.damage - 2)})
+                toast("The Enemy hit u for " + (kobold1.damage - 2) + " points.")
                 if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
@@ -190,7 +195,9 @@ export default function GamePage() {
                 }
             } else if (kobold2.life > 0) {
                 setCharacter({...character, life: character.life - (kobold2.damage - 2)})
+                toast("The Enemy hit u for " + (kobold2.damage - 2) + " points.")
                 if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
@@ -201,7 +208,9 @@ export default function GamePage() {
                 }
             } else if (kobold3.life > 0) {
                 setCharacter({...character, life: character.life - (kobold3.damage - 2)})
+                toast("The Enemy hit u for " + (kobold3.damage - 2) + " points.")
                 if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
@@ -226,10 +235,16 @@ export default function GamePage() {
             if (kobold1.life > 0) {
                 if (character.life < maxHp) {
                     setCharacter({...character, life: (character.life + 3) - kobold1.damage})
+                    toast("The Enemy hit u for " + kobold1.damage + " points.")
+                    toast("You heal ur self for " + 3 + " hp.")
                 } else {
                     setCharacter({...character, life: character.life - kobold1.damage})
+                    toast("The Enemy hit u for " + kobold1.damage + " points.")
+                    toast("You have max life and cant heal.")
+
                 }
                 if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
@@ -241,10 +256,15 @@ export default function GamePage() {
             } else if (kobold2.life > 0) {
                 if (character.life < maxHp) {
                     setCharacter({...character, life: (character.life + 3) - kobold2.damage})
+                    toast("The Enemy hit u for " + kobold2.damage + " points.")
+                    toast("You heal ur self for " + 3 + " hp.")
                 } else {
                     setCharacter({...character, life: character.life - kobold2.damage})
+                    toast("The Enemy hit u for " + kobold2.damage + " points.")
+                    toast("You have max life and cant heal.")
                 }
                 if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
@@ -256,10 +276,15 @@ export default function GamePage() {
             } else if (kobold3.life > 0) {
                 if (character.life < maxHp) {
                     setCharacter({...character, life: (character.life + 3) - kobold3.damage})
+                    toast("The Enemy hit u for " + kobold3.damage + " points.")
+                    toast("You heal ur self for " + 3 + " hp.")
                 } else {
                     setCharacter({...character, life: character.life - kobold3.damage})
+                    toast("The Enemy hit u for " + kobold3.damage + " points.")
+                    toast("You have max life and cant heal.")
                 }
                 if (character.life <= 0) {
+                    toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
                         .then(() =>
                             axios.delete("/api/game/lost/" + game.gameId)
