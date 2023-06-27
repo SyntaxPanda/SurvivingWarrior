@@ -578,7 +578,6 @@ export default function GamePage() {
                 autoClose={1300}
                 hideProgressBar
                 newestOnTop={false}
-                closeOnClick
                 rtl={false}
                 pauseOnFocusLoss
                 pauseOnHover
