@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    pull_request:
+        types: [ opened, synchronize, reopened ]
 
 jobs:
   build-frontend:
@@ -14,7 +16,7 @@ jobs:
         with:
           node-version: '18'
       - name: Build Frontend
-        run:
+        run: |
           cd frontend
           npm install
           npm run build
