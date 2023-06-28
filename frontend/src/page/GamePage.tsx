@@ -172,14 +172,25 @@ export default function GamePage() {
                 toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
                 setStoryCount(storyCount + 1)
             }
+        }else if(story.option1 === "Get Heal for Gold"){
+            let price = Math.round(Math.floor(Math.random() * (45 - 25 + 1)))
+            if(character.gold >= price){
+                let getMaxLife = Math.round(Math.floor(Math.random() * (30 - 10 + 1)))
+                setCharacter({...character, life: character.life + getMaxLife, gold: character.gold - price})
+                toast("U got " + getMaxLife + " Life and pay " + price + " Gold for this")
+                setStoryCount(storyCount +1)
+            }else{
+                toast("U have not enough Gold to buy this for " + price + " Gold")
+            }
         }
     }
 
     function onClickGetNextStoryChapterOption2() {
         if (story.option2 === "Block") {
             if (kobold1.life > 0) {
-                setCharacter({...character, life: character.life - (kobold1.damage - 2)})
-                toast("The Enemy hit u for " + (kobold1.damage - 2) + " points.")
+                let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
+                setCharacter({...character, life: character.life - (kobold1.damage - block)})
+                toast("The Enemy hit u for " + (kobold1.damage - block) + " points. U blocked " + block + " damage.")
                 if (character.life <= 0) {
                     toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
@@ -193,8 +204,9 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold2.life > 0) {
-                setCharacter({...character, life: character.life - (kobold2.damage - 2)})
-                toast("The Enemy hit u for " + (kobold2.damage - 2) + " points.")
+                let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
+                setCharacter({...character, life: character.life - (kobold2.damage - block)})
+                toast("The Enemy hit u for " + (kobold2.damage - block) + " points. U blocked " + block + " damage.")
                 if (character.life <= 0) {
                     toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
@@ -208,8 +220,9 @@ export default function GamePage() {
                         )
                 }
             } else if (kobold3.life > 0) {
-                setCharacter({...character, life: character.life - (kobold3.damage - 2)})
-                toast("The Enemy hit u for " + (kobold3.damage - 2) + " points.")
+                let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
+                setCharacter({...character, life: character.life - (kobold3.damage - block)})
+                toast("The Enemy hit u for " + (kobold3.damage - block) + " points. U blocked " + block + " damage.")
                 if (character.life <= 0) {
                     toast("You are Done!")
                     axios.delete("/api/character/lost/" + character.id)
@@ -230,6 +243,16 @@ export default function GamePage() {
                 })
                 setStoryCount(storyCount + 1)
             }
+        }else if(story.option2 === "Get damage for Gold"){
+            let price = Math.round(Math.floor(Math.random() * (20 - 2 + 1)))
+            if(character.gold >= price){
+                let getDamage = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
+                setCharacter({...character, damage: character.damage + getDamage, gold: character.gold - price})
+                toast("U got " + getDamage + " max damage and pay " + price + " Gold for this")
+                setStoryCount(storyCount +1)
+            }else{
+                toast("U have not enough Gold to buy this for " + price + " Gold")
+            }
         }
     }
 
@@ -237,9 +260,9 @@ export default function GamePage() {
         if (story.option3 === "Item") {
             if (kobold1.life > 0) {
                 if (character.life < character.maxLife) {
-                    setCharacter({...character, life: (character.life + 3) - kobold1.damage})
+                    setCharacter({...character, life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold1.damage})
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
-                    toast("You heal ur self for " + 3 + " hp.")
+                    toast("You heal ur self for hp.")
                 } else {
                     setCharacter({...character, life: character.life - kobold1.damage})
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
@@ -260,7 +283,7 @@ export default function GamePage() {
                 }
             } else if (kobold2.life > 0) {
                 if (character.life < character.maxLife) {
-                    setCharacter({...character, life: (character.life + 3) - kobold2.damage})
+                    setCharacter({...character, life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold2.damage})
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
                     toast("You heal ur self for " + 3 + " hp.")
                 } else {
@@ -282,7 +305,7 @@ export default function GamePage() {
                 }
             } else if (kobold3.life > 0) {
                 if (character.life < character.maxLife) {
-                    setCharacter({...character, life: (character.life + 3) - kobold3.damage})
+                    setCharacter({...character, life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold3.damage})
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
                     toast("You heal ur self for " + 3 + " hp.")
                 } else {
@@ -310,6 +333,8 @@ export default function GamePage() {
                 })
                 setStoryCount(storyCount + 1)
             }
+        }else if(story.option3 === "Dont buy something"){
+           setStoryCount(storyCount + 1)
         }
     }
 
