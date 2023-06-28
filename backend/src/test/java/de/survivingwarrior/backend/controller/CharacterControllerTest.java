@@ -42,6 +42,7 @@ class CharacterControllerTest {
                                     "name": "Hans",
                                     "level": 1,
                                     "exp": 0,
+                                    "skillPoints": 0,
                                     "inventory": [
                                         null,
                                         null,
@@ -54,7 +55,8 @@ class CharacterControllerTest {
                 )).andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(jsonPath("$.life").isNotEmpty())
                 .andExpect(jsonPath("$.damage").isNotEmpty())
-                .andExpect(jsonPath("$.gold").isNotEmpty());
+                .andExpect(jsonPath("$.gold").isNotEmpty())
+                .andExpect(jsonPath("$.maxLife").isNotEmpty());
     }
 
     @Test
@@ -85,6 +87,7 @@ class CharacterControllerTest {
                                     "name": "Hans",
                                     "level": 1,
                                     "exp": 0,
+                                    "skillPoints": 0,
                                     "inventory": [
                                         null,
                                         null,
@@ -97,7 +100,8 @@ class CharacterControllerTest {
                 )).andExpect(jsonPath("$.id").value(character.getId()))
                 .andExpect(jsonPath("$.life").value(character.getLife()))
                 .andExpect(jsonPath("$.damage").value(character.getDamage()))
-                .andExpect(jsonPath("$.gold").value(character.getGold()));
+                .andExpect(jsonPath("$.gold").value(character.getGold()))
+                .andExpect(jsonPath("$.maxLife").value(character.getLife()));
     }
 
     @Test
@@ -124,7 +128,9 @@ class CharacterControllerTest {
                         .content("""
                                 {
                                 "level": 2,
-                                "damage": 10
+                                "damage": 10,
+                                "skillPoints": 0,
+                                "maxLife": 10
                                 }
                                 """).with(csrf()))
                 .andExpect(status().isOk());
