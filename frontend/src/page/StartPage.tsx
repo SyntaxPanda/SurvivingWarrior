@@ -69,20 +69,20 @@ export default function StartPage() {
                 <button onClick={logout}>Logout</button>
             </div>
             <Modal className={"modalLoadGame"} isOpen={modalOpen}>
-                <div className="container">
+                <div className="containerStartPage">
                     {games.map((game) => (
                         <Link to={"/game/" + game.gameId} onClick={() => {
                         }}>
-                            <div className="card" key={game.gameId}>
-                                <h3 className="title"> Game: {game.gameName}</h3>
-                                <h4 className={"title2"}>Story: {game.storyId}</h4>
-                                <div className="bar">
-                                    <div className="emptybar"></div>
-                                    <div className="filledbar"></div>
+                            <div className="cardStartPage" key={game.gameId}>
+                                <h3 className="titleStartPage"> Game: {game.gameName}</h3>
+                                <h4 className={"title2StartPage"}>Story: {game.storyId}</h4>
+                                <div className="barStartPage">
+                                    <div className="emptybarStartPage"></div>
+                                    <div className="filledbarStartPage"></div>
                                 </div>
-                                <div className="circle">
+                                <div className="circleStartPage">
                                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                        <circle className="stroke" cx="60" cy="60" r="50"/>
+                                        <circle className="strokeStartPage" cx="60" cy="60" r="50"/>
                                     </svg>
                                 </div>
                             </div>

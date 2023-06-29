@@ -51,7 +51,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-.container {
+.containerStartPage {
     position: absolute;
     height: 40vh;
     width: 60vw;
@@ -60,7 +60,7 @@ body {
     margin-left: 4vw;
 }
 
-.card {
+.cardStartPage {
     display: flex;
     height: 40vh;
     width: 15vw;
@@ -72,23 +72,23 @@ body {
     position: relative;
 }
 
-.card:not(:first-child) {
+.cardStartPage:not(:first-child) {
     margin-left: -50vw;
 }
 
-.card:hover {
+.cardStartPage:hover {
     transform: translateY(-4vh);
     transition: 0.4s ease-out;
     background: linear-gradient(90deg, rgb(169, 103, 27) 0%, rgb(84, 32, 5) 65%, rgb(227, 10, 10) 100%);
 }
 
-.card:hover ~ .card {
+.cardStartPage:hover ~ .cardStartPage {
     position: relative;
     left: 30vw;
     transition: 0.4s ease-out;
 }
 
-.title {
+.titleStartPage {
     color: white;
     font-weight: 200;
     position: absolute;
@@ -96,7 +96,7 @@ body {
     top: 2vh;
 }
 
-.title2{
+.title2StartPage{
     color: white;
     font-weight: 200;
     position: absolute;
@@ -104,7 +104,7 @@ body {
     top: 5vh;
 }
 
-.bar {
+.barStartPage {
     position: absolute;
     top: 13vh;
     left: 2vw;
@@ -112,13 +112,13 @@ body {
     width: 10vw;
 }
 
-.emptybar {
+.emptybarStartPage {
     background-color: #2e3033;
     width: 100%;
     height: 100%;
 }
 
-.filledbar {
+.filledbarStartPage {
     position: absolute;
     top: 0;
     z-index: 3;
@@ -129,18 +129,18 @@ body {
     transition: 0.6s ease-out;
 }
 
-.card:hover .filledbar {
+.cardStartPage:hover .filledbarStartPage {
     width: 10vw;
     transition: 0.4s ease-out;
 }
 
-.circle {
+.circleStartPage {
     position: absolute;
     top: 18vh;
     left: calc(50% - 60px);
 }
 
-.stroke {
+.strokeStartPage {
     stroke: white;
     stroke-dasharray: 360;
     stroke-dashoffset: 360;
@@ -152,7 +152,7 @@ svg {
     stroke-width: 0.2vw;
 }
 
-.card:hover .stroke {
+.cardStartPage:hover .strokeStartPage {
     stroke-dashoffset: 100;
     transition: 0.6s ease-out;
 }
