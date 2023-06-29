@@ -65,6 +65,9 @@ button {
     background-position: center;
     background-size: 4vw 7vh;
     background-repeat: no-repeat;
+    grid-row: 1/4;
+    grid-column: 1/2;
+    border-radius: 0.6vh;
 }
 
 .kobold1 {

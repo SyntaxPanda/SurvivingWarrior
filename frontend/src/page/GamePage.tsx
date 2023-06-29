@@ -30,7 +30,7 @@ export default function GamePage() {
             gold: 0,
             id: "",
             level: 0,
-            life: 0,
+            life: 1,
             name: "",
             item: []
         })
@@ -103,6 +103,25 @@ export default function GamePage() {
             }
         }
     }, [kobolds])
+
+    function lostgame() {
+        toast("You are Done!")
+        axios.delete("/api/character/lost/" + character.id)
+            .then(() =>
+                axios.delete("/api/game/lost/" + game.gameId)
+                    .then(() =>
+                        setTimeout(() => {
+                            navigate("/start")
+                        }, 2000)
+                    ))
+    }
+
+    useEffect(() => {
+        if (character.life < 1) {
+            lostgame()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [character.life])
 
     function onClickGetNextStoryChapterOption1() {
         if (story.option1 === "Hit") {

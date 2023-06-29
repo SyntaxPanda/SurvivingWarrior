@@ -2,6 +2,7 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import "../css/RegisterPage.css"
+import {toast} from "react-toastify";
 
 export default function RegisterPage() {
 
@@ -27,7 +28,19 @@ export default function RegisterPage() {
     }
 
     function setPasswordHandler(e: ChangeEvent<HTMLInputElement>) {
-        setPassword(e.target.value)
+            if (e.target.value.length < 8) {
+                toast('Das Passwort muss mindestens 8 Zeichen lang sein.');
+            }
+            if (!/[A-Z]/.test(e.target.value)) {
+                toast('Das Passwort muss mindestens einen Großbuchstaben enthalten.');
+            }
+            if (!/[a-z]/.test(e.target.value)) {
+                toast('Das Passwort muss mindestens einen Kleinbuchstaben enthalten.');
+            }
+            if (!/[!@#$%^&*]/.test(e.target.value)) {
+                toast('Das Passwort muss mindestens ein Sonderzeichen enthalten (!@#$%^&*).');
+            }
+            setPassword('Das Passwort erfüllt alle Kriterien.');
     }
 
     function backOnClickHandler() {

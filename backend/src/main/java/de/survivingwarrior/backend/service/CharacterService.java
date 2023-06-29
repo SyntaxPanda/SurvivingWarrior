@@ -21,9 +21,9 @@ public class CharacterService {
         Item[] inventory = new Item[6];
         character.setId(generateUUID.generateUUID());
         character.setInventory(inventory);
-        character.setGold(random.nextInt(11) + 4);
-        character.setDamage(random.nextInt(6) +3);
-        character.setLife(random.nextInt(35) + 22);
+        character.setGold(random.nextInt(10) + 1);
+        character.setDamage(random.nextInt(5) + 4);
+        character.setLife(random.nextInt(26) + 41);
         character.setLevel(1);
         character.setMaxLife(character.getLife());
         return characterRepo.insert(character);
