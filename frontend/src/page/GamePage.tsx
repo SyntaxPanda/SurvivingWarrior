@@ -173,9 +173,9 @@ export default function GamePage() {
                 setStoryCount(storyCount + 1)
             }
         } else if (story.option1 === "Get Heal for Gold") {
-            let price = Math.round(Math.floor(Math.random() * (45 - 25 + 1)))
+            let price = Math.round(Math.floor(Math.random() * (45 - 1 + 25)))
             if (character.gold >= price) {
-                let getMaxLife = Math.round(Math.floor(Math.random() * (30 - 10 + 1)))
+                let getMaxLife = Math.round(Math.floor(Math.random() * (30 - 1 + 15)))
                 setCharacter({...character, life: character.life + getMaxLife, gold: character.gold - price})
                 toast("U got " + getMaxLife + " Life and pay " + price + " Gold for this")
                 setStoryCount(storyCount + 1)
