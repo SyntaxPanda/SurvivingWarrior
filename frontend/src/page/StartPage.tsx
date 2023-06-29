@@ -9,48 +9,48 @@ import "../css/StartPage.css"
 export default function StartPage() {
     const navigate = useNavigate();
 
-    const[modalOpen, setModalOpen] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
 
-    const[games, setGames] =
+    const [games, setGames] =
         useState<Game[]>([])
 
-    function onClickNavigateToNewGamePage(){
+    function onClickNavigateToNewGamePage() {
         navigate("/newgame")
     }
 
     const [username, setUsername] =
         useState("")
 
-    function setUsernameIfLogin(){
+    function setUsernameIfLogin() {
         axios.get("/api/user/username")
-            .then(response =>{
+            .then(response => {
                 setUsername(response.data)
             })
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         setUsernameIfLogin()
     }, [])
 
-    function getAllGamesForLoadGame(){
-    axios.get("/api/game/all/" + username)
-        .then(response =>
-        setGames(response.data))
+    function getAllGamesForLoadGame() {
+        axios.get("/api/game/all/" + username)
+            .then(response =>
+                setGames(response.data))
     }
 
-    function openLoadGameModal(){
+    function openLoadGameModal() {
         setModalOpen(true)
         getAllGamesForLoadGame()
     }
 
-    function closeLoadGameModal(){
+    function closeLoadGameModal() {
         setModalOpen(false)
     }
 
     const logout = async () => {
         try {
             await axios.post('/api/user/logout')
-                .then(() =>{
+                .then(() => {
                     navigate("/")
                 })
         } catch (error) {
@@ -68,19 +68,30 @@ export default function StartPage() {
             <div className={"logoutGameButton"}>
                 <button onClick={logout}>Logout</button>
             </div>
-            <Modal isOpen={modalOpen}>
-                {games.map((game) => {
-                    return (
-                        <div>
-                            <Link to={"/game/" + game.gameId} onClick={() => {
-                    }}>
-                            <h3>{game.gameName}</h3>
-                            <p>{game.storyId}</p>
+            <Modal className={"modalLoadGame"} isOpen={modalOpen}>
+                <div className="container">
+                    {games.map((game) => (
+                        <Link to={"/game/" + game.gameId} onClick={() => {
+                        }}>
+                            <div className="card" key={game.gameId}>
+                                <h3 className="title"> Game: {game.gameName}</h3>
+                                <h4 className={"title2"}>Story: {game.storyId}</h4>
+                                <div className="bar">
+                                    <div className="emptybar"></div>
+                                    <div className="filledbar"></div>
+                                </div>
+                                <div className="circle">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <circle className="stroke" cx="60" cy="60" r="50"/>
+                                    </svg>
+                                </div>
+                            </div>
                         </Link>
-                        </div>
-                    );
-                })}
-                <button onClick={closeLoadGameModal}>Close</button>
+                    ))}
+                </div>
+                <div className={"buttonBackStartPage"}>
+                    <button onClick={closeLoadGameModal}>Close</button>
+                </div>
             </Modal>
         </div>
     );
