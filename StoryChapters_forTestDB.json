@@ -405,22 +405,6 @@
   ],
   "_class": "de.survivingwarrior.backend.model.Story"
 },{
-  "_id": "4",
-  "name": "Händler",
-  "storyText": "Du triffst einen alten Kauz, er schiebt einen alten Holz Karren vor sich her. \"Was wollen Sie kaufen?",
-  "option1": "Get Heal for Gold",
-  "option2": "Get damage for Gold",
-  "option3": "Dont buy something",
-  "_class": "de.survivingwarrior.backend.model.Story"
-},{
-  "_id": "8",
-  "name": "Händler",
-  "storyText": "In einer Stadt hörst du eine junge Frau wie sie ruft: Günstige Angebote!",
-  "option1": "Get Heal for Gold",
-  "option2": "Get damage for Gold",
-  "option3": "Dont buy something",
-  "_class": "de.survivingwarrior.backend.model.Story"
-},{
   "_id": "5-2",
   "name": "Wolf",
   "storyText": "In einem Wald hörst du geheule, als du dich umschaust erblickst du 6 Blut rote Augen.",
@@ -859,6 +843,42 @@
       "name": "Junge",
       "damage": 3,
       "life": 14,
+      "gold": 0,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "4",
+  "name": "Vendor",
+  "storyText": "Auf einem Waldweg triffst du auf einen alten Mann. Er bietet dir mit rauer Stimme Waren an.",
+  "option1": "Get Heal for Gold",
+  "option2": "Get damage for Gold",
+  "option3": "Dont buy something",
+  "enemies": [
+    {
+      "_id": "da078jsp-1234-4660-9d3c-ab571baac55c",
+      "name": "Wolf",
+      "damage": 0,
+      "life": 0,
+      "gold": 0,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "8",
+  "name": "Vendor",
+  "storyText": "In einer Stadt hörst du eine junge Frau wie sie ruft: Günstige Angebote!",
+  "option1": "Get Heal for Gold",
+  "option2": "Get damage for Gold",
+  "option3": "Dont buy something",
+  "enemies": [
+    {
+      "_id": "da078jsp-1234-4660-9d3c-ab571baac55c",
+      "name": "Wolf",
+      "damage": 0,
+      "life": 0,
       "gold": 0,
       "_class": "de.survivingwarrior.backend.model.Kobold"
     }
