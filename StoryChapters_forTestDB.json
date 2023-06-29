@@ -121,8 +121,8 @@
     {
       "_id": "ea5b0b0f-6c55-4111-9f4a-a916d5b9e722",
       "name": "Kobold",
-      "damage": 2,
-      "life": 7,
+      "damage": 4,
+      "life": 14,
       "gold": 7,
       "_class": "de.survivingwarrior.backend.model.Kobold"
     },
@@ -364,6 +364,522 @@
       "damage": 1,
       "life": 5,
       "gold": 7,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "10-1",
+  "name": "Dragon of Fire",
+  "storyText": "Auf der Berg Spitze angekommen spürst du extreme Winde. Als du dich gegen den Wind nach vorne kämpfst erkennst du Riesen flügel und und es wird immer heißer.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "fc581a7f-7111-4c7d-8f03-62623a8e0f45",
+      "name": "Dragon of Fire",
+      "damage": 12,
+      "life": 45,
+      "gold": 27,
+      "_class": "de.survivingwarrior.backend.model.Dragon"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "10-2",
+  "name": "Dragon of Ice",
+  "storyText": "Tief im Berg, in einer dunklen und sehr kalten Höhle merkst du wie die Erde immer wieder beebt. Du schreitest voran bis du einen riesen drachen erspähst. Mit dem Kopf an der decke, blickt er dich an. Überall sind Eiszapfen von 3 Meter.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "fc581a7f-7112-4c7d-8f03-62623a8e0f45",
+      "name": "Dragon of Ice",
+      "damage": 10,
+      "life": 49,
+      "gold": 30,
+      "_class": "de.survivingwarrior.backend.model.Dragon"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "5-2",
+  "name": "Wolf",
+  "storyText": "In einem Wald hörst du geheule, als du dich umschaust erblickst du 6 Blut rote Augen.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Wolf",
+      "damage": 7,
+      "life": 19,
+      "gold": 4,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Wolf",
+      "damage": 5,
+      "life": 16,
+      "gold": 2,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "c5062b2a-420f-4e8e-95cd-5op4a6df68b9",
+      "name": "Wolf",
+      "damage": 2,
+      "life": 13,
+      "gold": 5,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "5-1",
+  "name": "Wolf",
+  "storyText": "Auf einem Wald weg greift dich ein kleiner Wolf an.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-1234-4660-9d3c-ab571baac55c",
+      "name": "Wolf",
+      "damage": 3,
+      "life": 25,
+      "gold": 6,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "5-3",
+  "name": "Wolf",
+  "storyText": "Du siehst 2 baby Wölfe, von der Seite kommt ein Knurren da siehst du 2 Wölfe die ihre kleinen verteidigen wollen.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Wolf",
+      "damage": 5,
+      "life": 21,
+      "gold": 6,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Wolf",
+      "damage": 5,
+      "life": 23,
+      "gold": 3,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "5-4",
+  "name": "Wolf",
+  "storyText": "Du siehst 2 sehr große Wölfe. Schaum kommt aus den Mund winkeln.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Wolf",
+      "damage": 10,
+      "life": 9,
+      "gold": 10,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Wolf",
+      "damage": 9,
+      "life": 12,
+      "gold": 1,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "6-1",
+  "name": "Bär",
+  "storyText": "In einer Felsen Spalte siehst du 2 schwarze Bären.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Bär",
+      "damage": 3,
+      "life": 30,
+      "gold": 6,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Bär",
+      "damage": 8,
+      "life": 17,
+      "gold": 9,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "6-3",
+  "name": "Bär",
+  "storyText": "Am fluss siehst du ein stück weiter oben 3 Bären, es siehst aus wie Eltern mit Kind.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Bär",
+      "damage": 4,
+      "life": 27,
+      "gold": 8,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Bär",
+      "damage": 5,
+      "life": 24,
+      "gold": 3,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "c5062b2a-420f-4e8e-95cd-5op4a6df68b9",
+      "name": "Bär",
+      "damage": 1,
+      "life": 6,
+      "gold": 5,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "6-2",
+  "name": "Bär",
+  "storyText": "Du bist auf einenm Spziergang als du an einer Höhle vorbei kommst. Dort liegen 2 Bären.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Bär",
+      "damage": 3,
+      "life": 30,
+      "gold": 8,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Bär",
+      "damage": 7,
+      "life": 19,
+      "gold": 7,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "6-4",
+  "name": "Bär",
+  "storyText": "Du schwimmst in einem See, da hörst du lautes Platschen hinter dir. Oh ein Bär.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Bär",
+      "damage": 7,
+      "life": 24,
+      "gold": 5,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "7-1",
+  "name": "Piraten",
+  "storyText": "Du bist auf dem Meer in einem Holz Boot. In der ferne erkennst du einen Piraten Flagge.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Pirat",
+      "damage": 2,
+      "life": 32,
+      "gold": 2,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Pirat",
+      "damage": 5,
+      "life": 13,
+      "gold": 3,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "c5062b2a-420f-4e8e-95cd-5op4a6df68b9",
+      "name": "Pirat",
+      "damage": 3,
+      "life": 15,
+      "gold": 5,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "7-2",
+  "name": "Piraten",
+  "storyText": "Als du am Hafen ankommst bietet dir ein junger Mann an dich auf eine Insel voller Schätze zu bringen. Auf dem Schiff versucht er dich aus zu Rauben.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Pirat",
+      "damage": 5,
+      "life": 16,
+      "gold": 8,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "7-3",
+  "name": "Piraten",
+  "storyText": "Du hast dir ein Boot geliehen und machst dich auf den Weg übers Meer. An einer Insel siehst du eine gestrandete Frau. Als du ihr helfen willst Zieht sie ein Messer.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Pirat",
+      "damage": 10,
+      "life": 9,
+      "gold": 2,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "7-4",
+  "name": "Piraten",
+  "storyText": "Mit einer Crew versuchst du auf einen anderen Kontinent zu Segeln. Auf deiner Reise werdet ihr von einem Piraten Schiff angegriffen.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Pirat",
+      "damage": 5,
+      "life": 35,
+      "gold": 8,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Pirat",
+      "damage": 5,
+      "life": 21,
+      "gold": 7,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "10-3",
+  "name": "Dragon of Water",
+  "storyText": "Auf dem Meer hörst du lautes Brüllen. Du siehst wie sich langsam ein riesen Geschöpf aus dem Wasser erhebt. Ein Drache!",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "fc581a7f-7112-4c7d-8f03-62623a8e0f45",
+      "name": "Dragon of Ice",
+      "damage": 7,
+      "life": 56,
+      "gold": 29,
+      "_class": "de.survivingwarrior.backend.model.Dragon"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "10-4",
+  "name": "Dragon of Stone",
+  "storyText": "Als du am Wandern bist und deinen freien Tag genießen willst siehst du wie sich aus dem Berg ein extrem großer Brocken löst. Es ist ein Drache aus Stein.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "fc581a7f-7111-4c7d-8f03-62623a8e0f45",
+      "name": "Dragon of Stone",
+      "damage": 11,
+      "life": 78,
+      "gold": 27,
+      "_class": "de.survivingwarrior.backend.model.Dragon"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "9-1",
+  "name": "Luftschiff",
+  "storyText": "Du findest ein Luftschiff und versuchst es zu starten. Als es abhebt bemerkst du das noch Personen an Bord sind. Sie stürmen auf dich zu.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Mensch",
+      "damage": 3,
+      "life": 15,
+      "gold": 3,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Mensch",
+      "damage": 5,
+      "life": 13,
+      "gold": 3,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "c5062b2a-420f-4e8e-95cd-5op4a6df68b9",
+      "name": "Mensch",
+      "damage": 7,
+      "life": 21,
+      "gold": 5,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "9-2",
+  "name": "Luftschiff",
+  "storyText": "Auf der Reise in ein anderes Land nimmst du das Örtliche Luftschiff. Auf halbem Weg werdet ihr überfallen.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Mensch",
+      "damage": 8,
+      "life": 21,
+      "gold": 3,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Mensch",
+      "damage": 9,
+      "life": 19,
+      "gold": 4,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "9-3",
+  "name": "Luftschiff",
+  "storyText": "Du willst dir ein eigenes Luftschiff kaufen, in der Werft wo du es besichtigst warten 2 Diebe auf dich.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Mensch",
+      "damage": 4,
+      "life": 41,
+      "gold": 5,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    },
+    {
+      "_id": "ef25opad-6130-4124-88ef-c9019d674fdc",
+      "name": "Mensch",
+      "damage": 13,
+      "life": 21,
+      "gold": 1,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "9-4",
+  "name": "Luftschiff",
+  "storyText": "Bei deinem Stamm Schmied triffst du einen kleinen Jungen. Er rempelt dich an und klaut dir dein Gold. Du rennst hinter her, als er in einer Sackgasse ist will er dich Angreifen.",
+  "option1": "Hit",
+  "option2": "Block",
+  "option3": "Item",
+  "enemies": [
+    {
+      "_id": "da078jsp-7acf-4660-9d3c-ab571baac55c",
+      "name": "Junge",
+      "damage": 3,
+      "life": 14,
+      "gold": 0,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "4",
+  "name": "Vendor",
+  "storyText": "Auf einem Waldweg triffst du auf einen alten Mann. Er bietet dir mit rauer Stimme Waren an.",
+  "option1": "Get Heal for Gold",
+  "option2": "Get damage for Gold",
+  "option3": "Dont buy something",
+  "enemies": [
+    {
+      "_id": "da078jsp-1234-4660-9d3c-ab571baac55c",
+      "name": "Wolf",
+      "damage": 0,
+      "life": 0,
+      "gold": 0,
+      "_class": "de.survivingwarrior.backend.model.Kobold"
+    }
+  ],
+  "_class": "de.survivingwarrior.backend.model.Story"
+},{
+  "_id": "8",
+  "name": "Vendor",
+  "storyText": "In einer Stadt hörst du eine junge Frau wie sie ruft: Günstige Angebote!",
+  "option1": "Get Heal for Gold",
+  "option2": "Get damage for Gold",
+  "option3": "Dont buy something",
+  "enemies": [
+    {
+      "_id": "da078jsp-1234-4660-9d3c-ab571baac55c",
+      "name": "Wolf",
+      "damage": 0,
+      "life": 0,
+      "gold": 0,
       "_class": "de.survivingwarrior.backend.model.Kobold"
     }
   ],

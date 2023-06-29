@@ -5,7 +5,9 @@ export type Character = {
     id:string,
     level:number,
     exp:number,
+    skillPoints:number,
     life:number,
+    maxLife:number,
     damage:number,
     gold:number,
     item:Item[]
