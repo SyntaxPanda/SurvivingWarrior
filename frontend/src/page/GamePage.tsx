@@ -584,6 +584,7 @@ export default function GamePage() {
                 pauseOnHover
                 theme="dark"
                 style={{width: "13vw"}}
+                limit={6}
             />
         </div>
     );
