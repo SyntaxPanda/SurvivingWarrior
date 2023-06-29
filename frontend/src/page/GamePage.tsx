@@ -36,7 +36,7 @@ export default function GamePage() {
         })
 
     const [kobold1, setKobold1] =
-        useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
+        useState<Kobold>({damage: 0, gold: 0, id: "", life: 1, name: ""})
 
     const [kobold2, setKobold2] =
         useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
@@ -123,6 +123,31 @@ export default function GamePage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.life])
 
+    function allEnemyDead() {
+        setCharacter({
+            ...character,
+            gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
+            exp: character.exp + (3 * kobolds.length)
+        })
+        toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
+        setStoryCount(storyCount + 1)
+    }
+
+    useEffect(() => {
+        if (story.id !== "4") {
+            if (story.id !== "8") {
+                if (kobold1.life < 1) {
+                    if (kobold2.life < 1) {
+                        if (kobold3.life < 1) {
+                            allEnemyDead()
+                        }
+                    }
+                }
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [kobold1.life, kobold2.life, kobold3.life])
+
     function onClickGetNextStoryChapterOption1() {
         if (story.option1 === "Hit") {
             if (kobold1.life > 0) {
@@ -140,14 +165,6 @@ export default function GamePage() {
                 setCharacter({...character, life: character.life - kobold3.damage})
                 toast("You hit the Enemy for " + character.damage + " points.")
                 toast("The Enemy hit u for " + kobold3.damage + " points.")
-            } else {
-                setCharacter({
-                    ...character,
-                    gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
-                    exp: character.exp + (3 * kobolds.length)
-                })
-                toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
-                setStoryCount(storyCount + 1)
             }
         } else if (story.option1 === "Get Heal for Gold") {
             let price = Math.round(Math.floor(Math.random() * (45 - 1 + 25)))
@@ -176,13 +193,6 @@ export default function GamePage() {
                 let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
                 setCharacter({...character, life: character.life - (kobold3.damage - block)})
                 toast("The Enemy hit u for " + (kobold3.damage - block) + " points. U blocked " + block + " damage.")
-            } else {
-                setCharacter({
-                    ...character,
-                    gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
-                    exp: character.exp + (3 * kobolds.length)
-                })
-                setStoryCount(storyCount + 1)
             }
         } else if (story.option2 === "Get damage for Gold") {
             let price = Math.round(Math.floor(Math.random() * (20 - 2 + 1)))
@@ -239,13 +249,6 @@ export default function GamePage() {
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
                     toast("You have max life and cant heal.")
                 }
-            } else {
-                setCharacter({
-                    ...character,
-                    gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
-                    exp: character.exp + (3 * kobolds.length)
-                })
-                setStoryCount(storyCount + 1)
             }
         } else if (story.option3 === "Dont buy something") {
             setStoryCount(storyCount + 1)
