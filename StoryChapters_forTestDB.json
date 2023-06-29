@@ -122,7 +122,7 @@
       "_id": "ea5b0b0f-6c55-4111-9f4a-a916d5b9e722",
       "name": "Kobold",
       "damage": 4,
-      "life": 50,
+      "life": 14,
       "gold": 7,
       "_class": "de.survivingwarrior.backend.model.Kobold"
     },
