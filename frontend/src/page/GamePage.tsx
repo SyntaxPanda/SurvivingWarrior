@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {Game} from "../model/GameType";
 import {Character} from "../model/CharacterType";
@@ -508,17 +508,31 @@ export default function GamePage() {
         <div className={"gamePageBox"}>
             <Modal className={"modalMenu"} isOpen={isOpen}>
                 <button onClick={openSaveGameModal}>Save</button>
-                <Modal className={"modalSave"} isOpen={saveGameModal}>
-                    {games.map((game) => {
-                        return (
-                            <div className={"save-content"}>
-                                <h3>{game.gameName}</h3>
-                                <p>{game.storyId}</p>
-                            </div>
-                        );
-                    })}
-                    <button onClick={saveGame}>Save now</button>
-                    <button onClick={closeSaveGameModal}>Close</button>
+                <Modal className={"modalLoadGame"} isOpen={saveGameModal}>
+                    <div className="container">
+                        {games.map((game) => (
+                            <Link to={"/game/" + game.gameId} onClick={() => {
+                            }}>
+                                <div className="card" key={game.gameId}>
+                                    <h3 className="title"> Game: {game.gameName}</h3>
+                                    <h4 className={"title2"}>Story: {game.storyId}</h4>
+                                    <div className="bar">
+                                        <div className="emptybar"></div>
+                                        <div className="filledbar"></div>
+                                    </div>
+                                    <div className="circle">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                            <circle className="stroke" cx="60" cy="60" r="50"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                    <div className={"buttonBackStartPage"}>
+                        <button onClick={saveGame}>Save</button>
+                        <button onClick={closeSaveGameModal}>Back</button>
+                    </div>
                 </Modal>
                 <button onClick={goToMenu}>Menu</button>
                 <button onClick={closeModal}>close</button>
