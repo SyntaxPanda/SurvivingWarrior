@@ -172,14 +172,14 @@ export default function GamePage() {
                 toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
                 setStoryCount(storyCount + 1)
             }
-        }else if(story.option1 === "Get Heal for Gold"){
+        } else if (story.option1 === "Get Heal for Gold") {
             let price = Math.round(Math.floor(Math.random() * (45 - 25 + 1)))
-            if(character.gold >= price){
+            if (character.gold >= price) {
                 let getMaxLife = Math.round(Math.floor(Math.random() * (30 - 10 + 1)))
                 setCharacter({...character, life: character.life + getMaxLife, gold: character.gold - price})
                 toast("U got " + getMaxLife + " Life and pay " + price + " Gold for this")
-                setStoryCount(storyCount +1)
-            }else{
+                setStoryCount(storyCount + 1)
+            } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
         }
@@ -243,14 +243,14 @@ export default function GamePage() {
                 })
                 setStoryCount(storyCount + 1)
             }
-        }else if(story.option2 === "Get damage for Gold"){
+        } else if (story.option2 === "Get damage for Gold") {
             let price = Math.round(Math.floor(Math.random() * (20 - 2 + 1)))
-            if(character.gold >= price){
+            if (character.gold >= price) {
                 let getDamage = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
                 setCharacter({...character, damage: character.damage + getDamage, gold: character.gold - price})
                 toast("U got " + getDamage + " max damage and pay " + price + " Gold for this")
-                setStoryCount(storyCount +1)
-            }else{
+                setStoryCount(storyCount + 1)
+            } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
         }
@@ -260,7 +260,10 @@ export default function GamePage() {
         if (story.option3 === "Item") {
             if (kobold1.life > 0) {
                 if (character.life < character.maxLife) {
-                    setCharacter({...character, life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold1.damage})
+                    setCharacter({
+                        ...character,
+                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold1.damage
+                    })
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
                     toast("You heal ur self for hp.")
                 } else {
@@ -283,7 +286,10 @@ export default function GamePage() {
                 }
             } else if (kobold2.life > 0) {
                 if (character.life < character.maxLife) {
-                    setCharacter({...character, life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold2.damage})
+                    setCharacter({
+                        ...character,
+                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold2.damage
+                    })
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
                     toast("You heal ur self for " + 3 + " hp.")
                 } else {
@@ -305,7 +311,10 @@ export default function GamePage() {
                 }
             } else if (kobold3.life > 0) {
                 if (character.life < character.maxLife) {
-                    setCharacter({...character, life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold3.damage})
+                    setCharacter({
+                        ...character,
+                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold3.damage
+                    })
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
                     toast("You heal ur self for " + 3 + " hp.")
                 } else {
@@ -333,8 +342,8 @@ export default function GamePage() {
                 })
                 setStoryCount(storyCount + 1)
             }
-        }else if(story.option3 === "Dont buy something"){
-           setStoryCount(storyCount + 1)
+        } else if (story.option3 === "Dont buy something") {
+            setStoryCount(storyCount + 1)
         }
     }
 
@@ -391,6 +400,14 @@ export default function GamePage() {
     const story1 = ["1-1", "1-2", "1-3", "1-4"]
     const story2 = ["2-1", "2-2", "2-3", "2-4"]
     const story3 = ["3-1", "3-2", "3-3", "3-4"]
+    const story4 = ["4"]
+    const story5 = ["5-1", "5-2", "5-3", "5-4"]
+    const story6 = ["6-1", "6-2", "6-3", "6-4"]
+    const story7 = ["7-1", "7-2", "7-3", "7-4"]
+    const story8 = ["8"]
+    const story9 = ["9-1", "9-2", "9-3", "9-4"]
+    const story10 = ["10-1", "10-2", "10-3", "10-4"]
+
 
     const [storyCount, setStoryCount] = useState(0)
 
@@ -430,12 +447,38 @@ export default function GamePage() {
         } else if (storyCount === 3) {
             randomIndex = Math.floor(Math.random() * story3.length);
             return story3[randomIndex];
+        } else if (storyCount === 4) {
+            randomIndex = Math.floor(Math.random() * story4.length);
+            return story4[randomIndex];
+        } else if (storyCount === 5) {
+            randomIndex = Math.floor(Math.random() * story5.length);
+            return story5[randomIndex];
+        } else if (storyCount === 6) {
+            randomIndex = Math.floor(Math.random() * story6.length);
+            return story6[randomIndex];
+        } else if (storyCount === 7) {
+            randomIndex = Math.floor(Math.random() * story7.length);
+            return story7[randomIndex];
+        } else if (storyCount === 8) {
+            randomIndex = Math.floor(Math.random() * story8.length);
+            return story8[randomIndex];
+        } else if (storyCount === 9) {
+            randomIndex = Math.floor(Math.random() * story9.length);
+            return story9[randomIndex];
+        } else if (storyCount === 10) {
+            randomIndex = Math.floor(Math.random() * story10.length);
+            return story10[randomIndex];
         }
     }
 
     function getLevelUp() {
         if (character.exp >= 10) {
-            setCharacter({...character, level: character.level + 1, exp: character.exp - 10, skillPoints: character.skillPoints + 5})
+            setCharacter({
+                ...character,
+                level: character.level + 1,
+                exp: character.exp - 10,
+                skillPoints: character.skillPoints + 5
+            })
         }
     }
 
@@ -446,13 +489,18 @@ export default function GamePage() {
 
     function increaseCharacterLife() {
         if (character.skillPoints > 0) {
-            setCharacter({...character, life: character.life + 1, maxLife: character.maxLife + 1, skillPoints: character.skillPoints - 1})
+            setCharacter({
+                ...character,
+                life: character.life + 1,
+                maxLife: character.maxLife + 1,
+                skillPoints: character.skillPoints - 1
+            })
         }
     }
 
     function increaseCharacterDmg() {
         if (character.skillPoints > 0) {
-            setCharacter({...character, damage: character.damage + 1, skillPoints: character.skillPoints -1})
+            setCharacter({...character, damage: character.damage + 1, skillPoints: character.skillPoints - 1})
         }
     }
 
