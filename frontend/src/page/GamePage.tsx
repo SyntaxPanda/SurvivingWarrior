@@ -9,6 +9,7 @@ import Modal from "react-modal";
 import {Kobold} from "../model/KoboldType";
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {UserDTO} from "../model/UserType";
 
 Modal.setAppElement('#root');
 
@@ -61,6 +62,9 @@ export default function GamePage() {
     const [game, setGame] =
         useState<Game>({username: "", gameId: "", gameName: "", characterId: "", storyId: ""})
 
+    const [user, setUser] =
+        useState<UserDTO>({achievement: [], id: "", userName: ""})
+
     const params = useParams()
     const gameId: string | undefined = params.id;
 
@@ -77,7 +81,6 @@ export default function GamePage() {
                 setGame(response.data);
                 charId = response.data.characterId
                 storyId = response.data.storyId
-
             })
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
@@ -88,6 +91,10 @@ export default function GamePage() {
                 setStory(response.data)
                 setRandomStory("")
                 setKobolds(response.data.enemies)
+            })
+            .then(() => axios.get("/api/user/details"))
+            .then(response => {
+                setUser(response.data)
             })
             .catch(error => console.error(error));
     }

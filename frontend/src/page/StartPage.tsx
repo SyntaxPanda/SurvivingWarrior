@@ -5,35 +5,49 @@ import Modal from "react-modal";
 import {Game} from "../model/GameType";
 import axios from "axios";
 import "../css/StartPage.css"
+import {UserDTO} from "../model/UserType";
+import {Achievement} from "../model/AchievementType";
 
 export default function StartPage() {
     const navigate = useNavigate();
 
     const [modalOpen, setModalOpen] = useState(false)
+    const [achievementModal, setAchievementModal] = useState(false)
 
     const [games, setGames] =
         useState<Game[]>([])
+    const [achievements, setAchievements] =
+        useState<Achievement[]>()
 
     function onClickNavigateToNewGamePage() {
         navigate("/newgame")
     }
 
-    const [username, setUsername] =
-        useState("")
+    const [user, setUser] =
+        useState<UserDTO>({id: "", achievement: [], userName: ""})
 
-    function setUsernameIfLogin() {
-        axios.get("/api/user/username")
+    function setUserIfLogin() {
+        axios.get("/api/user/details")
             .then(response => {
-                setUsername(response.data)
+                setUser(response.data)
             })
     }
 
     useEffect(() => {
-        setUsernameIfLogin()
+        setUserIfLogin()
     }, [])
 
+    function getAllAchievements() {
+        setAchievements(user.achievement)
+        setAchievementModal(true)
+    }
+
+    function closeAchievementModal() {
+        setAchievementModal(false)
+    }
+
     function getAllGamesForLoadGame() {
-        axios.get("/api/game/all/" + username)
+        axios.get("/api/game/all/" + user.userName)
             .then(response =>
                 setGames(response.data))
     }
@@ -91,6 +105,24 @@ export default function StartPage() {
                 </div>
                 <div className={"buttonBackStartPage"}>
                     <button onClick={closeLoadGameModal}>Close</button>
+                </div>
+                <button onClick={getAllAchievements}>Achievements</button>
+            </Modal>
+            <Modal isOpen={achievementModal}>
+                <div>
+                    {achievements?.map((achievement) => {
+                            return (
+                                <div className={""}>
+                                    <div className={"infosAchievement"}>
+                                        {achievement.name}{achievement.description}
+                                    </div>
+                                </div>
+                            )
+                        }
+                    )}
+                </div>
+                <div>
+                    <button onClick={closeAchievementModal}>Close</button>
                 </div>
             </Modal>
         </div>
