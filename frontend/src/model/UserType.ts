@@ -4,11 +4,11 @@ export type User ={
     id:string,
     userName:string,
     password:string,
-    achievement: Achievement[]
+    achievements: Achievement[]
 }
 
 export type UserDTO ={
     id:string,
     userName:string
-    achievement: Achievement[]
+    achievements: Achievement[]
 }

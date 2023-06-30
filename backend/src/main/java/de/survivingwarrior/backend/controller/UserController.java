@@ -46,8 +46,8 @@ public class UserController {
         return "Ur logout";
     }
 
-    @GetMapping("/details")
-    public UserDTO getUser(@RequestBody String username){
+    @GetMapping("/details/{username}")
+    public UserDTO getUser(@PathVariable String username){
         return userService.getUser(username);
     }
 

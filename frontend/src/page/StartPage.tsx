@@ -19,17 +19,24 @@ export default function StartPage() {
     const [achievements, setAchievements] =
         useState<Achievement[]>()
 
+    const[username, setUsername] =
+        useState("")
+
     function onClickNavigateToNewGamePage() {
         navigate("/newgame")
     }
 
     const [user, setUser] =
-        useState<UserDTO>({id: "", achievement: [], userName: ""})
+        useState<UserDTO>({id: "", achievements: [], userName: ""})
 
     function setUserIfLogin() {
-        axios.get("/api/user/details")
+        axios.get("/api/user/username")
             .then(response => {
-                setUser(response.data)
+                setUsername(response.data)
+                axios.get("/api/user/details/" + response.data)
+                    .then(r => {
+                        setUser(r.data)
+                    })
             })
     }
 
@@ -37,8 +44,9 @@ export default function StartPage() {
         setUserIfLogin()
     }, [])
 
+
     function getAllAchievements() {
-        setAchievements(user.achievement)
+        setAchievements(user.achievements)
         setAchievementModal(true)
     }
 
@@ -47,7 +55,7 @@ export default function StartPage() {
     }
 
     function getAllGamesForLoadGame() {
-        axios.get("/api/game/all/" + user.userName)
+        axios.get("/api/game/all/" + username)
             .then(response =>
                 setGames(response.data))
     }
@@ -80,7 +88,12 @@ export default function StartPage() {
                 <button onClick={openLoadGameModal}>Load Game</button>
             </div>
             <div className={"logoutGameButton"}>
-                <button onClick={logout}>Logout</button>
+                <div className={"buttonLogout"}>
+                    <button onClick={logout}>Logout</button>
+                </div>
+                <div className={"buttonAchievement"}>
+                    <button onClick={getAllAchievements}>Achievements</button>
+                </div>
             </div>
             <Modal className={"modalLoadGame"} isOpen={modalOpen}>
                 <div className="containerStartPage">
@@ -106,20 +119,19 @@ export default function StartPage() {
                 <div className={"buttonBackStartPage"}>
                     <button onClick={closeLoadGameModal}>Close</button>
                 </div>
-                <button onClick={getAllAchievements}>Achievements</button>
             </Modal>
             <Modal isOpen={achievementModal}>
                 <div>
-                    {achievements?.map((achievement) => {
-                            return (
-                                <div className={""}>
-                                    <div className={"infosAchievement"}>
-                                        {achievement.name}{achievement.description}
-                                    </div>
+                    {user.achievements.map((achievement, index) => {
+                        const frameClassName = achievement ? "rainbowFrame" : "blackFrame";
+                        return (
+                            <div className={frameClassName} key={index}>
+                                <div className="infosAchievement">
+                                    {achievement.name} {achievement.description}
                                 </div>
-                            )
-                        }
-                    )}
+                            </div>
+                        );
+                    })}
                 </div>
                 <div>
                     <button onClick={closeAchievementModal}>Close</button>

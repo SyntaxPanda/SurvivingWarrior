@@ -63,7 +63,7 @@ export default function GamePage() {
         useState<Game>({username: "", gameId: "", gameName: "", characterId: "", storyId: ""})
 
     const [user, setUser] =
-        useState<UserDTO>({achievement: [], id: "", userName: ""})
+        useState<UserDTO>({achievements: [], id: "", userName: ""})
 
     const params = useParams()
     const gameId: string | undefined = params.id;
@@ -76,11 +76,17 @@ export default function GamePage() {
     function getGameById() {
         let charId = ""
         let storyId = ""
+        let username = ""
         axios.get("/api/game/" + gameId)
             .then(response => {
                 setGame(response.data);
                 charId = response.data.characterId
                 storyId = response.data.storyId
+                username = response.data.username
+            })
+            .then(() => axios.get("/api/user/details/" + username))
+            .then(r =>{
+                setUser(r.data)
             })
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
@@ -91,10 +97,6 @@ export default function GamePage() {
                 setStory(response.data)
                 setRandomStory("")
                 setKobolds(response.data.enemies)
-            })
-            .then(() => axios.get("/api/user/details"))
-            .then(response => {
-                setUser(response.data)
             })
             .catch(error => console.error(error));
     }

@@ -30,6 +30,21 @@
     width: 10vw;
     height: 7vh;
     margin-left: 10vw;
+    grid-template-columns: 35vw 35vw;
+    grid-column: auto;
+}
+
+.buttonLogout{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+}
+
+.buttonAchievement{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+    justify-self: flex-end;
 }
 
 .modalLoadGame {
@@ -159,4 +174,21 @@ svg {
 
 .infosAchievement:hover{
 
+}
+
+.rainbowFrame {
+    border: 2px solid;
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    animation: rotation 2s linear infinite;
+}
+
+.blackFrame {
+    border: 2px solid black;
+    animation: none;
+}
+
+@keyframes rotation {
+    /* Definition der Animationsrotation */
 }
