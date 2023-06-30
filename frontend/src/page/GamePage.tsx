@@ -30,13 +30,13 @@ export default function GamePage() {
             gold: 0,
             id: "",
             level: 0,
-            life: 0,
+            life: 1,
             name: "",
             item: []
         })
 
     const [kobold1, setKobold1] =
-        useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
+        useState<Kobold>({damage: 0, gold: 0, id: "", life: 1, name: ""})
 
     const [kobold2, setKobold2] =
         useState<Kobold>({damage: 0, gold: 0, id: "", life: 0, name: ""})
@@ -104,6 +104,50 @@ export default function GamePage() {
         }
     }, [kobolds])
 
+    function lostgame() {
+        toast("You are Done!")
+        axios.delete("/api/character/lost/" + character.id)
+            .then(() =>
+                axios.delete("/api/game/lost/" + game.gameId)
+                    .then(() =>
+                        setTimeout(() => {
+                            navigate("/start")
+                        }, 2000)
+                    ))
+    }
+
+    useEffect(() => {
+        if (character.life < 1) {
+            lostgame()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [character.life])
+
+    function allEnemyDead() {
+        setCharacter({
+            ...character,
+            gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
+            exp: character.exp + (3 * kobolds.length)
+        })
+        toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
+        setStoryCount(storyCount + 1)
+    }
+
+    useEffect(() => {
+        if (story.id !== "4") {
+            if (story.id !== "8") {
+                if (kobold1.life < 1) {
+                    if (kobold2.life < 1) {
+                        if (kobold3.life < 1) {
+                            allEnemyDead()
+                        }
+                    }
+                }
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [kobold1.life, kobold2.life, kobold3.life])
+
     function onClickGetNextStoryChapterOption1() {
         if (story.option1 === "Hit") {
             if (kobold1.life > 0) {
@@ -111,66 +155,16 @@ export default function GamePage() {
                 setCharacter({...character, life: character.life - kobold1.damage})
                 toast("You hit the Enemy for " + character.damage + " points.")
                 toast("The Enemy hit u for " + kobold1.damage + " points.")
-                if (kobold1.life < 1) {
-                    setCharacter({...character, gold: character.gold + kobold1.gold})
-                } else if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + game.gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
-                }
             } else if (kobold2.life > 0) {
                 setKobold2({...kobold2, life: kobold2.life - character.damage})
                 setCharacter({...character, life: character.life - kobold2.damage})
                 toast("You hit the Enemy for " + character.damage + " points.")
                 toast("The Enemy hit u for " + kobold2.damage + " points.")
-                if (kobold2.life <= 0) {
-                    setCharacter({...character, gold: character.gold + kobold2.gold})
-                } else if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
-                }
             } else if (kobold3.life > 0) {
                 setKobold3({...kobold3, life: kobold3.life - character.damage})
                 setCharacter({...character, life: character.life - kobold3.damage})
                 toast("You hit the Enemy for " + character.damage + " points.")
                 toast("The Enemy hit u for " + kobold3.damage + " points.")
-                if (kobold3.life <= 0) {
-                    setCharacter({...character, gold: character.gold + kobold3.gold})
-                } else if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
-                }
-            } else {
-                setCharacter({
-                    ...character,
-                    gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
-                    exp: character.exp + (3 * kobolds.length)
-                })
-                toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
-                setStoryCount(storyCount + 1)
             }
         } else if (story.option1 === "Get Heal for Gold") {
             let price = Math.round(Math.floor(Math.random() * (45 - 1 + 25)))
@@ -191,57 +185,14 @@ export default function GamePage() {
                 let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
                 setCharacter({...character, life: character.life - (kobold1.damage - block)})
                 toast("The Enemy hit u for " + (kobold1.damage - block) + " points. U blocked " + block + " damage.")
-                if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + game.gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
-                }
             } else if (kobold2.life > 0) {
                 let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
                 setCharacter({...character, life: character.life - (kobold2.damage - block)})
                 toast("The Enemy hit u for " + (kobold2.damage - block) + " points. U blocked " + block + " damage.")
-                if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + game.gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
-                }
             } else if (kobold3.life > 0) {
                 let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
                 setCharacter({...character, life: character.life - (kobold3.damage - block)})
                 toast("The Enemy hit u for " + (kobold3.damage - block) + " points. U blocked " + block + " damage.")
-                if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + game.gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
-                }
-            } else {
-                setCharacter({
-                    ...character,
-                    gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
-                    exp: character.exp + (3 * kobolds.length)
-                })
-                setStoryCount(storyCount + 1)
             }
         } else if (story.option2 === "Get damage for Gold") {
             let price = Math.round(Math.floor(Math.random() * (20 - 2 + 1)))
@@ -272,18 +223,6 @@ export default function GamePage() {
                     toast("You have max life and cant heal.")
 
                 }
-                if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + game.gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
-                }
             } else if (kobold2.life > 0) {
                 if (character.life < character.maxLife) {
                     setCharacter({
@@ -296,18 +235,6 @@ export default function GamePage() {
                     setCharacter({...character, life: character.life - kobold2.damage})
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
                     toast("You have max life and cant heal.")
-                }
-                if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + game.gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
                 }
             } else if (kobold3.life > 0) {
                 if (character.life < character.maxLife) {
@@ -322,25 +249,6 @@ export default function GamePage() {
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
                     toast("You have max life and cant heal.")
                 }
-                if (character.life <= 0) {
-                    toast("You are Done!")
-                    axios.delete("/api/character/lost/" + character.id)
-                        .then(() =>
-                            axios.delete("/api/game/lost/" + game.gameId)
-                                .then(() =>
-                                    setTimeout(() => {
-                                        navigate("/start")
-                                    }, 2000)
-                                )
-                        )
-                }
-            } else {
-                setCharacter({
-                    ...character,
-                    gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
-                    exp: character.exp + (3 * kobolds.length)
-                })
-                setStoryCount(storyCount + 1)
             }
         } else if (story.option3 === "Dont buy something") {
             setStoryCount(storyCount + 1)
@@ -676,6 +584,7 @@ export default function GamePage() {
                 pauseOnHover
                 theme="dark"
                 style={{width: "13vw"}}
+                limit={6}
             />
         </div>
     );
