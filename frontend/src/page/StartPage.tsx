@@ -44,7 +44,6 @@ export default function StartPage() {
         setUserIfLogin()
     }, [])
 
-
     function getAllAchievements() {
         setAchievements(user.achievements)
         setAchievementModal(true)
@@ -120,14 +119,14 @@ export default function StartPage() {
                     <button onClick={closeLoadGameModal}>Close</button>
                 </div>
             </Modal>
-            <Modal isOpen={achievementModal}>
-                <div>
+            <Modal className={"modalAchievement"} isOpen={achievementModal}>
+                <div className={"achievementGrid"}>
                     {user.achievements.map((achievement, index) => {
-                        const frameClassName = achievement ? "rainbowFrame" : "blackFrame";
+                        const frameClassName = achievement.reached ? "rainbowFrame" : "blackFrame";
                         return (
                             <div className={frameClassName} key={index}>
-                                <div className="infosAchievement">
-                                    {achievement.name} {achievement.description}
+                                <div className={"achievementContent"}>
+                                    {achievement.name} <div className={"infosAchievement"}>{achievement.description}</div>
                                 </div>
                             </div>
                         );

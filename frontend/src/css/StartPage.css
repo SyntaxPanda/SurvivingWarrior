@@ -172,21 +172,65 @@ svg {
     transition: 0.6s ease-out;
 }
 
-.infosAchievement:hover{
-
+.infosAchievement {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    border: 2px solid;
+    background-image: url("../image/backgroundButtonKobold.jpg");
+    padding: 5px;
 }
+
+.achievementContent:hover .infosAchievement {
+    display: block;
+}
+
+.achievementContent{
+    height: 10vh;
+}
+
+.modalAchievement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    width: 70vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("../image/backgroundButtonKobold.jpg");
+}
+
+.achievementGrid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1vh;
+}
+
 
 .rainbowFrame {
     border: 2px solid;
-    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    animation: rotation 2s linear infinite;
+    animation: rainbowBorder 2s linear infinite;
+}
+
+@keyframes rainbowBorder {
+    0%   { border-color: red; }
+    14%  { border-color: orange; }
+    28%  { border-color: yellow; }
+    42%  { border-color: green; }
+    57%  { border-color: blue; }
+    71%  { border-color: indigo; }
+    85%  { border-color: violet; }
+    100% { border-color: red; }
 }
 
 .blackFrame {
-    border: 2px solid black;
+    border: 2px solid #ffffff;
     animation: none;
+    color: #61dafb;
+    background-image: url("../image/backgroundButtonKobold.jpg");
 }
 
 @keyframes rotation {
