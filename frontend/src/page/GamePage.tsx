@@ -195,7 +195,7 @@ export default function GamePage() {
                 toast("The Enemy hit u for " + (kobold3.damage - block) + " points. U blocked " + block + " damage.")
             }
         } else if (story.option2 === "Get damage for Gold") {
-            let price = Math.round(Math.floor(Math.random() * (20 - 2 + 1)))
+            let price = Math.round(Math.floor(Math.random() * (10 - 1 + 10)))
             if (character.gold >= price) {
                 let getDamage = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
                 setCharacter({...character, damage: character.damage + getDamage, gold: character.gold - price})
