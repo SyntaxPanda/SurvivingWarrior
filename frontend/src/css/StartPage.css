@@ -213,6 +213,8 @@ svg {
 .rainbowFrame {
     border: 2px solid;
     animation: rainbowBorder 2s linear infinite;
+    color: #61dafb;
+    background-image: url("../image/backgroundButtonKobold.jpg");
 }
 
 @keyframes rainbowBorder {
