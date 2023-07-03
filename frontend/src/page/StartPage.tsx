@@ -6,7 +6,6 @@ import {Game} from "../model/GameType";
 import axios from "axios";
 import "../css/StartPage.css"
 import {UserDTO} from "../model/UserType";
-import {Achievement} from "../model/AchievementType";
 
 export default function StartPage() {
     const navigate = useNavigate();
@@ -16,8 +15,6 @@ export default function StartPage() {
 
     const [games, setGames] =
         useState<Game[]>([])
-    const [achievements, setAchievements] =
-        useState<Achievement[]>()
 
     const[username, setUsername] =
         useState("")
@@ -45,7 +42,6 @@ export default function StartPage() {
     }, [])
 
     function getAllAchievements() {
-        setAchievements(user.achievements)
         setAchievementModal(true)
     }
 
