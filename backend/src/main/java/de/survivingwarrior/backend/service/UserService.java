@@ -5,6 +5,7 @@ import de.survivingwarrior.backend.model.UserA;
 import de.survivingwarrior.backend.model.UserDTO;
 import de.survivingwarrior.backend.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,7 +30,7 @@ public class UserService implements UserDetailsService {
         UserA optionalUserUnSave = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with this username: " + username + " not found"));
         System.out.println("after find by username");
-        return new User(optionalUserUnSave.getUsername(), optionalUserUnSave.getPassword(), List.of());
+        return new User(optionalUserUnSave.getUsername(), optionalUserUnSave.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_BASIC")));
     }
 
     public UserDTO registerUser(UserA userA) {

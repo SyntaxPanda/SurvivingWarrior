@@ -34,13 +34,13 @@ public class SecurityConfig {
                         //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                         //.csrfTokenRequestHandler(requestHandler))
 
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .httpBasic(basic -> basic.authenticationEntryPoint(
                         (request, response, authException) ->
                                 response.sendError(
                                         HttpStatus.UNAUTHORIZED.value(),
                                         HttpStatus.UNAUTHORIZED.getReasonPhrase()
                                 )))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/api/user/**").permitAll();
                     auth.requestMatchers("/api/**").authenticated();
