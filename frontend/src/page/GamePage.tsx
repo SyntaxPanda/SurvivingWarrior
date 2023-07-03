@@ -63,7 +63,7 @@ export default function GamePage() {
         useState<Game>({username: "", gameId: "", gameName: "", characterId: "", storyId: ""})
 
     const [user, setUser] =
-        useState<UserDTO>({dragonCounter: 0, gameCounter: 0, goldCounter: 0, achievements: [], id: "", userName: ""})
+        useState<UserDTO>({dragonCounter: 0, levelCounter: 0, goldCounter: 0, achievements: [], id: "", userName: ""})
 
     const params = useParams()
     const gameId: string | undefined = params.id;
@@ -133,6 +133,10 @@ export default function GamePage() {
     }, [character.life])
 
     function allEnemyDead() {
+        if (story.id === "10") {
+            setUser({...user, dragonCounter: user.dragonCounter + 1})
+        }
+        setUser({...user, goldCounter: user.goldCounter + kobold1.gold + kobold2.gold + kobold3.gold})
         setCharacter({
             ...character,
             gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
@@ -283,6 +287,7 @@ export default function GamePage() {
             storyId: story.id,
             username: game.username
         })
+            .then(() => axios.put("/api/achievement/reached", {user}))
             .then()
         navigate("/start")
     }
@@ -396,6 +401,7 @@ export default function GamePage() {
                 exp: character.exp - 10,
                 skillPoints: character.skillPoints + 5
             })
+            setUser({...user, levelCounter: user.levelCounter + 1})
         }
     }
 
@@ -421,7 +427,7 @@ export default function GamePage() {
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getAchievementsCharLevel()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.level])
@@ -435,116 +441,141 @@ export default function GamePage() {
             if (character.level === 10) {
                 user.achievements[1].reached = true;
             }
-        }else if(!user.achievements[2]?.reached){
-            if(character.level === 15){
+        } else if (!user.achievements[2]?.reached) {
+            if (character.level === 15) {
                 user.achievements[2].reached = true
             }
-        }else if(!user.achievements[3]?.reached){
-            if(character.level === 20){
+        } else if (!user.achievements[3]?.reached) {
+            if (character.level === 20) {
                 user.achievements[3].reached = true
             }
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getAchievementsCharGold()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.gold])
 
-    function getAchievementsCharGold(){
-        if(!user.achievements[4]?.reached){
-            if(character.gold === 100){
+    function getAchievementsCharGold() {
+        if (!user.achievements[4]?.reached) {
+            if (character.gold === 100) {
                 user.achievements[4].reached = true
             }
-        }else if(!user.achievements[5]?.reached){
-            if(character.gold === 150){
+        } else if (!user.achievements[5]?.reached) {
+            if (character.gold === 150) {
                 user.achievements[5].reached = true
             }
-        }else if(!user.achievements[6]?.reached){
-            if(character.gold === 200){
+        } else if (!user.achievements[6]?.reached) {
+            if (character.gold === 200) {
                 user.achievements[6].reached = true
             }
-        }else if(!user.achievements[7]?.reached){
-            if(character.gold === 250){
+        } else if (!user.achievements[7]?.reached) {
+            if (character.gold === 250) {
                 user.achievements[7].reached = true
             }
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
+        getAchievementsCharLevelOverall()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user.levelCounter])
+
+    function getAchievementsCharLevelOverall() {
+        if (!user.achievements[8]?.reached) {
+            if (user.levelCounter === 100) {
+                user.achievements[8].reached = true
+            }
+        } else if (!user.achievements[9]?.reached) {
+            if (user.levelCounter === 250) {
+                user.achievements[9].reached = true
+            }
+        } else if (!user.achievements[10]?.reached) {
+            if (user.levelCounter === 500) {
+                user.achievements[10].reached = true
+            }
+        } else if (!user.achievements[11]?.reached) {
+            if (user.levelCounter === 1000) {
+                user.achievements[11].reached = true
+            }
+        }
+    }
+
+    useEffect(() => {
         getAchievementsCharDragonKills()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user.dragonCounter])
 
-    function getAchievementsCharDragonKills(){
-        if(!user.achievements[12]?.reached){
-            if(user.dragonCounter === 1){
+    function getAchievementsCharDragonKills() {
+        if (!user.achievements[12]?.reached) {
+            if (user.dragonCounter === 1) {
                 user.achievements[12].reached = true
             }
-        }else if(!user.achievements[13]?.reached){
-            if(user.dragonCounter === 5){
+        } else if (!user.achievements[13]?.reached) {
+            if (user.dragonCounter === 5) {
                 user.achievements[13].reached = true
             }
-        }else if(!user.achievements[14]?.reached){
-            if(user.dragonCounter === 10){
+        } else if (!user.achievements[14]?.reached) {
+            if (user.dragonCounter === 10) {
                 user.achievements[14].reached = true
             }
-        }else if(!user.achievements[15]?.reached){
-            if(user.dragonCounter === 25){
+        } else if (!user.achievements[15]?.reached) {
+            if (user.dragonCounter === 25) {
                 user.achievements[15].reached = true
             }
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getAchievementsCharDamage()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.damage])
 
-    function getAchievementsCharDamage(){
-        if(!user.achievements[16]?.reached){
-            if(character.damage === 15){
+    function getAchievementsCharDamage() {
+        if (!user.achievements[16]?.reached) {
+            if (character.damage === 15) {
                 user.achievements[16].reached = true
             }
-        }else if(!user.achievements[17]?.reached){
-            if(character.damage === 20){
+        } else if (!user.achievements[17]?.reached) {
+            if (character.damage === 20) {
                 user.achievements[17].reached = true
             }
-        }else if(!user.achievements[18]?.reached){
-            if(character.damage === 30){
+        } else if (!user.achievements[18]?.reached) {
+            if (character.damage === 30) {
                 user.achievements[18].reached = true
             }
-        }else if(!user.achievements[19]?.reached){
-            if(character.damage === 50){
+        } else if (!user.achievements[19]?.reached) {
+            if (character.damage === 50) {
                 user.achievements[19].reached = true
             }
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getAchievementsCharGoldOverall()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user.goldCounter])
 
-    function getAchievementsCharGoldOverall(){
-        if(!user.achievements[20]?.reached){
-            if(user.goldCounter === 100){
+    function getAchievementsCharGoldOverall() {
+        if (!user.achievements[20]?.reached) {
+            if (user.goldCounter === 100) {
                 user.achievements[20].reached = true
             }
-        }else if(!user.achievements[21]?.reached){
-            if(user.goldCounter === 50000){
+        } else if (!user.achievements[21]?.reached) {
+            if (user.goldCounter === 50000) {
                 user.achievements[21].reached = true
             }
-        }else if(!user.achievements[22]?.reached){
-            if(user.goldCounter === 100000){
+        } else if (!user.achievements[22]?.reached) {
+            if (user.goldCounter === 100000) {
                 user.achievements[22].reached = true
             }
-        }else if(!user.achievements[23]?.reached){
-            if(user.goldCounter === 500000){
+        } else if (!user.achievements[23]?.reached) {
+            if (user.goldCounter === 500000) {
                 user.achievements[23].reached = true
             }
-        }else if(!user.achievements[24]?.reached){
-            if(user.goldCounter === 1000000){
+        } else if (!user.achievements[24]?.reached) {
+            if (user.goldCounter === 1000000) {
                 user.achievements[24].reached = true
             }
         }
