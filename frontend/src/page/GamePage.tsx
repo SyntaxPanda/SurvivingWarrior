@@ -115,7 +115,7 @@ export default function GamePage() {
 
     function lostgame() {
         toast("You are Done!")
-        axios.put("/api/user/achievement/reached", {user})
+        axios.put("/api/user/achievement/reached", user)
             .then(() => axios.delete("/api/character/lost/" + character.id))
             .then(() =>
                 axios.delete("/api/game/lost/" + game.gameId)
@@ -438,6 +438,7 @@ export default function GamePage() {
         if (user.achievements[0]?.reached === false) {
             if (character.level >= 5) {
                 user.achievements[0].reached = true;
+                toast("You reached lvl5 Achievement")
             }
         } else if (user.achievements[1]?.reached === false) {
             if (character.level >= 10) {
@@ -463,6 +464,7 @@ export default function GamePage() {
         if (user.achievements[4]?.reached === false) {
             if (character.gold >= 100) {
                 user.achievements[4].reached = true
+                toast("You reached 100 Gold Achievement")
             }
         } else if (user.achievements[5]?.reached === false) {
             if (character.gold >= 150) {
@@ -488,6 +490,7 @@ export default function GamePage() {
         if (user.achievements[8]?.reached === false) {
             if (user.levelCounter >= 100) {
                 user.achievements[8].reached = true
+                toast("You reached 100 lvl Achievement")
             }
         } else if (user.achievements[9]?.reached === false) {
             if (user.levelCounter >= 250) {
@@ -513,6 +516,7 @@ export default function GamePage() {
         if (user.achievements[12]?.reached === false) {
             if (user.dragonCounter >= 1) {
                 user.achievements[12].reached = true
+                toast("You reached 1 Dragon kill Achievement")
             }
         } else if (user.achievements[13]?.reached === false) {
             if (user.dragonCounter >= 5) {
@@ -538,6 +542,7 @@ export default function GamePage() {
         if (user.achievements[16]?.reached === false) {
             if (character.damage >= 15) {
                 user.achievements[16].reached = true
+                toast("You reached 15 dmg Achievement")
             }
         } else if (user.achievements[17]?.reached === false) {
             if (character.damage >= 20) {
@@ -561,8 +566,9 @@ export default function GamePage() {
 
     function getAchievementsCharGoldOverall() {
         if (user.achievements[20]?.reached === false) {
-            if (user.goldCounter >= 100) {
+            if (user.goldCounter >= 10000) {
                 user.achievements[20].reached = true
+                toast("You reached 10k Gold Achievement")
             }
         } else if (user.achievements[21]?.reached === false) {
             if (user.goldCounter >= 50000) {
