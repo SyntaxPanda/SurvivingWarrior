@@ -115,7 +115,8 @@ export default function GamePage() {
 
     function lostgame() {
         toast("You are Done!")
-        axios.delete("/api/character/lost/" + character.id)
+        axios.put("/api/user/achievement/reached", user)
+            .then(() => axios.delete("/api/character/lost/" + character.id))
             .then(() =>
                 axios.delete("/api/game/lost/" + game.gameId)
                     .then(() =>
@@ -269,6 +270,8 @@ export default function GamePage() {
     }
 
     function saveGame() {
+        axios.put("/api/user/achievement/reached", {user})
+            .catch(error => console.error(error))
         axios.put("/api/character/" + character.id, {
             name: character.name,
             id: character.id,
@@ -287,7 +290,6 @@ export default function GamePage() {
             storyId: story.id,
             username: game.username
         })
-            .then(() => axios.put("/api/achievement/reached", {user}))
             .then()
         navigate("/start")
     }
@@ -458,7 +460,7 @@ export default function GamePage() {
     }, [character.gold])
 
     function getAchievementsCharGold() {
-        if (!user.achievements[4]?.reached) {
+        if (user.achievements[4]?.reached === false) {
             if (character.gold === 100) {
                 user.achievements[4].reached = true
             }
@@ -533,7 +535,7 @@ export default function GamePage() {
     }, [character.damage])
 
     function getAchievementsCharDamage() {
-        if (!user.achievements[16]?.reached) {
+        if (user.achievements[16]?.reached === false) {
             if (character.damage === 15) {
                 user.achievements[16].reached = true
             }
