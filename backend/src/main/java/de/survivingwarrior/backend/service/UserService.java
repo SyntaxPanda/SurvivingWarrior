@@ -41,10 +41,10 @@ public class UserService implements UserDetailsService {
                 new Achievement("6", "150 Gold", "Current Gold 150", false),
                 new Achievement("7", "200 Gold", "Current Gold 200", false),
                 new Achievement("8", "250 Gold", "Current Gold 250", false),
-                new Achievement("9", "1 Game", "Start 1 Game", false),
-                new Achievement("10", "5 Game", "Start 5 Game", false),
-                new Achievement("11", "10 Game", "Start 10 Game", false),
-                new Achievement("12", "25 Game", "Start 25 Game", false),
+                new Achievement("9", "Level 100", "100 level overall", false),
+                new Achievement("10", "Level 250", "250 level overall", false),
+                new Achievement("11", "Level 500", "500 level overall", false),
+                new Achievement("12", "Level 1000", "1000 level overall", false),
                 new Achievement("13", "1 Dragon", "Kill 1 Dragon", false),
                 new Achievement("14", "5 Dragon", "Kill 5 Dragon", false),
                 new Achievement("15", "10 Dragon", "Kill 10 Dragon", false),
@@ -72,7 +72,7 @@ public class UserService implements UserDetailsService {
                 userA.getUsername(),
                 userA.getAchievements(),
                 userA.getDragonCounter(),
-                userA.getGameCounter(),
+                userA.getLevelCounter(),
                 userA.getGoldCounter());
     }
 
@@ -87,7 +87,7 @@ public class UserService implements UserDetailsService {
                 optionalUserUnSave.getUsername(),
                 optionalUserUnSave.getAchievements(),
                 optionalUserUnSave.getDragonCounter(),
-                optionalUserUnSave.getGameCounter(),
+                optionalUserUnSave.getLevelCounter(),
                 optionalUserUnSave.getGoldCounter());
     }
 }
