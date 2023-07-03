@@ -115,7 +115,7 @@ export default function GamePage() {
 
     function lostgame() {
         toast("You are Done!")
-        axios.put("/api/user/achievement/reached", user)
+        axios.put("/api/user/achievement/reached", {user})
             .then(() => axios.delete("/api/character/lost/" + character.id))
             .then(() =>
                 axios.delete("/api/game/lost/" + game.gameId)
@@ -270,7 +270,7 @@ export default function GamePage() {
     }
 
     function saveGame() {
-        axios.put("/api/user/achievement/reached", {user})
+        axios.put("/api/user/achievement/reached", user)
             .catch(error => console.error(error))
         axios.put("/api/character/" + character.id, {
             name: character.name,
@@ -435,20 +435,20 @@ export default function GamePage() {
     }, [character.level])
 
     function getAchievementsCharLevel() {
-        if (!user.achievements[0]?.reached) {
-            if (character.level === 5) {
+        if (user.achievements[0]?.reached === false) {
+            if (character.level >= 5) {
                 user.achievements[0].reached = true;
             }
-        } else if (!user.achievements[1]?.reached) {
-            if (character.level === 10) {
+        } else if (user.achievements[1]?.reached === false) {
+            if (character.level >= 10) {
                 user.achievements[1].reached = true;
             }
-        } else if (!user.achievements[2]?.reached) {
-            if (character.level === 15) {
+        } else if (user.achievements[2]?.reached === false) {
+            if (character.level >= 15) {
                 user.achievements[2].reached = true
             }
-        } else if (!user.achievements[3]?.reached) {
-            if (character.level === 20) {
+        } else if (user.achievements[3]?.reached === false) {
+            if (character.level >= 20) {
                 user.achievements[3].reached = true
             }
         }
@@ -461,19 +461,19 @@ export default function GamePage() {
 
     function getAchievementsCharGold() {
         if (user.achievements[4]?.reached === false) {
-            if (character.gold === 100) {
+            if (character.gold >= 100) {
                 user.achievements[4].reached = true
             }
-        } else if (!user.achievements[5]?.reached) {
-            if (character.gold === 150) {
+        } else if (user.achievements[5]?.reached === false) {
+            if (character.gold >= 150) {
                 user.achievements[5].reached = true
             }
-        } else if (!user.achievements[6]?.reached) {
-            if (character.gold === 200) {
+        } else if (user.achievements[6]?.reached === false) {
+            if (character.gold >= 200) {
                 user.achievements[6].reached = true
             }
-        } else if (!user.achievements[7]?.reached) {
-            if (character.gold === 250) {
+        } else if (user.achievements[7]?.reached === false) {
+            if (character.gold >= 250) {
                 user.achievements[7].reached = true
             }
         }
@@ -485,20 +485,20 @@ export default function GamePage() {
     }, [user.levelCounter])
 
     function getAchievementsCharLevelOverall() {
-        if (!user.achievements[8]?.reached) {
-            if (user.levelCounter === 100) {
+        if (user.achievements[8]?.reached === false) {
+            if (user.levelCounter >= 100) {
                 user.achievements[8].reached = true
             }
-        } else if (!user.achievements[9]?.reached) {
-            if (user.levelCounter === 250) {
+        } else if (user.achievements[9]?.reached === false) {
+            if (user.levelCounter >= 250) {
                 user.achievements[9].reached = true
             }
-        } else if (!user.achievements[10]?.reached) {
-            if (user.levelCounter === 500) {
+        } else if (user.achievements[10]?.reached === false) {
+            if (user.levelCounter >= 500) {
                 user.achievements[10].reached = true
             }
-        } else if (!user.achievements[11]?.reached) {
-            if (user.levelCounter === 1000) {
+        } else if (user.achievements[11]?.reached === false) {
+            if (user.levelCounter >= 1000) {
                 user.achievements[11].reached = true
             }
         }
@@ -510,20 +510,20 @@ export default function GamePage() {
     }, [user.dragonCounter])
 
     function getAchievementsCharDragonKills() {
-        if (!user.achievements[12]?.reached) {
-            if (user.dragonCounter === 1) {
+        if (user.achievements[12]?.reached === false) {
+            if (user.dragonCounter >= 1) {
                 user.achievements[12].reached = true
             }
-        } else if (!user.achievements[13]?.reached) {
-            if (user.dragonCounter === 5) {
+        } else if (user.achievements[13]?.reached === false) {
+            if (user.dragonCounter >= 5) {
                 user.achievements[13].reached = true
             }
-        } else if (!user.achievements[14]?.reached) {
-            if (user.dragonCounter === 10) {
+        } else if (user.achievements[14]?.reached === false) {
+            if (user.dragonCounter >= 10) {
                 user.achievements[14].reached = true
             }
-        } else if (!user.achievements[15]?.reached) {
-            if (user.dragonCounter === 25) {
+        } else if (user.achievements[15]?.reached === false) {
+            if (user.dragonCounter >= 25) {
                 user.achievements[15].reached = true
             }
         }
@@ -536,19 +536,19 @@ export default function GamePage() {
 
     function getAchievementsCharDamage() {
         if (user.achievements[16]?.reached === false) {
-            if (character.damage === 15) {
+            if (character.damage >= 15) {
                 user.achievements[16].reached = true
             }
-        } else if (!user.achievements[17]?.reached) {
-            if (character.damage === 20) {
+        } else if (user.achievements[17]?.reached === false) {
+            if (character.damage >= 20) {
                 user.achievements[17].reached = true
             }
-        } else if (!user.achievements[18]?.reached) {
-            if (character.damage === 30) {
+        } else if (user.achievements[18]?.reached === false) {
+            if (character.damage >= 30) {
                 user.achievements[18].reached = true
             }
-        } else if (!user.achievements[19]?.reached) {
-            if (character.damage === 50) {
+        } else if (user.achievements[19]?.reached === false) {
+            if (character.damage >= 50) {
                 user.achievements[19].reached = true
             }
         }
@@ -560,24 +560,24 @@ export default function GamePage() {
     }, [user.goldCounter])
 
     function getAchievementsCharGoldOverall() {
-        if (!user.achievements[20]?.reached) {
-            if (user.goldCounter === 100) {
+        if (user.achievements[20]?.reached === false) {
+            if (user.goldCounter >= 100) {
                 user.achievements[20].reached = true
             }
-        } else if (!user.achievements[21]?.reached) {
-            if (user.goldCounter === 50000) {
+        } else if (user.achievements[21]?.reached === false) {
+            if (user.goldCounter >= 50000) {
                 user.achievements[21].reached = true
             }
-        } else if (!user.achievements[22]?.reached) {
-            if (user.goldCounter === 100000) {
+        } else if (user.achievements[22]?.reached === false) {
+            if (user.goldCounter >= 100000) {
                 user.achievements[22].reached = true
             }
-        } else if (!user.achievements[23]?.reached) {
-            if (user.goldCounter === 500000) {
+        } else if (user.achievements[23]?.reached === false) {
+            if (user.goldCounter >= 500000) {
                 user.achievements[23].reached = true
             }
-        } else if (!user.achievements[24]?.reached) {
-            if (user.goldCounter === 1000000) {
+        } else if (user.achievements[24]?.reached === false) {
+            if (user.goldCounter >= 1000000) {
                 user.achievements[24].reached = true
             }
         }
