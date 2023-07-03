@@ -53,9 +53,11 @@ public class UserService implements UserDetailsService {
                 new Achievement("18", "20 Damage", "Have 20 Damage", false),
                 new Achievement("19", "30 Damage", "Have 30 Damage", false),
                 new Achievement("20", "50 Damage", "Have 50 Damage", false),
-                new Achievement("21", "50 Demons", "Kill 50 Demons", false),
-                new Achievement("22", "100 Demons", "Kill 100 Demons", false),
-                new Achievement("23", "250 Demons", "Kill 250 Demons", false)));
+                new Achievement("21", "10000 Gold", "10000 Gold overall", false),
+                new Achievement("22", "50000 Gold", "50000 Gold overall", false),
+                new Achievement("23", "100000 Gold", "100000 Gold overall", false),
+                new Achievement("24", "500000 Gold", "500000 Gold overall", false),
+                new Achievement("25", "1000000 Gold", "1000000 Gold overall", false)));
 
         String username = userA.getUsername();
         if (userRepo.findUserAByUsername(username).equals(userA.getUsername())) {
@@ -66,7 +68,12 @@ public class UserService implements UserDetailsService {
             userA.setPassword(encoder.encode(userA.getPassword()));
             userRepo.insert(userA);
         }
-        return new UserDTO(userA.getId(), userA.getUsername(), userA.getAchievements());
+        return new UserDTO(userA.getId(),
+                userA.getUsername(),
+                userA.getAchievements(),
+                userA.getDragonCounter(),
+                userA.getGameCounter(),
+                userA.getGoldCounter());
     }
 
     public void saveUser(UserA userA) {
@@ -76,6 +83,11 @@ public class UserService implements UserDetailsService {
     public UserDTO getUser(String username) {
         UserA optionalUserUnSave = userRepo.findUserAByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with this username: " + username + " not found"));
-        return new UserDTO(optionalUserUnSave.getId(), optionalUserUnSave.getUsername(), optionalUserUnSave.getAchievements());
+        return new UserDTO(optionalUserUnSave.getId(),
+                optionalUserUnSave.getUsername(),
+                optionalUserUnSave.getAchievements(),
+                optionalUserUnSave.getDragonCounter(),
+                optionalUserUnSave.getGameCounter(),
+                optionalUserUnSave.getGoldCounter());
     }
 }

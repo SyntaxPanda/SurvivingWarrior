@@ -19,4 +19,7 @@ public class UserA {
     private String username;
     private String password;
     private List<Achievement> achievements;
+    private int dragonCounter;
+    private int gameCounter;
+    private int goldCounter;
 }
