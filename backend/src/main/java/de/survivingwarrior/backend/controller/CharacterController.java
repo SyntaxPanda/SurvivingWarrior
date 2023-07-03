@@ -5,6 +5,7 @@ import de.survivingwarrior.backend.service.CharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -15,7 +16,8 @@ public class CharacterController {
     private final CharacterService characterService;
 
     @PostMapping("/newchar")
-    public Character newGameCharacterName(@RequestBody Character character){
+    public Character newGameCharacterName(@RequestBody Character character, Principal principal){
+        System.out.println(principal.getName());
         return characterService.newGameCharacterName(character);
     }
 

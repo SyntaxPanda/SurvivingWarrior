@@ -26,8 +26,10 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("before find by username");
         UserA optionalUserUnSave = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with this username: " + username + " not found"));
+        System.out.println("after find by username");
         return new User(optionalUserUnSave.getUsername(), optionalUserUnSave.getPassword(), List.of());
     }
 
