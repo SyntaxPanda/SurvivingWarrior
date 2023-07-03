@@ -77,7 +77,14 @@ public class UserService implements UserDetailsService {
     }
 
     public void saveUser(UserA userA) {
-        userRepo.save(userA);
+        UserA newUserA = userRepo.findUserAByUsername(userA.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User with this username: " + userA.getUsername() + " not found"));
+        newUserA.setId(userA.getId());
+        newUserA.setDragonCounter(userA.getDragonCounter());
+        newUserA.setAchievements(userA.getAchievements());
+        newUserA.setLevelCounter(userA.getLevelCounter());
+        newUserA.setGoldCounter(userA.getGoldCounter());
+        userRepo.save(newUserA);
     }
 
     public UserDTO getUser(String username) {
