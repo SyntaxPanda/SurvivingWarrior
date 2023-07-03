@@ -187,7 +187,10 @@ svg {
 }
 
 .achievementContent{
+    display: grid;
     height: 10vh;
+    align-items: center;
+    justify-items: center;
 }
 
 .modalAchievement {
