@@ -6,7 +6,7 @@ export type User ={
     password:string,
     achievements: Achievement[]
     dragonCounter:number;
-    gameCounter:number;
+    levelCounter:number;
     goldCounter:number;
 }
 
@@ -15,6 +15,6 @@ export type UserDTO ={
     userName:string
     achievements: Achievement[]
     dragonCounter:number;
-    gameCounter:number;
+    levelCounter:number;
     goldCounter:number;
 }

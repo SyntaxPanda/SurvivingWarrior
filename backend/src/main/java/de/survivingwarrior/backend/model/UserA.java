@@ -20,6 +20,6 @@ public class UserA {
     private String password;
     private List<Achievement> achievements;
     private int dragonCounter;
-    private int gameCounter;
+    private int levelCounter;
     private int goldCounter;
 }

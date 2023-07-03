@@ -15,6 +15,6 @@ public class UserDTO {
     private String username;
     private List<Achievement> achievements;
     private int dragonCounter;
-    private int gameCounter;
+    private int levelCounter;
     private int goldCounter;
 }
