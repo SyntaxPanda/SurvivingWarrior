@@ -27,7 +27,7 @@ export default function StartPage() {
     }
 
     const [user, setUser] =
-        useState<UserDTO>({id: "", achievements: [], userName: ""})
+        useState<UserDTO>({dragonCounter: 0, gameCounter: 0, goldCounter: 0, id: "", achievements: [], userName: ""})
 
     function setUserIfLogin() {
         axios.get("/api/user/username")
