@@ -63,7 +63,7 @@ export default function GamePage() {
         useState<Game>({username: "", gameId: "", gameName: "", characterId: "", storyId: ""})
 
     const [user, setUser] =
-        useState<UserDTO>({achievements: [], id: "", userName: ""})
+        useState<UserDTO>({dragonCounter: 0, gameCounter: 0, goldCounter: 0, achievements: [], id: "", userName: ""})
 
     const params = useParams()
     const gameId: string | undefined = params.id;
