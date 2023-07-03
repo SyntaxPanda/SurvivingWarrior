@@ -421,6 +421,11 @@ export default function GamePage() {
         }
     }
 
+    useEffect(() =>{
+        getAchievementsCharLevel()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [character.level])
+
     function getAchievementsCharLevel() {
         if (!user.achievements[0]?.reached) {
             if (character.level === 5) {
@@ -440,6 +445,11 @@ export default function GamePage() {
             }
         }
     }
+
+    useEffect(() =>{
+        getAchievementsCharGold()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [character.gold])
 
     function getAchievementsCharGold(){
         if(!user.achievements[4]?.reached){
@@ -461,6 +471,11 @@ export default function GamePage() {
         }
     }
 
+    useEffect(() =>{
+        getAchievementsCharDragonKills()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user.dragonCounter])
+
     function getAchievementsCharDragonKills(){
         if(!user.achievements[12]?.reached){
             if(user.dragonCounter === 1){
@@ -481,6 +496,11 @@ export default function GamePage() {
         }
     }
 
+    useEffect(() =>{
+        getAchievementsCharDamage()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [character.damage])
+
     function getAchievementsCharDamage(){
         if(!user.achievements[16]?.reached){
             if(character.damage === 15){
@@ -500,6 +520,11 @@ export default function GamePage() {
             }
         }
     }
+
+    useEffect(() =>{
+        getAchievementsCharGoldOverall()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user.goldCounter])
 
     function getAchievementsCharGoldOverall(){
         if(!user.achievements[20]?.reached){
