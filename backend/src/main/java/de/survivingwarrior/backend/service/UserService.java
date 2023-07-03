@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserA optionalUserUnSave = userRepo.findUserAByUsername(username)
+        UserA optionalUserUnSave = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with this username: " + username + " not found"));
         return new User(optionalUserUnSave.getUsername(), optionalUserUnSave.getPassword(), List.of());
     }
@@ -60,14 +60,15 @@ public class UserService implements UserDetailsService {
                 new Achievement("25", "1000000 Gold", "1000000 Gold overall", false)));
 
         String username = userA.getUsername();
-        if (userRepo.findUserAByUsername(username).equals(userA.getUsername())) {
+        if (userRepo.findByUsername(username).isPresent()) {
             throw new IllegalArgumentException("Username already exist");
-        } else {
-            userA.setAchievements(achievements);
-            userA.setId(generateUUID.generateUUID());
-            userA.setPassword(encoder.encode(userA.getPassword()));
-            userRepo.insert(userA);
         }
+
+        userA.setAchievements(achievements);
+        userA.setId(generateUUID.generateUUID());
+        userA.setPassword(encoder.encode(userA.getPassword()));
+        userRepo.insert(userA);
+
         return new UserDTO(userA.getId(),
                 userA.getUsername(),
                 userA.getAchievements(),
@@ -77,7 +78,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void saveUser(UserA userA) {
-        UserA newUserA = userRepo.findUserAByUsername(userA.getUsername())
+        UserA newUserA = userRepo.findByUsername(userA.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("User with this username: " + userA.getUsername() + " not found"));
         newUserA.setId(userA.getId());
         newUserA.setDragonCounter(userA.getDragonCounter());
@@ -88,7 +89,7 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDTO getUser(String username) {
-        UserA optionalUserUnSave = userRepo.findUserAByUsername(username)
+        UserA optionalUserUnSave = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with this username: " + username + " not found"));
         return new UserDTO(optionalUserUnSave.getId(),
                 optionalUserUnSave.getUsername(),

@@ -1,6 +1,5 @@
 package de.survivingwarrior.backend.controller;
 
-import de.survivingwarrior.backend.model.Achievement;
 import de.survivingwarrior.backend.model.UserA;
 import de.survivingwarrior.backend.model.UserDTO;
 import de.survivingwarrior.backend.service.UserService;
