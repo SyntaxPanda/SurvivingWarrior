@@ -1,0 +1,27 @@
+.patchPageFirstPage{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+}
+
+.patch{
+    display: grid;
+    color: white;
+    width: 60vw;
+    height: 100vh;
+    justify-self: center;
+}
+
+.patchFile{
+    display: grid;
+    border: 1px solid white;
+    margin-bottom: 2vh;
+}
+
+.buttonBackPatchPage{
+    display: grid;
+    justify-self: flex-start;
+    height: 8vh;
+    width: 10vw;
+    margin: 1vw;
+}

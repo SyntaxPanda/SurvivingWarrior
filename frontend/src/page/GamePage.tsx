@@ -17,7 +17,6 @@ export default function GamePage() {
     const navigate = useNavigate()
 
     const [games, setGames] = useState<Game[]>([])
-
     const [isOpen, setIsOpen] = useState(false)
 
     const [saveGameModal, setSaveGameModal] = useState(false)
@@ -114,15 +113,12 @@ export default function GamePage() {
     }, [kobolds])
 
     function lostgame() {
-        toast("You are Done!")
         axios.put("/api/user/achievement/reached", user)
             .then(() => axios.delete("/api/character/lost/" + character.id))
             .then(() =>
                 axios.delete("/api/game/lost/" + game.gameId)
                     .then(() =>
-                        setTimeout(() => {
-                            navigate("/start")
-                        }, 2000)
+                            navigate("/death")
                     ))
     }
 

@@ -2,12 +2,14 @@ import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "../css/NewGamePage.css"
+import {toast, ToastContainer} from "react-toastify";
+
 export default function NewGamePage() {
     const [name, setName] =
         useState("")
 
     const [gameName, setGameName] =
-    useState("")
+        useState("")
 
     const navigate = useNavigate();
 
@@ -15,15 +17,15 @@ export default function NewGamePage() {
         setName(es.target.value)
     }
 
-    function setNameOfGame(e: ChangeEvent<HTMLInputElement>){
+    function setNameOfGame(e: ChangeEvent<HTMLInputElement>) {
         setGameName(e.target.value)
         console.log(e.target.value)
     }
 
-    const[username, setUsername] =
+    const [username, setUsername] =
         useState("")
 
-    function getUserName(){
+    function getUserName() {
         axios.get("/api/user/username")
             .then(response => {
                 setUsername(response.data)
@@ -36,33 +38,41 @@ export default function NewGamePage() {
 
     function startNewGame(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-
-        axios.post("/api/character/newchar", {
-            name
-        })
-            .then(response => {
-
-                axios.post('/api/game/new', {
-                    gameName,
-                    characterId: response.data.id,
-                    storyId: "1",
-                    username: username
+        if (name.length >= 4) {
+            if (gameName.length >= 4) {
+                axios.post("/api/character/newchar", {
+                    name
                 })
                     .then(response => {
-                        navigate("/game/" + response.data.gameId);
+
+                        axios.post('/api/game/new', {
+                            gameName,
+                            characterId: response.data.id,
+                            storyId: "1",
+                            username: username
+                        })
+                            .then(response => {
+                                navigate("/game/" + response.data.gameId);
+                            })
+                            .catch(error => {
+                                // Fehlerbehandlung für den zweiten Axios-Aufruf
+                                console.error(error);
+                            });
                     })
                     .catch(error => {
-                        // Fehlerbehandlung für den zweiten Axios-Aufruf
+                        // Fehlerbehandlung für den ersten Axios-Aufruf
                         console.error(error);
                     });
-            })
-            .catch(error => {
-                // Fehlerbehandlung für den ersten Axios-Aufruf
-                console.error(error);
-            });
+            } else {
+                toast("The GameName need 4 or more letters")
+            }
+        } else {
+            toast("The CharacterName need 4 or more letters")
+
+        }
     }
 
-    function backToMenu(){
+    function backToMenu() {
         navigate("/start")
     }
 
@@ -86,9 +96,20 @@ export default function NewGamePage() {
             </form>
 
             <div className={"backButtonNewGamePage"}>
-               <button onClick={backToMenu}>Back</button>
+                <button onClick={backToMenu}>Back</button>
             </div>
-
+            <ToastContainer
+                position="top-center"
+                autoClose={1500}
+                hideProgressBar
+                newestOnTop={false}
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+                theme="dark"
+                style={{width: "20vw"}}
+                limit={1}
+            />
         </div>
     );
 }

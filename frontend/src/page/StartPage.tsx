@@ -74,6 +74,10 @@ export default function StartPage() {
         }
     };
 
+    function goToPatchNotePage(){
+        navigate("/patchNoteLogin")
+    }
+
     return (
         <div className={"startPage"}>
             <div className={"NewGameButton"}>
@@ -85,6 +89,9 @@ export default function StartPage() {
             <div className={"logoutGameButton"}>
                 <div className={"buttonLogout"}>
                     <button onClick={logout}>Logout</button>
+                </div>
+                <div className={"patchButtonStartPage"}>
+                    <button onClick={goToPatchNotePage}>PatchNote</button>
                 </div>
                 <div className={"buttonAchievement"}>
                     <button onClick={getAllAchievements}>Achievements</button>
@@ -120,7 +127,7 @@ export default function StartPage() {
                     {user.achievements.map((achievement, index) => {
                         const frameClassName = achievement.reached ? "rainbowFrame" : "blackFrame";
                         return (
-                            <div className={frameClassName} key={index}>
+                            <div className={frameClassName} key={achievement.id}>
                                 <div className={"achievementContent"}>
                                     {achievement.name} <div className={"infosAchievement"}>{achievement.description}</div>
                                 </div>
