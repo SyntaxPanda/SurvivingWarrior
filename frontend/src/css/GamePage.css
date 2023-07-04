@@ -148,7 +148,6 @@ button {
 
 .storyImage {
     display: grid;
-    border: 1px solid darkred;
     height: 40vh;
     width: 60vw;
     margin-top: 1vh;

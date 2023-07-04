@@ -69,6 +69,7 @@ export default function NewGamePage() {
 
     return (
         <div className={"newGamePage"}>
+
             <form className={"formNewGamePage"} onSubmit={startNewGame}>
                 <div className={"characterNameNewGamePage"}>
                     <input type="text" placeholder={"Character Name"} value={name} onInput={setCharacterName}/>
@@ -83,9 +84,11 @@ export default function NewGamePage() {
                     <button>Start Game</button>
                 </div>
             </form>
+
             <div className={"backButtonNewGamePage"}>
                <button onClick={backToMenu}>Back</button>
             </div>
+
         </div>
     );
 }

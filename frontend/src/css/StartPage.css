@@ -30,6 +30,21 @@
     width: 10vw;
     height: 7vh;
     margin-left: 10vw;
+    grid-template-columns: 35vw 35vw;
+    grid-column: auto;
+}
+
+.buttonLogout{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+}
+
+.buttonAchievement{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+    justify-self: flex-end;
 }
 
 .modalLoadGame {
@@ -155,4 +170,74 @@ svg {
 .cardStartPage:hover .strokeStartPage {
     stroke-dashoffset: 100;
     transition: 0.6s ease-out;
+}
+
+.infosAchievement {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    border: 2px solid;
+    background-image: url("../image/backgroundButtonKobold.jpg");
+    padding: 5px;
+}
+
+.achievementContent:hover .infosAchievement {
+    display: block;
+}
+
+.achievementContent{
+    display: grid;
+    height: 10vh;
+    align-items: center;
+    justify-items: center;
+}
+
+.modalAchievement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    width: 70vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("../image/backgroundButtonKobold.jpg");
+}
+
+.achievementGrid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1vh;
+}
+
+
+.rainbowFrame {
+    border: 2px solid;
+    animation: rainbowBorder 2s linear infinite;
+    color: #61dafb;
+    background-image: url("../image/backgroundButtonKobold.jpg");
+}
+
+@keyframes rainbowBorder {
+    0%   { border-color: red; }
+    14%  { border-color: orange; }
+    28%  { border-color: yellow; }
+    42%  { border-color: green; }
+    57%  { border-color: blue; }
+    71%  { border-color: indigo; }
+    85%  { border-color: violet; }
+    100% { border-color: red; }
+}
+
+.blackFrame {
+    border: 2px solid #ffffff;
+    animation: none;
+    color: #61dafb;
+    background-image: url("../image/backgroundButtonKobold.jpg");
+}
+
+@keyframes rotation {
+    /* Definition der Animationsrotation */
 }

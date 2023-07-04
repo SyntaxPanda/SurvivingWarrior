@@ -9,6 +9,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -120,4 +121,58 @@ class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    @DirtiesContext
+    @WithMockUser()
+    void getUser() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "username": "Tim",
+                                        "password": "123"
+                                        }
+                                        """
+                        ).with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/login")
+                        .with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/details/Tim"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DirtiesContext
+    @WithMockUser()
+    void saveUser() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(
+                                """
+                                        {
+                                        "username": "Tim",
+                                        "password": "123"
+                                        }
+                                        """
+                        ).with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/user/login")
+                        .with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/user/achievement/reached")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                        "username": "Tim",
+                        "dragonCounter": 1
+                        }
+                        """).with(csrf()))
+                .andExpect(status().isOk());
+    }
 }

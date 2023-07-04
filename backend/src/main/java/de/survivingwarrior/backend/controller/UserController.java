@@ -44,4 +44,16 @@ public class UserController {
         SecurityContextHolder.clearContext();
         return "Ur logout";
     }
+
+
+    //Test schreiben
+    @GetMapping("/details/{username}")
+    public UserDTO getUser(@PathVariable String username){
+        return userService.getUser(username);
+    }
+
+    @PutMapping("/achievement/reached")
+    public void saveUser(@RequestBody UserA userA){
+        userService.saveUser(userA);
+    }
 }
