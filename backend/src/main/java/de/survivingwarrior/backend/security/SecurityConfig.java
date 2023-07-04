@@ -30,9 +30,10 @@ public class SecurityConfig {
         //new code for Spring 3.1 and newer (not sure if 3.0.6 is supported as well)
 
         return http
-                .csrf(AbstractHttpConfigurer::disable)
-                        //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        //.csrfTokenRequestHandler(requestHandler))
+                .csrf(csrf -> csrf
+                //.csrf(AbstractHttpConfigurer::disable)
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .csrfTokenRequestHandler(requestHandler))
 
                 .httpBasic(basic -> basic.authenticationEntryPoint(
                         (request, response, authException) ->
