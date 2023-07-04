@@ -42,15 +42,10 @@ class CharacterControllerTest {
                                     "name": "Hans",
                                     "level": 1,
                                     "exp": 0,
-                                    "skillPoints": 0,
-                                    "inventory": [
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null
-                                    ]
+                                    "skillPoints": 10,
+                                    "healPower": 5,
+                                    "pots": 5,
+                                    "maxPots": 5
                                 }"""
                 )).andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(jsonPath("$.life").isNotEmpty())
@@ -87,15 +82,10 @@ class CharacterControllerTest {
                                     "name": "Hans",
                                     "level": 1,
                                     "exp": 0,
-                                    "skillPoints": 0,
-                                    "inventory": [
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null
-                                    ]
+                                    "skillPoints": 10,
+                                    "healPower": 5,
+                                    "pots": 5,
+                                    "maxPots": 5
                                 }"""
                 )).andExpect(jsonPath("$.id").value(character.getId()))
                 .andExpect(jsonPath("$.life").value(character.getLife()))
