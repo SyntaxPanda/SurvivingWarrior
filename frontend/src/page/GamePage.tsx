@@ -131,19 +131,27 @@ export default function GamePage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.life])
 
-    function allEnemyDead() {
+    useEffect(()=>{
+        if (character.pots < character.maxPots) {
+            setCharacter({...character, pots: character.pots + 1})
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user.goldCounter])
+
+    useEffect(()=>{
         if (story.id === "10") {
             setUser({...user, dragonCounter: user.dragonCounter + 1})
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user.goldCounter])
+
+    function allEnemyDead() {
         setUser({...user, goldCounter: user.goldCounter + kobold1.gold + kobold2.gold + kobold3.gold})
         setCharacter({
             ...character,
             gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
             exp: character.exp + (3 * kobolds.length)
         })
-        if (character.pots < character.maxPots) {
-            setCharacter({...character, pots: character.pots + 1})
-        }
         toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
         setStoryCount(storyCount + 1)
     }
@@ -225,7 +233,7 @@ export default function GamePage() {
     function onClickGetNextStoryChapterOption3() {
         if (story.option3 === "HealPot") {
             if (kobold1.life > 0) {
-                if ((character.life + character.healPower) <= character.maxLife) {
+                if ((character.life + character.healPower) <= character.maxLife && character.pots > 0) {
                     setCharacter({
                         ...character,
                         life: (character.life + character.healPower) - kobold1.damage,
@@ -236,11 +244,11 @@ export default function GamePage() {
                 } else {
                     setCharacter({...character, life: character.life - kobold1.damage})
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
-                    toast("You have max life and cant heal.")
+                    toast("You have max life or not more Pots and cant heal.")
 
                 }
             } else if (kobold2.life > 0) {
-                if ((character.life + character.healPower) <= character.maxLife) {
+                if ((character.life + character.healPower) <= character.maxLife && character.pots > 0) {
                     setCharacter({
                         ...character,
                         life: (character.life + character.healPower) - kobold2.damage,
@@ -251,10 +259,10 @@ export default function GamePage() {
                 } else {
                     setCharacter({...character, life: character.life - kobold2.damage})
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
-                    toast("You have max life and cant heal.")
+                    toast("You have max life or no more Pots and cant heal.")
                 }
             } else if (kobold3.life > 0) {
-                if ((character.life + character.healPower) <= character.maxLife) {
+                if ((character.life + character.healPower) <= character.maxLife && character.pots > 0) {
                     setCharacter({
                         ...character,
                         life: (character.life + character.healPower) - kobold3.damage,
@@ -265,7 +273,7 @@ export default function GamePage() {
                 } else {
                     setCharacter({...character, life: character.life - kobold3.damage})
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
-                    toast("You have max life and cant heal.")
+                    toast("You have max life or no more Pots and cant heal.")
                 }
             }
         } else if (story.option3 === "Dont buy something") {
@@ -390,14 +398,20 @@ export default function GamePage() {
         }
     }
 
+    useEffect(()=>{
+        if(character.pots < character.maxPots){
+            setCharacter({...character, pots: character.pots +1})
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [getLevelUp])
+
     function getLevelUp() {
         if (character.exp >= 10) {
             setCharacter({
                 ...character,
                 level: character.level + 1,
                 exp: character.exp - 10,
-                skillPoints: character.skillPoints + 5,
-                pots: character.pots + 1
+                skillPoints: character.skillPoints + 5
             })
             setUser({...user, levelCounter: user.levelCounter + 1})
         }
@@ -711,7 +725,7 @@ export default function GamePage() {
                     </div>
                     <div className={"button3"}>
                         <button className={"buttonHover"}
-                                onClick={onClickGetNextStoryChapterOption3}>{story.option3} {character.pots.toLocaleString()}/{character.maxPots.toLocaleString()}</button>
+                                onClick={onClickGetNextStoryChapterOption3}>{story.option3} {story.option3 === "HealPot" && `${character.pots.toLocaleString()}/${character.maxPots.toLocaleString()}`}</button>
                     </div>
                 </div>
             </div>
