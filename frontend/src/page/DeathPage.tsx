@@ -12,7 +12,7 @@ export default function DeathPage() {
     }, [])
 
     function deathToMenu() {
-        toast("You are Death! Game Over!")
+        toast("You are dead! Game Over!")
         setTimeout(() => {
             nav("/start")
         }, 3500)
