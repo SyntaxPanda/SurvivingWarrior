@@ -9,6 +9,7 @@ import LoginPage from "./page/LoginPage";
 import ProtectedRoutes from "./page/ProtectedRoutes";
 import RegisterPage from "./page/RegisterPage";
 import FirstPage from "./page/FirstPage";
+import DeathPage from "./page/DeathPage";
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
                 <Route path={"/register"} element={<RegisterPage/>}/>
                 <Route path={"/login"} element={<LoginPage login={login}/>}/>
                 <Route element={<ProtectedRoutes user={user}/>}>
+                    <Route path={"/death"} element={<DeathPage/>}/>
                     <Route path={"/start"} element={<StartPage/>}/>
                     <Route path={"/newgame"} element={<NewGamePage/>}/>
                     <Route path={"/game/:id"} element={<GamePage/>}/>
