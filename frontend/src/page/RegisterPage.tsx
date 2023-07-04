@@ -18,23 +18,27 @@ export default function RegisterPage() {
             if (/[A-Z]/.test(password)) {
                 if (/[a-z]/.test(password)) {
                     if (/[!@#$%^&*]/.test(password)) {
-                        axios.post("/api/user/register", {
-                            username,
-                            password
-                        })
-                            .then(() => {
-                                navigate("/login")
+                        if (username.length >= 4) {
+                            axios.post("/api/user/register", {
+                                username,
+                                password
                             })
-                    }else{
+                                .then(() => {
+                                    navigate("/login")
+                                })
+                        } else {
+                            toast("Username need 4 or more letters.")
+                        }
+                    } else {
                         toast('Das Passwort muss mindestens ein Sonderzeichen enthalten (!@#$%^&*).');
                     }
-                }else{
+                } else {
                     toast('Das Passwort muss mindestens einen Kleinbuchstaben enthalten.');
                 }
-            }else{
+            } else {
                 toast('Das Passwort muss mindestens einen Großbuchstaben enthalten.');
             }
-        }else{
+        } else {
             toast('Das Passwort muss mindestens 8 Zeichen lang sein.');
         }
     }
@@ -44,7 +48,7 @@ export default function RegisterPage() {
     }
 
     function setPasswordHandler(e: ChangeEvent<HTMLInputElement>) {
-            setPassword(e.target.value);
+        setPassword(e.target.value);
     }
 
     function backOnClickHandler() {
@@ -68,15 +72,14 @@ export default function RegisterPage() {
                 <button onClick={backOnClickHandler}>Back</button>
             </div>
             <ToastContainer
-                position="bottom-left"
-                autoClose={1300}
-                hideProgressBar
+                position="top-center"
+                autoClose={2000}
                 newestOnTop={false}
                 rtl={false}
                 pauseOnFocusLoss
                 pauseOnHover
-                theme="dark"
-                style={{width: "13vw"}}
+                theme="light"
+                style={{width: "20vw"}}
             />
         </div>
     );

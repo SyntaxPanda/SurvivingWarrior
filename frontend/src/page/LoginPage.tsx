@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import "../css/LoginPage.css"
+import {toast, ToastContainer} from "react-toastify";
 
 type Props = {
     login: (username: string, password: string) => Promise<void>
@@ -19,7 +20,10 @@ export default function LoginPage(props: Props) {
             .then(() => {
                 navigate("/start")
             })
-            .catch(error => console.error(error))
+            .catch(() => {
+                toast("Username or Password false")
+                setPassword("")
+            })
     }
 
     function onInputPasswordHandler(e: ChangeEvent<HTMLInputElement>) {
@@ -50,6 +54,17 @@ export default function LoginPage(props: Props) {
             <div className={"backButtonLoginPage"}>
                 <button onClick={backMenuHandler}>Back</button>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                newestOnTop={false}
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+                theme="colored"
+                style={{width: "20vw"}}
+                limit={1}
+            />
         </div>
     );
 }
