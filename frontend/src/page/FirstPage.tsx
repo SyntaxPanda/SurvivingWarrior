@@ -13,6 +13,10 @@ export default function FirstPage() {
         navigate("/register")
     }
 
+    function onClickHandlerPatchNotesFirstPage(){
+        navigate("/patchNotes")
+    }
+
     return (
         <div className={"firstPage"}>
             <div className={"buttonGroup"}>
@@ -21,6 +25,9 @@ export default function FirstPage() {
                 </div>
                 <div className={"registerButton"}>
                     <button onClick={onClickRegisterHandler}>Register</button>
+                </div>
+                <div className={"patchNotesButton"}>
+                    <button onClick={onClickHandlerPatchNotesFirstPage}>Patch Notes</button>
                 </div>
             </div>
         </div>

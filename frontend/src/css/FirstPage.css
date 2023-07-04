@@ -9,21 +9,30 @@
 
 .buttonGroup{
     display: grid;
-    grid-template-rows: 50vh 50vh;
+    grid-template-rows: 33vh 33vh 33vh;
     justify-items: center;
     align-items: center;
 }
 
 .loginButton{
     display: grid;
-    align-self: center;
+    align-self: flex-end;
     justify-self: flex-start;
     margin-left: 10vw;
     width: 10vw;
-    height: 7vh;
+    height: 8vh;
 }
 
 .registerButton{
+    align-self: center;
+    justify-self: flex-start;
+    margin-left: 10vw;
+    display: grid;
+    width: 10vw;
+    height: 8vh;
+}
+
+.patchNotesButton{
     align-self: flex-start;
     justify-self: flex-start;
     margin-left: 10vw;
