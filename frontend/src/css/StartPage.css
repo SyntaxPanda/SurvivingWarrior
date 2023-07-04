@@ -30,8 +30,16 @@
     width: 10vw;
     height: 7vh;
     margin-left: 10vw;
-    grid-template-columns: 35vw 35vw;
+    grid-template-columns: 20vw 20vw 30vw;
     grid-column: auto;
+}
+
+.patchButtonStartPage{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+    align-self: center;
+    margin-left: 10vw;
 }
 
 .buttonLogout{
