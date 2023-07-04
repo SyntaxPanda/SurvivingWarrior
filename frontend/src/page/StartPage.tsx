@@ -120,7 +120,7 @@ export default function StartPage() {
                     {user.achievements.map((achievement, index) => {
                         const frameClassName = achievement.reached ? "rainbowFrame" : "blackFrame";
                         return (
-                            <div className={frameClassName} key={index}>
+                            <div className={frameClassName} key={achievement.id}>
                                 <div className={"achievementContent"}>
                                     {achievement.name} <div className={"infosAchievement"}>{achievement.description}</div>
                                 </div>
