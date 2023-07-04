@@ -10,6 +10,7 @@ import ProtectedRoutes from "./page/ProtectedRoutes";
 import RegisterPage from "./page/RegisterPage";
 import FirstPage from "./page/FirstPage";
 import DeathPage from "./page/DeathPage";
+import PatchNotes from "./page/PatchNotes";
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
                 <Route path={"/"} element={<FirstPage/>}/>
                 <Route path={"/register"} element={<RegisterPage/>}/>
                 <Route path={"/login"} element={<LoginPage login={login}/>}/>
+                <Route path={"/patchNotes"} element={<PatchNotes/>}/>
                 <Route element={<ProtectedRoutes user={user}/>}>
                     <Route path={"/death"} element={<DeathPage/>}/>
                     <Route path={"/start"} element={<StartPage/>}/>
