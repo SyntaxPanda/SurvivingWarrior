@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import "../css/PatchNotes.css"
+import "../css/PatchNotePageLogin.css"
 import usePatch from "../hooks/usePatch";
 
 export default function PatchNotePageLogin() {
@@ -13,13 +13,13 @@ export default function PatchNotePageLogin() {
     }
 
     return (
-        <div className={"patchPageFirstPage"}>
-            <div className={"buttonBackPatchPage"}>
+        <div className={"patchPageStartPage"}>
+            <div className={"buttonBackPatchPageStartPage"}>
                 <button onClick={backToStartPage}>Back</button>
             </div>
-            <div className={"patch"}>
+            <div className={"patchStartPage"}>
                 {patchNotes.reverse().map((patch) => (
-                    <div className={"patchFile"}>
+                    <div className={"patchFileStartPage"}>
                         <h1>Version: {patch.version}</h1>
                         <h2>PatchNote: </h2>{patch.description.split('-').map((item, index) => (
                         <p key={index}>{item.trim()}</p>
