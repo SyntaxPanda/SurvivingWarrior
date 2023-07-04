@@ -10,7 +10,7 @@ export default function usePatch() {
     },
         {
             version: "0.2", description: "· Now Player can see a button for PatchNotes\n" +
-                "-· PatchNote site with new Patches (still in progress)\n" +
+                "-· PatchNote site with new Patches (finish) ot the FirstPage and StartPage\n" +
                 "-· Fix text notification at DeathPage from \"Death\" to \"dead\"", date: "04.07.2023"
         }]
 
