@@ -19,6 +19,8 @@ public class Character {
     private int life;
     private int maxLife;
     private int damage;
+    private int healPower;
+    private int pots;
+    private int maxPots;
     private int gold;
-    private Item[] inventory = new Item[6];
 }

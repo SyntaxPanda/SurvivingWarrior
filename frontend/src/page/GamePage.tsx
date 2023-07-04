@@ -23,6 +23,7 @@ export default function GamePage() {
 
     const [character, setCharacter] =
         useState<Character>({
+            maxPots: 0,
             maxLife: 0,
             skillPoints: 0,
             damage: 0,
@@ -32,7 +33,8 @@ export default function GamePage() {
             level: 0,
             life: 1,
             name: "",
-            item: []
+            healPower: 0,
+            pots: 0
         })
 
     const [kobold1, setKobold1] =
@@ -118,7 +120,7 @@ export default function GamePage() {
             .then(() =>
                 axios.delete("/api/game/lost/" + game.gameId)
                     .then(() =>
-                            navigate("/death")
+                        navigate("/death")
                     ))
     }
 
@@ -139,6 +141,9 @@ export default function GamePage() {
             gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
             exp: character.exp + (3 * kobolds.length)
         })
+        if (character.pots < character.maxPots) {
+            setCharacter({...character, pots: character.pots + 1})
+        }
         toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
         setStoryCount(storyCount + 1)
     }
@@ -218,15 +223,16 @@ export default function GamePage() {
     }
 
     function onClickGetNextStoryChapterOption3() {
-        if (story.option3 === "Item") {
+        if (story.option3 === "HealPot") {
             if (kobold1.life > 0) {
-                if (character.life < character.maxLife) {
+                if ((character.life + character.healPower) <= character.maxLife) {
                     setCharacter({
                         ...character,
-                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold1.damage
+                        life: (character.life + character.healPower) - kobold1.damage,
+                        pots: character.pots - 1
                     })
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
-                    toast("You heal ur self for hp.")
+                    toast("You heal ur self for " + character.healPower + " hp.")
                 } else {
                     setCharacter({...character, life: character.life - kobold1.damage})
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
@@ -234,26 +240,28 @@ export default function GamePage() {
 
                 }
             } else if (kobold2.life > 0) {
-                if (character.life < character.maxLife) {
+                if ((character.life + character.healPower) <= character.maxLife) {
                     setCharacter({
                         ...character,
-                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold2.damage
+                        life: (character.life + character.healPower) - kobold2.damage,
+                        pots: character.pots - 1
                     })
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
-                    toast("You heal ur self for " + 3 + " hp.")
+                    toast("You heal ur self for " + character.healPower + " hp.")
                 } else {
                     setCharacter({...character, life: character.life - kobold2.damage})
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
                     toast("You have max life and cant heal.")
                 }
             } else if (kobold3.life > 0) {
-                if (character.life < character.maxLife) {
+                if ((character.life + character.healPower) <= character.maxLife) {
                     setCharacter({
                         ...character,
-                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold3.damage
+                        life: (character.life + character.healPower) - kobold3.damage,
+                        pots: character.pots - 1
                     })
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
-                    toast("You heal ur self for " + 3 + " hp.")
+                    toast("You heal ur self for " + character.healPower + " hp.")
                 } else {
                     setCharacter({...character, life: character.life - kobold3.damage})
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
@@ -268,17 +276,8 @@ export default function GamePage() {
     function saveGame() {
         axios.put("/api/user/achievement/reached", user)
             .catch(error => console.error(error))
-        axios.put("/api/character/" + character.id, {
-            name: character.name,
-            id: character.id,
-            level: character.level,
-            exp: character.exp,
-            skillPoints: character.skillPoints,
-            life: character.life,
-            maxLife: character.maxLife,
-            damage: character.damage,
-            gold: character.gold
-        }).catch(error => console.log(error))
+        axios.put("/api/character/" + character.id, character
+        ).catch(error => console.log(error))
         axios.put("/api/game/save", {
             gameId: game.gameId,
             gameName: game.gameName,
@@ -397,7 +396,8 @@ export default function GamePage() {
                 ...character,
                 level: character.level + 1,
                 exp: character.exp - 10,
-                skillPoints: character.skillPoints + 5
+                skillPoints: character.skillPoints + 5,
+                pots: character.pots + 1
             })
             setUser({...user, levelCounter: user.levelCounter + 1})
         }
@@ -414,6 +414,25 @@ export default function GamePage() {
                 ...character,
                 life: character.life + 1,
                 maxLife: character.maxLife + 1,
+                skillPoints: character.skillPoints - 1
+            })
+        }
+    }
+
+    function increaseCharacterHealPower() {
+        if (character.skillPoints > 0) {
+            setCharacter({
+                ...character, healPower: character.healPower + 1,
+                skillPoints: character.skillPoints - 1
+            })
+        }
+    }
+
+    function increaseCharacterMaxPots() {
+        if (character.skillPoints > 0) {
+            setCharacter({
+                ...character, pots: character.pots + 1,
+                maxPots: character.maxPots + 1,
                 skillPoints: character.skillPoints - 1
             })
         }
@@ -692,7 +711,7 @@ export default function GamePage() {
                     </div>
                     <div className={"button3"}>
                         <button className={"buttonHover"}
-                                onClick={onClickGetNextStoryChapterOption3}>{story.option3}</button>
+                                onClick={onClickGetNextStoryChapterOption3}>{story.option3} {character.pots.toLocaleString()}/{character.maxPots.toLocaleString()}</button>
                     </div>
                 </div>
             </div>
@@ -718,7 +737,7 @@ export default function GamePage() {
                 </div>
                 <div className={"characterLifeBox"}>
                     <div className={"characterLifeString"}>
-                        Character-Life:
+                        Life:
                     </div>
                     <div className={"characterLifeStat"}>
                         {character.life}
@@ -729,13 +748,35 @@ export default function GamePage() {
                 </div>
                 <div className={"characterDmgBox"}>
                     <div className={"characterDmgString"}>
-                        Character-Damage:
+                        Damage:
                     </div>
                     <div className={"characterDmg"}>
                         {character.damage}
                     </div>
                     <div className={"buttonDmgUp"}>
                         <button onClick={increaseCharacterDmg}>+</button>
+                    </div>
+                </div>
+                <div className={"characterHealPowerBox"}>
+                    <div className={"characterHealPowerString"}>
+                        HealPower:
+                    </div>
+                    <div className={"characterHealPower"}>
+                        {character.healPower}
+                    </div>
+                    <div className={"buttonHealPowerUp"}>
+                        <button onClick={increaseCharacterHealPower}>+</button>
+                    </div>
+                </div>
+                <div className={"characterPotBox"}>
+                    <div className={"characterDmgString"}>
+                        MaximalPots:
+                    </div>
+                    <div className={"characterPot"}>
+                        {character.maxPots}
+                    </div>
+                    <div className={"buttonPotsUp"}>
+                        <button onClick={increaseCharacterMaxPots}>+</button>
                     </div>
                 </div>
                 <div className={"characterGoldBox"}>

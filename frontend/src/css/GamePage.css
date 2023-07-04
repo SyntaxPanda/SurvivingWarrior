@@ -312,6 +312,66 @@ button {
     width: 1vw;
 }
 
+.characterPotBox {
+    display: grid;
+    grid-template-columns: 12vw 4vw 4vw;
+    border: 1px solid grey;
+    margin-top: 1vh;
+    height: 5vh;
+}
+
+.characterPotString {
+    display: grid;
+    justify-self: flex-start;
+    align-self: center;
+    margin-left: 1vw;
+}
+
+.characterPot {
+    display: grid;
+    justify-self: center;
+    align-self: center;
+}
+
+.buttonPotsUp {
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    height: 3vh;
+    width: 1vw;
+}
+
+.characterHealPowerBox {
+    display: grid;
+    grid-template-columns: 12vw 4vw 4vw;
+    border: 1px solid grey;
+    margin-top: 1vh;
+    height: 5vh;
+}
+
+.characterHealPowerString {
+    display: grid;
+    justify-self: flex-start;
+    align-self: center;
+    margin-left: 1vw;
+}
+
+.characterHealPower {
+    display: grid;
+    justify-self: center;
+    align-self: center;
+}
+
+.buttonHealPowerUp {
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    height: 3vh;
+    width: 1vw;
+}
+
+
+
 .characterGoldBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;

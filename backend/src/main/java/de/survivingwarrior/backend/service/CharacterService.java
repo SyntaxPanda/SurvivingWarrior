@@ -18,14 +18,16 @@ public class CharacterService {
     private final Random random = new Random();
 
     public Character newGameCharacterName(Character character) {
-        Item[] inventory = new Item[6];
         character.setId(generateUUID.generateUUID());
-        character.setInventory(inventory);
         character.setGold(random.nextInt(10) + 1);
-        character.setDamage(random.nextInt(5) + 4);
-        character.setLife(random.nextInt(26) + 41);
+        character.setDamage(4);
+        character.setLife(50);
         character.setLevel(1);
+        character.setSkillPoints(10);
         character.setMaxLife(character.getLife());
+        character.setPots(5);
+        character.setHealPower(5);
+        character.setMaxPots(character.getPots());
         return characterRepo.insert(character);
     }
 
