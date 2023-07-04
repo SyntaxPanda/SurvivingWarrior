@@ -17,7 +17,6 @@ export default function GamePage() {
     const navigate = useNavigate()
 
     const [games, setGames] = useState<Game[]>([])
-
     const [isOpen, setIsOpen] = useState(false)
 
     const [saveGameModal, setSaveGameModal] = useState(false)
