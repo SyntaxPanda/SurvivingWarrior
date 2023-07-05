@@ -218,8 +218,25 @@ export default function GamePage() {
                 pots: character.maxPots
             })
             setGame({...game, storyCounter: game.storyCounter + 1})
-        }else if(story.option1 === "Menu"){
+        } else if (story.option1 === "Menu") {
             saveGame()
+        }else if (story.option1 === "Get 3 MaxPots") {
+            let price = Math.round(Math.floor(Math.random() * (70 - 1 + 45)))
+            if (character.gold >= price) {
+                setCharacter({...character, maxPots: character.maxPots + 3, gold: character.gold - price})
+                toast("U got 3 maxPots. U pay " + price + " Gold for this")
+                setGame({...game, storyCounter: game.storyCounter + 1})
+            } else {
+                toast("U have not enough Gold to buy this for " + price + " Gold")
+            }
+        }else if(story.option1 === "Get 4 damage"){
+            let price = Math.round(Math.floor(Math.random() * (80 - 1 + 55)))
+            if(character.gold >= price){
+                setCharacter({...character, gold: character.gold - price, damage: character.damage + 4})
+                toast("U got 4 more dmg for " + price + " Gold.")
+            }else{
+                toast("U have not enough Gold to buy this for " + price + " Gold")
+            }
         }
     }
 
@@ -255,8 +272,25 @@ export default function GamePage() {
                 pots: character.maxPots
             })
             setGame({...game, storyCounter: game.storyCounter + 1})
-        }else if(story.option2 === "Menu"){
+        } else if (story.option2 === "Menu") {
             saveGame()
+        } else if (story.option2 === "Fill ur Pots with lava") {
+            let price = Math.round(Math.floor(Math.random() * (70 - 1 + 45)))
+            if (character.gold >= price) {
+                setCharacter({...character, healPower: character.healPower + 5, gold: character.gold - price})
+                toast("Ur potion got a hellfire color. U pay " + price + " Gold for this")
+                setGame({...game, storyCounter: game.storyCounter + 1})
+            } else {
+                toast("U have not enough Gold to buy this for " + price + " Gold")
+            }
+        }else if(story.option2 === "Fill all ur Potions"){
+            let price = Math.round(Math.floor(Math.random() * (120 - 1 + 85)))
+            if(character.gold >= price){
+                setCharacter({...character, gold: character.gold - price, pots: character.maxPots})
+                toast("U fill up all potions for " + price + " Gold")
+            }else{
+                toast("U have not enough Gold to buy this for " + price + " Gold")
+            }
         }
     }
 
@@ -342,7 +376,7 @@ export default function GamePage() {
                 pots: character.maxPots
             })
             setGame({...game, storyCounter: game.storyCounter + 1})
-        }else if(story.option3 === "Menu"){
+        } else if (story.option3 === "Menu") {
             saveGame()
         }
     }
