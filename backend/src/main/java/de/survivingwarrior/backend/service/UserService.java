@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,5 +102,11 @@ public class UserService implements UserDetailsService {
                 optionalUserUnSave.getGoldCounter(),
                 optionalUserUnSave.getSkillPoints(),
                 optionalUserUnSave.getAchievementPoints());
+    }
+
+    public List<UserDTO> getAllUser() {
+        return userRepo.findAll().stream()
+                .map(user -> new UserDTO(user.getId(), user.getUsername(), user.getAchievements() , user.getDragonCounter(), user.getLevelCounter(), user.getGoldCounter(), user.getSkillPoints(), user.getAchievementPoints()))
+                .toList();
     }
 }
