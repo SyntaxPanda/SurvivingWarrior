@@ -20,10 +20,8 @@ export default function usePatch() {
                 "-· Character can now choose his own way with 10 start SkillPoints.", date: "04.07.2023"
         },
         {
-            version: "0.4", description: "· Hotfix for HealPot.\n" +
-                "-· \n" +
-                "-· \n" +
-                "-· ", date: "05.07.2023"
+            version: "0.4", description: "· Hotfix for HealPot."
+                , date: "05.07.2023"
         }]
 
     return {patchNotes}
