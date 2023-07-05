@@ -64,7 +64,11 @@ export default function GamePage() {
         useState<Game>({username: "", gameId: "", gameName: "", characterId: "", storyId: ""})
 
     const [user, setUser] =
-        useState<UserDTO>({dragonCounter: 0, levelCounter: 0, goldCounter: 0, achievements: [], id: "", userName: ""})
+        useState<UserDTO>({
+            achievementPoints: 0,
+            skillPoints: 0,
+            dragonCounter: 0, levelCounter: 0, goldCounter: 0, achievements: [], id: "", userName: ""
+        })
 
     const params = useParams()
     const gameId: string | undefined = params.id;
@@ -78,6 +82,7 @@ export default function GamePage() {
         let charId = ""
         let storyId = ""
         let username = ""
+        let userSkillpoints = 0
         axios.get("/api/game/" + gameId)
             .then(response => {
                 setGame(response.data);
@@ -88,10 +93,27 @@ export default function GamePage() {
             .then(() => axios.get("/api/user/details/" + username))
             .then(r => {
                 setUser(r.data)
+                userSkillpoints = r.data.skillPoints
             })
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
-                setCharacter(response.data);
+                if(storyId === "1"){
+                    setCharacter({...character,
+                        skillPoints: response.data.skillPoints + userSkillpoints,
+                        life: response.data.life,
+                        maxLife: response.data.maxLife,
+                        damage: response.data.damage,
+                        pots: response.data.pots,
+                        maxPots: response.data.maxPots,
+                        level: response.data.level,
+                        exp: response.data.exp,
+                        id: response.data.id,
+                        gold: response.data.gold,
+                        healPower: response.data.healPower,
+                        name: response.data.name})
+                }else{
+                    setCharacter(response.data);
+                }
             })
             .then(() => axios.get("/api/story/" + storyId))
             .then(response => {
@@ -131,7 +153,7 @@ export default function GamePage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.life])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (story.id === "10") {
             setUser({...user, dragonCounter: user.dragonCounter + 1})
         }
@@ -192,6 +214,11 @@ export default function GamePage() {
             } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
+        }else if(story.option1 === "10 MaxLife"){
+            setCharacter({...character, maxLife: character.maxLife +10,
+                life: character.maxLife,
+                pots: character.maxPots})
+            setStoryCount(storyCount + 1)
         }
     }
 
@@ -220,6 +247,11 @@ export default function GamePage() {
             } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
+        }else if(story.option2 === "10 Damage"){
+            setCharacter({...character, damage: character.damage + 10,
+                life: character.maxLife,
+                pots: character.maxPots})
+            setStoryCount(storyCount + 1)
         }
     }
 
@@ -270,6 +302,12 @@ export default function GamePage() {
                 }
             }
         } else if (story.option3 === "Dont buy something") {
+            setStoryCount(storyCount + 1)
+        }else if(story.option3 === "5 MaxLife/Damage"){
+            setCharacter({...character, maxLife: character.maxLife + 5,
+                damage: character.damage + 5,
+                life: character.maxLife,
+                pots: character.maxPots})
             setStoryCount(storyCount + 1)
         }
     }
@@ -327,6 +365,17 @@ export default function GamePage() {
     const story8 = ["8"]
     const story9 = ["9-1", "9-2", "9-3", "9-4"]
     const story10 = ["10-1", "10-2", "10-3", "10-4"]
+    const story1Finish = ["2"]
+    const story11 = ["11-1", "11-2", "11-3", "11-4"]
+    const story12 = ["12-1", "12-2", "12-3", "12-4"]
+    const story13 = ["13-1", "13-2", "13-3", "13-4"]
+    const story14 = ["14"]
+    const story15 = ["15-1", "15-2", "15-3", "15-4"]
+    const story16 = ["16-1", "16-2", "16-3", "16-4"]
+    const story17 = ["17-1", "17-2", "17-3", "17-4"]
+    const story18 = ["18"]
+    const story19 = ["19-1", "19-2", "19-3", "19-4"]
+    const story20 = ["20-1", "20-2", "20-3", "20-4"]
 
 
     const [storyCount, setStoryCount] = useState(0)
@@ -388,12 +437,45 @@ export default function GamePage() {
         } else if (storyCount === 10) {
             randomIndex = Math.floor(Math.random() * story10.length);
             return story10[randomIndex];
+        }else if (storyCount === 11) {
+            randomIndex = Math.floor(Math.random() * story10.length);
+            return story1Finish[randomIndex];
+        }else if (storyCount === 12) {
+            randomIndex = Math.floor(Math.random() * story11.length);
+            return story11[randomIndex];
+        }else if (storyCount === 13) {
+            randomIndex = Math.floor(Math.random() * story12.length);
+            return story12[randomIndex];
+        }else if (storyCount === 14) {
+            randomIndex = Math.floor(Math.random() * story13.length);
+            return story13[randomIndex];
+        }else if (storyCount === 15) {
+            randomIndex = Math.floor(Math.random() * story14.length);
+            return story14[randomIndex];
+        }else if (storyCount === 16) {
+            randomIndex = Math.floor(Math.random() * story15.length);
+            return story15[randomIndex];
+        }else if (storyCount === 17) {
+            randomIndex = Math.floor(Math.random() * story16.length);
+            return story16[randomIndex];
+        }else if (storyCount === 18) {
+            randomIndex = Math.floor(Math.random() * story17.length);
+            return story17[randomIndex];
+        }else if (storyCount === 19) {
+            randomIndex = Math.floor(Math.random() * story18.length);
+            return story18[randomIndex];
+        }else if (storyCount === 20) {
+            randomIndex = Math.floor(Math.random() * story19.length);
+            return story19[randomIndex];
+        }else if (storyCount === 21) {
+            randomIndex = Math.floor(Math.random() * story20.length);
+            return story20[randomIndex];
         }
     }
 
-    useEffect(()=>{
-        if(character.pots < character.maxPots){
-            setCharacter({...character, pots: character.pots +1})
+    useEffect(() => {
+        if (character.pots < character.maxPots) {
+            setCharacter({...character, pots: character.pots + 1})
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [character.level])
@@ -460,19 +542,23 @@ export default function GamePage() {
         if (user.achievements[0]?.reached === false) {
             if (character.level >= 5) {
                 user.achievements[0].reached = true;
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached lvl5 Achievement")
             }
         } else if (user.achievements[1]?.reached === false) {
             if (character.level >= 10) {
                 user.achievements[1].reached = true;
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[2]?.reached === false) {
             if (character.level >= 15) {
                 user.achievements[2].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[3]?.reached === false) {
             if (character.level >= 20) {
                 user.achievements[3].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -486,19 +572,23 @@ export default function GamePage() {
         if (user.achievements[4]?.reached === false) {
             if (character.gold >= 100) {
                 user.achievements[4].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 100 Gold Achievement")
             }
         } else if (user.achievements[5]?.reached === false) {
             if (character.gold >= 150) {
                 user.achievements[5].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[6]?.reached === false) {
             if (character.gold >= 200) {
                 user.achievements[6].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[7]?.reached === false) {
             if (character.gold >= 250) {
                 user.achievements[7].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -512,19 +602,23 @@ export default function GamePage() {
         if (user.achievements[8]?.reached === false) {
             if (user.levelCounter >= 100) {
                 user.achievements[8].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 100 lvl Achievement")
             }
         } else if (user.achievements[9]?.reached === false) {
             if (user.levelCounter >= 250) {
                 user.achievements[9].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[10]?.reached === false) {
             if (user.levelCounter >= 500) {
                 user.achievements[10].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[11]?.reached === false) {
             if (user.levelCounter >= 1000) {
                 user.achievements[11].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -538,19 +632,23 @@ export default function GamePage() {
         if (user.achievements[12]?.reached === false) {
             if (user.dragonCounter >= 1) {
                 user.achievements[12].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 1 Dragon kill Achievement")
             }
         } else if (user.achievements[13]?.reached === false) {
             if (user.dragonCounter >= 5) {
                 user.achievements[13].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[14]?.reached === false) {
             if (user.dragonCounter >= 10) {
                 user.achievements[14].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[15]?.reached === false) {
             if (user.dragonCounter >= 25) {
                 user.achievements[15].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -564,19 +662,23 @@ export default function GamePage() {
         if (user.achievements[16]?.reached === false) {
             if (character.damage >= 15) {
                 user.achievements[16].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 15 dmg Achievement")
             }
         } else if (user.achievements[17]?.reached === false) {
             if (character.damage >= 20) {
                 user.achievements[17].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[18]?.reached === false) {
             if (character.damage >= 30) {
                 user.achievements[18].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[19]?.reached === false) {
             if (character.damage >= 50) {
                 user.achievements[19].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -590,23 +692,28 @@ export default function GamePage() {
         if (user.achievements[20]?.reached === false) {
             if (user.goldCounter >= 10000) {
                 user.achievements[20].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 10k Gold Achievement")
             }
         } else if (user.achievements[21]?.reached === false) {
             if (user.goldCounter >= 50000) {
                 user.achievements[21].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[22]?.reached === false) {
             if (user.goldCounter >= 100000) {
                 user.achievements[22].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[23]?.reached === false) {
             if (user.goldCounter >= 500000) {
                 user.achievements[23].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[24]?.reached === false) {
             if (user.goldCounter >= 1000000) {
                 user.achievements[24].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
