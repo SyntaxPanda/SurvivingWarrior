@@ -438,7 +438,7 @@ export default function GamePage() {
             randomIndex = Math.floor(Math.random() * story10.length);
             return story10[randomIndex];
         }else if (storyCount === 11) {
-            randomIndex = Math.floor(Math.random() * story10.length);
+            randomIndex = Math.floor(Math.random() * story1Finish.length);
             return story1Finish[randomIndex];
         }else if (storyCount === 12) {
             randomIndex = Math.floor(Math.random() * story11.length);
