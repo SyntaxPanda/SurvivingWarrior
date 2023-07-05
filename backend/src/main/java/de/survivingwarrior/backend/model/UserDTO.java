@@ -3,7 +3,6 @@ package de.survivingwarrior.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @Data
@@ -17,4 +16,6 @@ public class UserDTO {
     private int dragonCounter;
     private int levelCounter;
     private int goldCounter;
+    private int skillPoints;
+    private int achievementPoints;
 }

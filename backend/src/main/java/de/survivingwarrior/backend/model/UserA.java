@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.With;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.List;
 
 @Data
@@ -22,4 +21,6 @@ public class UserA {
     private int dragonCounter;
     private int levelCounter;
     private int goldCounter;
+    private int skillPoints;
+    private int achievementPoints;
 }

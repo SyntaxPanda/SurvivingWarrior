@@ -74,7 +74,9 @@ public class UserService implements UserDetailsService {
                 userA.getAchievements(),
                 userA.getDragonCounter(),
                 userA.getLevelCounter(),
-                userA.getGoldCounter());
+                userA.getGoldCounter(),
+                userA.getSkillPoints(),
+                userA.getAchievementPoints());
     }
 
     public void saveUser(UserA userA) {
@@ -85,6 +87,8 @@ public class UserService implements UserDetailsService {
         newUserA.setAchievements(userA.getAchievements());
         newUserA.setLevelCounter(userA.getLevelCounter());
         newUserA.setGoldCounter(userA.getGoldCounter());
+        newUserA.setSkillPoints(userA.getSkillPoints());
+        newUserA.setAchievementPoints(userA.getAchievementPoints());
         userRepo.save(newUserA);
     }
 
@@ -96,6 +100,8 @@ public class UserService implements UserDetailsService {
                 optionalUserUnSave.getAchievements(),
                 optionalUserUnSave.getDragonCounter(),
                 optionalUserUnSave.getLevelCounter(),
-                optionalUserUnSave.getGoldCounter());
+                optionalUserUnSave.getGoldCounter(),
+                optionalUserUnSave.getSkillPoints(),
+                optionalUserUnSave.getAchievementPoints());
     }
 }
