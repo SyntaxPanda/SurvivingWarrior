@@ -20,7 +20,9 @@ export default function usePatch() {
                 "-· Character can now choose his own way with 10 start SkillPoints.", date: "04.07.2023"
         },
         {
-            version: "0.4", description: "· Hotfix for HealPot." +
+            version: "0.4", description:
+                "· Hard reset to enjoy all new functions." +
+                "-· Hotfix for HealPot." +
                 "-· Now u can kill the Dragon and got the next Story." +
                 "-· For every Achievement u got now 5 AchievementPoints for leaderboard(is coming)." +
                 "-· For every Achievement u reached, u start new Character with 1 skill point more."
