@@ -8,6 +8,8 @@ export type User ={
     dragonCounter:number;
     levelCounter:number;
     goldCounter:number;
+    achievementPoints:number;
+    skillPoints:number;
 }
 
 export type UserDTO ={
@@ -17,4 +19,6 @@ export type UserDTO ={
     dragonCounter:number;
     levelCounter:number;
     goldCounter:number;
+    achievementPoints:number;
+    skillPoints:number;
 }

@@ -12,7 +12,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -42,15 +41,10 @@ class CharacterControllerTest {
                                     "name": "Hans",
                                     "level": 1,
                                     "exp": 0,
-                                    "skillPoints": 0,
-                                    "inventory": [
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null
-                                    ]
+                                    "skillPoints": 10,
+                                    "healPower": 5,
+                                    "pots": 5,
+                                    "maxPots": 5
                                 }"""
                 )).andExpect(jsonPath("$.id").isNotEmpty())
                 .andExpect(jsonPath("$.life").isNotEmpty())
@@ -87,15 +81,10 @@ class CharacterControllerTest {
                                     "name": "Hans",
                                     "level": 1,
                                     "exp": 0,
-                                    "skillPoints": 0,
-                                    "inventory": [
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null
-                                    ]
+                                    "skillPoints": 10,
+                                    "healPower": 5,
+                                    "pots": 5,
+                                    "maxPots": 5
                                 }"""
                 )).andExpect(jsonPath("$.id").value(character.getId()))
                 .andExpect(jsonPath("$.life").value(character.getLife()))

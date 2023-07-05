@@ -12,6 +12,33 @@ export default function usePatch() {
             version: "0.2", description: "· Now Player can see a button for PatchNotes\n" +
                 "-· PatchNote site with new Patches (finish) ot the FirstPage and StartPage\n" +
                 "-· Fix text notification at DeathPage from \"Death\" to \"dead\"", date: "04.07.2023"
+        },
+        {
+            version: "0.3", description: "· Character has now a fixed value.\n" +
+                "-· Character has now new values(Pots and HealPower), Pots are limited and HealPower is how much life one Pots heals.\n" +
+                "-· The 3rd button \"Item\" is now a \"Pot\" button with visual value of ur Pots.\n" +
+                "-· Character can now choose his own way with 10 start SkillPoints.", date: "04.07.2023"
+        },
+        {
+            version: "0.4.1", description:
+                "· Hard reset to enjoy all new functions." +
+                "-· Hotfix for HealPot." +
+                "-· Now u can kill the Dragon and got the next Story." +
+                "-· For every Achievement u got now 5 AchievementPoints for leaderboard(is coming)." +
+                "-· For every Achievement u reached, u start new Character with 1 skill point more."
+                , date: "05.07.2023"
+        },
+        {
+            version: "0.4.2", description:
+                "· Character get now 3 skill points for lvl up, before 5." +
+                "-· Character needs now 15 exp to get lvl up, before 10."
+            , date: "05.07.2023"
+        },
+        {
+            version: "0.4.3", description:
+                "· Story Update: The way to Hell" +
+                "-· New options for buttons."
+            , date: "05.07.2023"
         }]
 
     return {patchNotes}

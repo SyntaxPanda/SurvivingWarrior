@@ -18,4 +18,5 @@ public class Game {
     private String characterId;
     private String storyId;
     private String username;
+    private int storyCounter;
 }

@@ -23,6 +23,7 @@ export default function GamePage() {
 
     const [character, setCharacter] =
         useState<Character>({
+            maxPots: 0,
             maxLife: 0,
             skillPoints: 0,
             damage: 0,
@@ -32,7 +33,8 @@ export default function GamePage() {
             level: 0,
             life: 1,
             name: "",
-            item: []
+            healPower: 0,
+            pots: 0
         })
 
     const [kobold1, setKobold1] =
@@ -59,10 +61,14 @@ export default function GamePage() {
         })
 
     const [game, setGame] =
-        useState<Game>({username: "", gameId: "", gameName: "", characterId: "", storyId: ""})
+        useState<Game>({storyCounter: 0, username: "", gameId: "", gameName: "", characterId: "", storyId: ""})
 
     const [user, setUser] =
-        useState<UserDTO>({dragonCounter: 0, levelCounter: 0, goldCounter: 0, achievements: [], id: "", userName: ""})
+        useState<UserDTO>({
+            achievementPoints: 0,
+            skillPoints: 0,
+            dragonCounter: 0, levelCounter: 0, goldCounter: 0, achievements: [], id: "", userName: ""
+        })
 
     const params = useParams()
     const gameId: string | undefined = params.id;
@@ -76,6 +82,7 @@ export default function GamePage() {
         let charId = ""
         let storyId = ""
         let username = ""
+        let userSkillpoints = 0
         axios.get("/api/game/" + gameId)
             .then(response => {
                 setGame(response.data);
@@ -86,10 +93,29 @@ export default function GamePage() {
             .then(() => axios.get("/api/user/details/" + username))
             .then(r => {
                 setUser(r.data)
+                userSkillpoints = r.data.skillPoints
             })
             .then(() => axios.get("/api/character/" + charId))
             .then(response => {
-                setCharacter(response.data);
+                if (storyId === "1") {
+                    setCharacter({
+                        ...character,
+                        skillPoints: response.data.skillPoints + userSkillpoints,
+                        life: response.data.life,
+                        maxLife: response.data.maxLife,
+                        damage: response.data.damage,
+                        pots: response.data.pots,
+                        maxPots: response.data.maxPots,
+                        level: response.data.level,
+                        exp: response.data.exp,
+                        id: response.data.id,
+                        gold: response.data.gold,
+                        healPower: response.data.healPower,
+                        name: response.data.name
+                    })
+                } else {
+                    setCharacter(response.data);
+                }
             })
             .then(() => axios.get("/api/story/" + storyId))
             .then(response => {
@@ -118,7 +144,7 @@ export default function GamePage() {
             .then(() =>
                 axios.delete("/api/game/lost/" + game.gameId)
                     .then(() =>
-                            navigate("/death")
+                        navigate("/death")
                     ))
     }
 
@@ -130,9 +156,6 @@ export default function GamePage() {
     }, [character.life])
 
     function allEnemyDead() {
-        if (story.id === "10") {
-            setUser({...user, dragonCounter: user.dragonCounter + 1})
-        }
         setUser({...user, goldCounter: user.goldCounter + kobold1.gold + kobold2.gold + kobold3.gold})
         setCharacter({
             ...character,
@@ -140,16 +163,18 @@ export default function GamePage() {
             exp: character.exp + (3 * kobolds.length)
         })
         toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
-        setStoryCount(storyCount + 1)
+        setGame({...game, storyCounter: game.storyCounter + 1})
     }
 
     useEffect(() => {
         if (story.id !== "4") {
             if (story.id !== "8") {
-                if (kobold1.life < 1) {
-                    if (kobold2.life < 1) {
-                        if (kobold3.life < 1) {
-                            allEnemyDead()
+                if (story.id !== "11") {
+                    if (kobold1.life < 1) {
+                        if (kobold2.life < 1) {
+                            if (kobold3.life < 1) {
+                                allEnemyDead()
+                            }
                         }
                     }
                 }
@@ -182,10 +207,19 @@ export default function GamePage() {
                 let getMaxLife = Math.round(Math.floor(Math.random() * (30 - 1 + 15)))
                 setCharacter({...character, life: character.life + getMaxLife, gold: character.gold - price})
                 toast("U got " + getMaxLife + " Life and pay " + price + " Gold for this")
-                setStoryCount(storyCount + 1)
+                setGame({...game, storyCounter: game.storyCounter + 1})
             } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
+        } else if (story.option1 === "10 MaxLife") {
+            setCharacter({
+                ...character, maxLife: character.maxLife + 10,
+                life: character.maxLife + 10,
+                pots: character.maxPots
+            })
+            setGame({...game, storyCounter: game.storyCounter + 1})
+        }else if(story.option1 === "Menu"){
+            saveGame()
         }
     }
 
@@ -210,81 +244,121 @@ export default function GamePage() {
                 let getDamage = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
                 setCharacter({...character, damage: character.damage + getDamage, gold: character.gold - price})
                 toast("U got " + getDamage + " max damage and pay " + price + " Gold for this")
-                setStoryCount(storyCount + 1)
+                setGame({...game, storyCounter: game.storyCounter + 1})
             } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
+        } else if (story.option2 === "10 Damage") {
+            setCharacter({
+                ...character, damage: character.damage + 10,
+                life: character.maxLife,
+                pots: character.maxPots
+            })
+            setGame({...game, storyCounter: game.storyCounter + 1})
+        }else if(story.option2 === "Menu"){
+            saveGame()
         }
     }
 
     function onClickGetNextStoryChapterOption3() {
-        if (story.option3 === "Item") {
+        if (story.option3 === "HealPot") {
             if (kobold1.life > 0) {
-                if (character.life < character.maxLife) {
-                    setCharacter({
-                        ...character,
-                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold1.damage
-                    })
-                    toast("The Enemy hit u for " + kobold1.damage + " points.")
-                    toast("You heal ur self for hp.")
+                if (character.life < character.maxLife && character.pots > 0) {
+                    if (character.life + character.healPower > character.maxLife) {
+                        setCharacter({
+                            ...character,
+                            life: (character.maxLife - kobold1.damage),
+                            pots: character.pots - 1
+                        })
+                        toast("The Enemy hit u for " + kobold1.damage + " points.")
+                    } else {
+                        setCharacter({
+                            ...character,
+                            life: (character.life + character.healPower) - kobold1.damage,
+                            pots: character.pots - 1
+                        })
+                        toast("The Enemy hit u for " + kobold1.damage + " points.")
+                        toast("You heal ur self for " + character.healPower + " hp.")
+                    }
                 } else {
                     setCharacter({...character, life: character.life - kobold1.damage})
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
-                    toast("You have max life and cant heal.")
-
+                    toast("You have max life or not more Pots and cant heal.")
                 }
             } else if (kobold2.life > 0) {
-                if (character.life < character.maxLife) {
-                    setCharacter({
-                        ...character,
-                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold2.damage
-                    })
-                    toast("The Enemy hit u for " + kobold2.damage + " points.")
-                    toast("You heal ur self for " + 3 + " hp.")
+                if (character.life < character.maxLife && character.pots > 0) {
+                    if (character.life + character.healPower > character.maxLife) {
+                        setCharacter({
+                            ...character,
+                            life: (character.maxLife - kobold2.damage),
+                            pots: character.pots - 1
+                        })
+                        toast("The Enemy hit u for " + kobold2.damage + " points.")
+                    } else {
+                        setCharacter({
+                            ...character,
+                            life: (character.life + character.healPower) - kobold2.damage,
+                            pots: character.pots - 1
+                        })
+                        toast("The Enemy hit u for " + kobold2.damage + " points.")
+                        toast("You heal ur self for " + character.healPower + " hp.")
+                    }
                 } else {
                     setCharacter({...character, life: character.life - kobold2.damage})
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
-                    toast("You have max life and cant heal.")
+                    toast("You have max life or no more Pots and cant heal.")
                 }
             } else if (kobold3.life > 0) {
-                if (character.life < character.maxLife) {
-                    setCharacter({
-                        ...character,
-                        life: (character.life + (Math.round(Math.floor(Math.random() * (8 - 1 + 1))))) - kobold3.damage
-                    })
-                    toast("The Enemy hit u for " + kobold3.damage + " points.")
-                    toast("You heal ur self for " + 3 + " hp.")
+                if (character.life < character.maxLife && character.pots > 0) {
+                    if (character.life + character.healPower > character.maxLife) {
+                        setCharacter({
+                            ...character,
+                            life: (character.maxLife - kobold3.damage),
+                            pots: character.pots - 1
+                        })
+                        toast("The Enemy hit u for " + kobold3.damage + " points.")
+                    } else {
+                        setCharacter({
+                            ...character,
+                            life: (character.life + character.healPower) - kobold3.damage,
+                            pots: character.pots - 1
+                        })
+                        toast("The Enemy hit u for " + kobold3.damage + " points.")
+                        toast("You heal ur self for " + character.healPower + " hp.")
+                    }
                 } else {
                     setCharacter({...character, life: character.life - kobold3.damage})
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
-                    toast("You have max life and cant heal.")
+                    toast("You have max life or no more Pots and cant heal.")
                 }
             }
         } else if (story.option3 === "Dont buy something") {
-            setStoryCount(storyCount + 1)
+            setGame({...game, storyCounter: game.storyCounter + 1})
+        } else if (story.option3 === "5 MaxLife/Damage") {
+            setCharacter({
+                ...character, maxLife: character.maxLife + 5,
+                damage: character.damage + 5,
+                life: character.maxLife,
+                pots: character.maxPots
+            })
+            setGame({...game, storyCounter: game.storyCounter + 1})
+        }else if(story.option3 === "Menu"){
+            saveGame()
         }
     }
 
     function saveGame() {
         axios.put("/api/user/achievement/reached", user)
             .catch(error => console.error(error))
-        axios.put("/api/character/" + character.id, {
-            name: character.name,
-            id: character.id,
-            level: character.level,
-            exp: character.exp,
-            skillPoints: character.skillPoints,
-            life: character.life,
-            maxLife: character.maxLife,
-            damage: character.damage,
-            gold: character.gold
-        }).catch(error => console.log(error))
+        axios.put("/api/character/" + character.id, character
+        ).catch(error => console.log(error))
         axios.put("/api/game/save", {
             gameId: game.gameId,
             gameName: game.gameName,
             characterId: character.id,
             storyId: story.id,
-            username: game.username
+            username: game.username,
+            storyCounter: game.storyCounter
         })
             .then()
         navigate("/start")
@@ -327,20 +401,29 @@ export default function GamePage() {
     const story8 = ["8"]
     const story9 = ["9-1", "9-2", "9-3", "9-4"]
     const story10 = ["10-1", "10-2", "10-3", "10-4"]
-
-
-    const [storyCount, setStoryCount] = useState(0)
+    const story1Finish = ["11"]
+    const story11 = ["11-1", "11-2", "11-3"]
+    const story12 = ["12-1", "12-2", "12-3"]
+    const story13 = ["13-1", "13-2", "13-3"]
+    const story14 = ["14"]
+    const story15 = ["15-1", "15-2", "15-3"]
+    const story16 = ["16-1", "16-2", "16-3"]
+    const story17 = ["17-1", "17-2", "17-3"]
+    const story18 = ["18"]
+    const story19 = ["19-1", "19-2", "19-3"]
+    const story20 = ["20-1", "20-2", "20-3"]
+    const story21 = ["21"]
 
     const [randomStory, setRandomStory] =
         useState<String | undefined>("")
 
     useEffect(() => {
-        if (storyCount !== 0) {
+        if (game.storyCounter !== 0) {
             const newRandomStory = getRandomStoryById();
             setRandomStory(newRandomStory);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [storyCount]);
+    }, [game.storyCounter]);
 
     useEffect(() => {
         if (randomStory) {
@@ -358,46 +441,91 @@ export default function GamePage() {
     function getRandomStoryById() {
         let randomIndex;
 
-        if (storyCount === 1) {
+        if (game.storyCounter === 1) {
             randomIndex = Math.floor(Math.random() * story1.length);
             return story1[randomIndex];
-        } else if (storyCount === 2) {
+        } else if (game.storyCounter === 2) {
             randomIndex = Math.floor(Math.random() * story2.length);
             return story2[randomIndex];
-        } else if (storyCount === 3) {
+        } else if (game.storyCounter === 3) {
             randomIndex = Math.floor(Math.random() * story3.length);
             return story3[randomIndex];
-        } else if (storyCount === 4) {
+        } else if (game.storyCounter === 4) {
             randomIndex = Math.floor(Math.random() * story4.length);
             return story4[randomIndex];
-        } else if (storyCount === 5) {
+        } else if (game.storyCounter === 5) {
             randomIndex = Math.floor(Math.random() * story5.length);
             return story5[randomIndex];
-        } else if (storyCount === 6) {
+        } else if (game.storyCounter === 6) {
             randomIndex = Math.floor(Math.random() * story6.length);
             return story6[randomIndex];
-        } else if (storyCount === 7) {
+        } else if (game.storyCounter === 7) {
             randomIndex = Math.floor(Math.random() * story7.length);
             return story7[randomIndex];
-        } else if (storyCount === 8) {
+        } else if (game.storyCounter === 8) {
             randomIndex = Math.floor(Math.random() * story8.length);
             return story8[randomIndex];
-        } else if (storyCount === 9) {
+        } else if (game.storyCounter === 9) {
             randomIndex = Math.floor(Math.random() * story9.length);
             return story9[randomIndex];
-        } else if (storyCount === 10) {
+        } else if (game.storyCounter === 10) {
             randomIndex = Math.floor(Math.random() * story10.length);
             return story10[randomIndex];
+        } else if (game.storyCounter === 11) {
+            randomIndex = Math.floor(Math.random() * story1Finish.length);
+            setUser({...user, dragonCounter: user.dragonCounter + 1})
+            return story1Finish[randomIndex];
+        } else if (game.storyCounter === 12) {
+            randomIndex = Math.floor(Math.random() * story11.length);
+            return story11[randomIndex];
+        } else if (game.storyCounter === 13) {
+            randomIndex = Math.floor(Math.random() * story12.length);
+            return story12[randomIndex];
+        } else if (game.storyCounter === 14) {
+            randomIndex = Math.floor(Math.random() * story13.length);
+            return story13[randomIndex];
+        } else if (game.storyCounter === 15) {
+            randomIndex = Math.floor(Math.random() * story14.length);
+            return story14[randomIndex];
+        } else if (game.storyCounter === 16) {
+            randomIndex = Math.floor(Math.random() * story15.length);
+            return story15[randomIndex];
+        } else if (game.storyCounter === 17) {
+            randomIndex = Math.floor(Math.random() * story16.length);
+            return story16[randomIndex];
+        } else if (game.storyCounter === 18) {
+            randomIndex = Math.floor(Math.random() * story17.length);
+            return story17[randomIndex];
+        } else if (game.storyCounter === 19) {
+            randomIndex = Math.floor(Math.random() * story18.length);
+            return story18[randomIndex];
+        } else if (game.storyCounter === 20) {
+            randomIndex = Math.floor(Math.random() * story19.length);
+            return story19[randomIndex];
+        } else if (game.storyCounter === 21) {
+            randomIndex = Math.floor(Math.random() * story20.length);
+            return story20[randomIndex];
+        } else if (game.storyCounter === 22) {
+            setUser({...user, dragonCounter: user.dragonCounter + 1})
+            randomIndex = Math.floor(Math.random() * story21.length);
+            return story21[randomIndex];
         }
     }
 
+    useEffect(() => {
+        if (character.pots < character.maxPots) {
+            setCharacter({...character, pots: character.pots + 1})
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [character.level])
+
     function getLevelUp() {
-        if (character.exp >= 10) {
+        if (character.exp >= 15) {
             setCharacter({
                 ...character,
                 level: character.level + 1,
-                exp: character.exp - 10,
-                skillPoints: character.skillPoints + 5
+                exp: character.exp - 15,
+                skillPoints: character.skillPoints + 3
             })
             setUser({...user, levelCounter: user.levelCounter + 1})
         }
@@ -419,6 +547,25 @@ export default function GamePage() {
         }
     }
 
+    function increaseCharacterHealPower() {
+        if (character.skillPoints > 0) {
+            setCharacter({
+                ...character, healPower: character.healPower + 1,
+                skillPoints: character.skillPoints - 1
+            })
+        }
+    }
+
+    function increaseCharacterMaxPots() {
+        if (character.skillPoints > 0) {
+            setCharacter({
+                ...character, pots: character.pots + 1,
+                maxPots: character.maxPots + 1,
+                skillPoints: character.skillPoints - 1
+            })
+        }
+    }
+
     function increaseCharacterDmg() {
         if (character.skillPoints > 0) {
             setCharacter({...character, damage: character.damage + 1, skillPoints: character.skillPoints - 1})
@@ -434,19 +581,23 @@ export default function GamePage() {
         if (user.achievements[0]?.reached === false) {
             if (character.level >= 5) {
                 user.achievements[0].reached = true;
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached lvl5 Achievement")
             }
         } else if (user.achievements[1]?.reached === false) {
             if (character.level >= 10) {
                 user.achievements[1].reached = true;
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[2]?.reached === false) {
             if (character.level >= 15) {
                 user.achievements[2].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[3]?.reached === false) {
             if (character.level >= 20) {
                 user.achievements[3].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -460,19 +611,23 @@ export default function GamePage() {
         if (user.achievements[4]?.reached === false) {
             if (character.gold >= 100) {
                 user.achievements[4].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 100 Gold Achievement")
             }
         } else if (user.achievements[5]?.reached === false) {
             if (character.gold >= 150) {
                 user.achievements[5].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[6]?.reached === false) {
             if (character.gold >= 200) {
                 user.achievements[6].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[7]?.reached === false) {
             if (character.gold >= 250) {
                 user.achievements[7].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -486,19 +641,23 @@ export default function GamePage() {
         if (user.achievements[8]?.reached === false) {
             if (user.levelCounter >= 100) {
                 user.achievements[8].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 100 lvl Achievement")
             }
         } else if (user.achievements[9]?.reached === false) {
             if (user.levelCounter >= 250) {
                 user.achievements[9].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[10]?.reached === false) {
             if (user.levelCounter >= 500) {
                 user.achievements[10].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[11]?.reached === false) {
             if (user.levelCounter >= 1000) {
                 user.achievements[11].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -512,19 +671,23 @@ export default function GamePage() {
         if (user.achievements[12]?.reached === false) {
             if (user.dragonCounter >= 1) {
                 user.achievements[12].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 1 Dragon kill Achievement")
             }
         } else if (user.achievements[13]?.reached === false) {
             if (user.dragonCounter >= 5) {
                 user.achievements[13].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[14]?.reached === false) {
             if (user.dragonCounter >= 10) {
                 user.achievements[14].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[15]?.reached === false) {
             if (user.dragonCounter >= 25) {
                 user.achievements[15].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -538,19 +701,23 @@ export default function GamePage() {
         if (user.achievements[16]?.reached === false) {
             if (character.damage >= 15) {
                 user.achievements[16].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 15 dmg Achievement")
             }
         } else if (user.achievements[17]?.reached === false) {
             if (character.damage >= 20) {
                 user.achievements[17].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[18]?.reached === false) {
             if (character.damage >= 30) {
                 user.achievements[18].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[19]?.reached === false) {
             if (character.damage >= 50) {
                 user.achievements[19].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -564,23 +731,28 @@ export default function GamePage() {
         if (user.achievements[20]?.reached === false) {
             if (user.goldCounter >= 10000) {
                 user.achievements[20].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
                 toast("You reached 10k Gold Achievement")
             }
         } else if (user.achievements[21]?.reached === false) {
             if (user.goldCounter >= 50000) {
                 user.achievements[21].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[22]?.reached === false) {
             if (user.goldCounter >= 100000) {
                 user.achievements[22].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[23]?.reached === false) {
             if (user.goldCounter >= 500000) {
                 user.achievements[23].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         } else if (user.achievements[24]?.reached === false) {
             if (user.goldCounter >= 1000000) {
                 user.achievements[24].reached = true
+                setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
             }
         }
     }
@@ -665,10 +837,10 @@ export default function GamePage() {
             </div>
             <div className={"lifeAndExpBox"}>
                 <div className={"lifeBox"}>
-                    {character.life} / {character.maxLife}
+                    LIFE: {character.life} / {character.maxLife}
                 </div>
                 <div className={"expBox"}>
-                    {character.exp} / 10
+                    EXP: {character.exp} / 15
                 </div>
             </div>
             <div className={"storyBox"}>
@@ -692,7 +864,7 @@ export default function GamePage() {
                     </div>
                     <div className={"button3"}>
                         <button className={"buttonHover"}
-                                onClick={onClickGetNextStoryChapterOption3}>{story.option3}</button>
+                                onClick={onClickGetNextStoryChapterOption3}>{story.option3} {story.option3 === "HealPot" && `${character.pots.toLocaleString()}/${character.maxPots.toLocaleString()}`}</button>
                     </div>
                 </div>
             </div>
@@ -718,7 +890,7 @@ export default function GamePage() {
                 </div>
                 <div className={"characterLifeBox"}>
                     <div className={"characterLifeString"}>
-                        Character-Life:
+                        Life:
                     </div>
                     <div className={"characterLifeStat"}>
                         {character.life}
@@ -729,13 +901,35 @@ export default function GamePage() {
                 </div>
                 <div className={"characterDmgBox"}>
                     <div className={"characterDmgString"}>
-                        Character-Damage:
+                        Damage:
                     </div>
                     <div className={"characterDmg"}>
                         {character.damage}
                     </div>
                     <div className={"buttonDmgUp"}>
                         <button onClick={increaseCharacterDmg}>+</button>
+                    </div>
+                </div>
+                <div className={"characterHealPowerBox"}>
+                    <div className={"characterHealPowerString"}>
+                        HealPower:
+                    </div>
+                    <div className={"characterHealPower"}>
+                        {character.healPower}
+                    </div>
+                    <div className={"buttonHealPowerUp"}>
+                        <button onClick={increaseCharacterHealPower}>+</button>
+                    </div>
+                </div>
+                <div className={"characterPotBox"}>
+                    <div className={"characterDmgString"}>
+                        MaximalPots:
+                    </div>
+                    <div className={"characterPot"}>
+                        {character.maxPots}
+                    </div>
+                    <div className={"buttonPotsUp"}>
+                        <button onClick={increaseCharacterMaxPots}>+</button>
                     </div>
                 </div>
                 <div className={"characterGoldBox"}>

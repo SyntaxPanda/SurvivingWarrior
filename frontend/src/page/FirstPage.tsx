@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import "../css/FirstPage.css"
+import {toast, ToastContainer} from "react-toastify";
 
 export default function FirstPage() {
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        hardReset()
+    }, [])
+
+    function hardReset(){
+        toast("For this Patch all data are deleted.")
+        toast("Please register new User to enjoy full Experience")
+    }
 
     function onClickLoginHandler() {
         navigate("/login")
@@ -30,6 +40,18 @@ export default function FirstPage() {
                     <button onClick={onClickHandlerPatchNotesFirstPage}>Patch Notes</button>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={4000}
+                hideProgressBar
+                newestOnTop={false}
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+                theme="dark"
+                style={{width: "20vw"}}
+                limit={2}
+            />
         </div>
     );
 }
