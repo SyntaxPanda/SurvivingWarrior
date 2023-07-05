@@ -37,7 +37,8 @@ export default function usePatch() {
         {
             version: "0.4.3", description:
                 "· Story Update: The way to Hell" +
-                "-· New options for buttons."
+                "-· New options for buttons." +
+                "-· Fix Vendor Heal, now they cant heal more than maxLife"
             , date: "05.07.2023"
         }]
 
