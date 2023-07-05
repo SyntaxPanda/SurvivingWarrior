@@ -27,7 +27,7 @@ export default function StartPage() {
         useState<UserDTO>({
             achievementPoints: 0,
             skillPoints: 0,
-            dragonCounter: 0, levelCounter: 0, goldCounter: 0, id: "", achievements: [], userName: ""})
+            dragonCounter: 0, levelCounter: 0, goldCounter: 0, id: "", achievements: [], username: ""})
 
     function setUserIfLogin() {
         axios.get("/api/user/username")
@@ -81,8 +81,13 @@ export default function StartPage() {
         navigate("/patchNoteLogin")
     }
 
+    function getLeaderBoard(){
+        navigate("/leaderboard")
+    }
+
     return (
         <div className={"startPage"}>
+            <button onClick={getLeaderBoard}>Leaderboard</button>
             <div className={"NewGameButton"}>
                 <button onClick={onClickNavigateToNewGamePage}>New Game</button>
             </div>

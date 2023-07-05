@@ -67,7 +67,7 @@ export default function GamePage() {
         useState<UserDTO>({
             achievementPoints: 0,
             skillPoints: 0,
-            dragonCounter: 0, levelCounter: 0, goldCounter: 0, achievements: [], id: "", userName: ""
+            dragonCounter: 0, levelCounter: 0, goldCounter: 0, achievements: [], id: "", username: ""
         })
 
     const params = useParams()
