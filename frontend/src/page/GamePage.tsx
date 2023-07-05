@@ -365,7 +365,7 @@ export default function GamePage() {
     const story8 = ["8"]
     const story9 = ["9-1", "9-2", "9-3", "9-4"]
     const story10 = ["10-1", "10-2", "10-3", "10-4"]
-    const story1Finish = ["2"]
+    const story1Finish = ["11"]
     const story11 = ["11-1", "11-2", "11-3", "11-4"]
     const story12 = ["12-1", "12-2", "12-3", "12-4"]
     const story13 = ["13-1", "13-2", "13-3", "13-4"]
