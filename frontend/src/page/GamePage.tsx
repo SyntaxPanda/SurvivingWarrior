@@ -218,6 +218,8 @@ export default function GamePage() {
                 pots: character.maxPots
             })
             setGame({...game, storyCounter: game.storyCounter + 1})
+        }else if(story.option1 === "Menu"){
+            saveGame()
         }
     }
 
@@ -253,6 +255,8 @@ export default function GamePage() {
                 pots: character.maxPots
             })
             setGame({...game, storyCounter: game.storyCounter + 1})
+        }else if(story.option2 === "Menu"){
+            saveGame()
         }
     }
 
@@ -338,6 +342,8 @@ export default function GamePage() {
                 pots: character.maxPots
             })
             setGame({...game, storyCounter: game.storyCounter + 1})
+        }else if(story.option3 === "Menu"){
+            saveGame()
         }
     }
 
@@ -396,16 +402,17 @@ export default function GamePage() {
     const story9 = ["9-1", "9-2", "9-3", "9-4"]
     const story10 = ["10-1", "10-2", "10-3", "10-4"]
     const story1Finish = ["11"]
-    const story11 = ["11-1", "11-2", "11-3", "11-4"]
-    const story12 = ["12-1", "12-2", "12-3", "12-4"]
-    const story13 = ["13-1", "13-2", "13-3", "13-4"]
+    const story11 = ["11-1", "11-2", "11-3"]
+    const story12 = ["12-1", "12-2", "12-3"]
+    const story13 = ["13-1", "13-2", "13-3"]
     const story14 = ["14"]
-    const story15 = ["15-1", "15-2", "15-3", "15-4"]
-    const story16 = ["16-1", "16-2", "16-3", "16-4"]
-    const story17 = ["17-1", "17-2", "17-3", "17-4"]
+    const story15 = ["15-1", "15-2", "15-3"]
+    const story16 = ["16-1", "16-2", "16-3"]
+    const story17 = ["17-1", "17-2", "17-3"]
     const story18 = ["18"]
-    const story19 = ["19-1", "19-2", "19-3", "19-4"]
-    const story20 = ["20-1", "20-2", "20-3", "20-4"]
+    const story19 = ["19-1", "19-2", "19-3"]
+    const story20 = ["20-1", "20-2", "20-3"]
+    const story21 = ["21"]
 
     const [randomStory, setRandomStory] =
         useState<String | undefined>("")
@@ -498,6 +505,10 @@ export default function GamePage() {
         } else if (game.storyCounter === 21) {
             randomIndex = Math.floor(Math.random() * story20.length);
             return story20[randomIndex];
+        } else if (game.storyCounter === 22) {
+            setUser({...user, dragonCounter: user.dragonCounter + 1})
+            randomIndex = Math.floor(Math.random() * story21.length);
+            return story21[randomIndex];
         }
     }
 

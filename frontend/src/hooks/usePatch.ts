@@ -33,6 +33,12 @@ export default function usePatch() {
                 "· Character get now 3 skill points for lvl up, before 5." +
                 "-· Character needs now 15 exp to get lvl up, before 10."
             , date: "05.07.2023"
+        },
+        {
+            version: "0.4.3", description:
+                "· Story Update: The way to Hell" +
+                "-· New options for buttons."
+            , date: "05.07.2023"
         }]
 
     return {patchNotes}
