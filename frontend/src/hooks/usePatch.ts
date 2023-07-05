@@ -20,13 +20,19 @@ export default function usePatch() {
                 "-· Character can now choose his own way with 10 start SkillPoints.", date: "04.07.2023"
         },
         {
-            version: "0.4", description:
+            version: "0.4.1", description:
                 "· Hard reset to enjoy all new functions." +
                 "-· Hotfix for HealPot." +
                 "-· Now u can kill the Dragon and got the next Story." +
                 "-· For every Achievement u got now 5 AchievementPoints for leaderboard(is coming)." +
                 "-· For every Achievement u reached, u start new Character with 1 skill point more."
                 , date: "05.07.2023"
+        },
+        {
+            version: "0.4.2", description:
+                "· Character get now 3 skill points for lvl up, before 5." +
+                "-· Character needs now 15 exp to get lvl up, before 10."
+            , date: "05.07.2023"
         }]
 
     return {patchNotes}
