@@ -205,9 +205,15 @@ export default function GamePage() {
             let price = Math.round(Math.floor(Math.random() * (45 - 1 + 25)))
             if (character.gold >= price) {
                 let getMaxLife = Math.round(Math.floor(Math.random() * (30 - 1 + 15)))
-                setCharacter({...character, life: character.life + getMaxLife, gold: character.gold - price})
-                toast("U got " + getMaxLife + " Life and pay " + price + " Gold for this")
-                setGame({...game, storyCounter: game.storyCounter + 1})
+                if((character.life + getMaxLife) > character.maxLife){
+                    setCharacter({...character, life: character.maxLife, gold: character.gold - price})
+                    toast("U heal up to full life for " + price + " Gold")
+                    setGame({...game, storyCounter: game.storyCounter + 1})
+                }else{
+                    setCharacter({...character, life: character.life + getMaxLife, gold: character.gold - price})
+                    toast("U got " + getMaxLife + " Life and pay " + price + " Gold for this")
+                    setGame({...game, storyCounter: game.storyCounter + 1})
+                }
             } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
@@ -298,7 +304,7 @@ export default function GamePage() {
         if (story.option3 === "HealPot") {
             if (kobold1.life > 0) {
                 if (character.life < character.maxLife && character.pots > 0) {
-                    if (character.life + character.healPower > character.maxLife) {
+                    if ((character.life + character.healPower) > character.maxLife) {
                         setCharacter({
                             ...character,
                             life: (character.maxLife - kobold1.damage),
@@ -321,7 +327,7 @@ export default function GamePage() {
                 }
             } else if (kobold2.life > 0) {
                 if (character.life < character.maxLife && character.pots > 0) {
-                    if (character.life + character.healPower > character.maxLife) {
+                    if ((character.life + character.healPower) > character.maxLife) {
                         setCharacter({
                             ...character,
                             life: (character.maxLife - kobold2.damage),
@@ -344,7 +350,7 @@ export default function GamePage() {
                 }
             } else if (kobold3.life > 0) {
                 if (character.life < character.maxLife && character.pots > 0) {
-                    if (character.life + character.healPower > character.maxLife) {
+                    if ((character.life + character.healPower) > character.maxLife) {
                         setCharacter({
                             ...character,
                             life: (character.maxLife - kobold3.damage),
