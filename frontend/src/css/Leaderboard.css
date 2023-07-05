@@ -1,3 +1,64 @@
-.leaderBoardLayout{
+.leaderBoardPage{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
     color: white;
+    background-image: url("../../src/image/NewGamePage.jpg");
+    background-size: 100vw 100vh;
+}
+
+.leaderBoardLayout{
+    display: grid;
+    grid-template-columns: 40vw 40vw;
+    grid-template-rows: 40vh 40vh;
+    color: white;
+    justify-self: center;
+    align-self: center;
+    gap: 2vh;
+    font-size: 3vh;
+}
+
+.leaderBoardLayoutLevelCounter{
+    display: grid;
+    border: 3px solid white;
+    border-radius: 2vh;
+    animation: rainbowBorder 3.1s linear infinite;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.leaderBoardLayoutDragonCounter{
+    display: grid;
+    border: 3px solid white;
+    border-radius: 2vh;
+    animation: rainbowBorder 3.2s linear infinite;
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
+.leaderBoardLayoutGoldCounter{
+    display: grid;
+    border: 3px solid white;
+    border-radius: 2vh;
+    animation: rainbowBorder 2.9s linear infinite;
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
+.leaderBoardLayoutAchievementPoints{
+    display: grid;
+    border: 3px solid white;
+    border-radius: 2vh;
+    animation: rainbowBorder 3s linear infinite;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+@keyframes rainbowBorder {
+    0%   { border-color: red; }
+    14%  { border-color: orange; }
+    28%  { border-color: yellow; }
+    42%  { border-color: green; }
+    57%  { border-color: blue; }
+    71%  { border-color: indigo; }
+    85%  { border-color: violet; }
+    100% { border-color: red; }
 }

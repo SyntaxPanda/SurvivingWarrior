@@ -11,10 +11,28 @@
 
 .NewGameButton{
     display: grid;
+    grid-template-columns: 25vw 75vw;
     width: 10vw;
     height: 7vh;
     align-self: flex-end;
+    justify-items: flex-start;
     margin-left: 10vw;
+}
+
+.newGame{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+    align-self: center;
+}
+
+.getLeaderBoardButton{
+    display: grid;
+    width: 10vw;
+    height: 7vh;
+    align-self: center;
+    justify-self: flex-start;
+    margin-left: 4.8vw;
 }
 
 .loadGameButton{

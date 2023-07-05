@@ -40,6 +40,11 @@ export default function usePatch() {
                 "-· New options for buttons." +
                 "-· Fix Vendor Heal, now they cant heal more than maxLife"
             , date: "05.07.2023"
+        },
+        {
+            version: "0.4.4", description:
+                "· Leaderboard for DragonCounter, AchievementPoints, LevelCounter and GoldCounter"
+            , date: "06.07.2023"
         }]
 
     return {patchNotes}
