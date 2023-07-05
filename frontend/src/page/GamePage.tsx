@@ -132,13 +132,6 @@ export default function GamePage() {
     }, [character.life])
 
     useEffect(()=>{
-        if (character.pots < character.maxPots) {
-            setCharacter({...character, pots: character.pots + 1})
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user.goldCounter])
-
-    useEffect(()=>{
         if (story.id === "10") {
             setUser({...user, dragonCounter: user.dragonCounter + 1})
         }
@@ -403,7 +396,7 @@ export default function GamePage() {
             setCharacter({...character, pots: character.pots +1})
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [getLevelUp])
+    }, [character.level])
 
     function getLevelUp() {
         if (character.exp >= 10) {

@@ -18,6 +18,12 @@ export default function usePatch() {
                 "-· Character has now new values(Pots and HealPower), Pots are limited and HealPower is how much life one Pots heals.\n" +
                 "-· The 3rd button \"Item\" is now a \"Pot\" button with visual value of ur Pots.\n" +
                 "-· Character can now choose his own way with 10 start SkillPoints.", date: "04.07.2023"
+        },
+        {
+            version: "0.4", description: "· Hotfix for HealPot.\n" +
+                "-· \n" +
+                "-· \n" +
+                "-· ", date: "05.07.2023"
         }]
 
     return {patchNotes}
