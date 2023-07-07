@@ -58,6 +58,7 @@ button {
     justify-self: flex-start;
     width: 7vw;
     margin-right: 4vw;
+    height: 9vh;
 }
 
 .koboldImage {
@@ -79,7 +80,8 @@ button {
     border-radius: 10%;
     color: white;
     background-image: url("../image/backgroundButtonKobold.jpg");
-
+    font-size: 3.5vh;
+    height: 9vh;
 }
 
 .kobold2 {
@@ -91,6 +93,8 @@ button {
     border-radius: 10%;
     color: white;
     background-image: url("../image/backgroundButtonKobold.jpg");
+    font-size: 3.5vh;
+    height: 9vh;
 }
 
 .kobold3 {
@@ -102,6 +106,8 @@ button {
     border-radius: 10%;
     color: white;
     background-image: url("../image/backgroundButtonKobold.jpg");
+    font-size: 3.5vh;
+    height: 9vh;
 }
 
 .lifeAndExpBox {
@@ -133,8 +139,7 @@ button {
     display: grid;
     justify-self: center;
     margin-left: 2vw;
-    margin-bottom: 15vh;
-    margin-top: 3vh;
+    margin-top: 4vh;
     height: 80vh;
     color: white;
 }
@@ -142,13 +147,14 @@ button {
 .storyName {
     display: grid;
     border-bottom: 1px solid black;
-    width: 8vw;
+    width: 20vw;
     justify-self: center;
+    font-size: 3.5vh;
 }
 
 .storyImage {
     display: grid;
-    height: 40vh;
+    height: 5vh;
     width: 60vw;
     margin-top: 1vh;
     margin-bottom: 1vh;
@@ -158,12 +164,13 @@ button {
 .storyText {
     display: grid;
     border: 2px solid black;
-    height: 15vh;
+    height: 25vh;
     align-items: center;
     border-radius: 2vh;
     color: white;
     background-image: url("../image/backgroundButtonKobold.jpg");
     background-size: auto 15vh;
+    font-size: 3.5vh;
 }
 
 .storyButtons {
@@ -181,15 +188,6 @@ button {
     margin-top: 1vh;
     align-self: center;
     justify-self: center;
-}
-
-.buttonHover {
-    border-radius: 2vh;
-    background-color: gold;
-}
-
-.buttonHover:Hover {
-    background-color: #61dafb;
 }
 
 .button2 {
@@ -229,8 +227,9 @@ button {
     justify-self: center;
     align-items: center;
     border: 1px solid grey;
-    width: 5vw;
-    height: 3vh;
+    width: 12vw;
+    height: 4vh;
+    font-size: 3.5vh;
 }
 
 .levelBox {
@@ -239,6 +238,7 @@ button {
     border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
+    font-size: 3.5vh;
 }
 
 .levelString {
@@ -260,6 +260,7 @@ button {
     border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
+    font-size: 3.5vh;
 }
 
 .characterLifeString {
@@ -289,6 +290,7 @@ button {
     border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
+    font-size: 3.5vh;
 }
 
 .characterDmgString {
@@ -318,6 +320,7 @@ button {
     border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
+    font-size: 3.5vh;
 }
 
 .characterPotString {
@@ -347,6 +350,7 @@ button {
     border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
+    font-size: 3.5vh;
 }
 
 .characterHealPowerString {
@@ -370,14 +374,13 @@ button {
     width: 1vw;
 }
 
-
-
 .characterGoldBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;
     border: 1px solid grey;
     margin-top: 1vh;
     height: 5vh;
+    font-size: 3.5vh;
 }
 
 .characterGoldString {
@@ -436,23 +439,23 @@ body {
 
 .title {
     color: white;
-    font-weight: 200;
+    font-size: 3vh;
     position: absolute;
     left: 2vw;
-    top: 2vh;
+    top: 0.5vh;
 }
 
-.title2{
+.title2 {
     color: white;
-    font-weight: 200;
+    font-size: 3vh;
     position: absolute;
     left: 2vw;
-    top: 5vh;
+    top: 9vh;
 }
 
 .bar {
     position: absolute;
-    top: 13vh;
+    top: 19vh;
     left: 2vw;
     height: 0.7vh;
     width: 10vw;
@@ -470,8 +473,8 @@ body {
     z-index: 3;
     width: 0;
     height: 100%;
-    background: rgb(0,154,217);
-    background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
+    background: rgb(0, 154, 217);
+    background: linear-gradient(90deg, rgba(0, 154, 217, 1) 0%, rgba(217, 147, 0, 1) 65%, rgba(255, 186, 0, 1) 100%);
     transition: 0.6s ease-out;
 }
 
@@ -483,7 +486,7 @@ body {
 .circle {
     position: absolute;
     top: 18vh;
-    left: calc(50% - 60px);
+    left: calc(50% - 9vw);
 }
 
 .stroke {

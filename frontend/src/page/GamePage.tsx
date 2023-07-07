@@ -815,7 +815,7 @@ export default function GamePage() {
                                     </div>
                                     <div className="circle">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                            <circle className="stroke" cx="60" cy="60" r="50"/>
+                                            <circle className="stroke" cx="60" cy="45" r="30"/>
                                         </svg>
                                     </div>
                                 </div>
@@ -890,20 +890,20 @@ export default function GamePage() {
                 <div className={"storyImage"}>
                 </div>
                 <div className={"storyText"}>
-                    <p>{story.storyText}</p>
+                    {story.storyText}
                 </div>
                 <div className={"storyButtons"}>
                     <div className={"button1"}>
-                        <button className={"buttonHover"}
+                        <button
                                 onClick={onClickGetNextStoryChapterOption1}>{story.option1}
                         </button>
                     </div>
                     <div className={"button2"}>
-                        <button className={"buttonHover"}
+                        <button
                                 onClick={onClickGetNextStoryChapterOption2}>{story.option2}</button>
                     </div>
                     <div className={"button3"}>
-                        <button className={"buttonHover"}
+                        <button
                                 onClick={onClickGetNextStoryChapterOption3}>{story.option3} {story.option3 === "HealPot" && `${character.pots.toLocaleString()}/${character.maxPots.toLocaleString()}`}</button>
                     </div>
                 </div>
@@ -969,7 +969,7 @@ export default function GamePage() {
                         {character.maxPots}
                     </div>
                     <div className={"buttonPotsUp"}>
-                        <button onClick={increaseCharacterMaxPots}>+</button>
+                        <button className={"buttonIncrease"} onClick={increaseCharacterMaxPots}>+</button>
                     </div>
                 </div>
                 <div className={"characterGoldBox"}>
@@ -990,7 +990,7 @@ export default function GamePage() {
                 pauseOnFocusLoss
                 pauseOnHover
                 theme="dark"
-                style={{width: "13vw"}}
+                style={{width: "13vw", fontSize: "3.5vh"}}
                 limit={6}
             />
         </div>
