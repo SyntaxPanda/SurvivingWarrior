@@ -138,34 +138,47 @@ button {
 .storyBox {
     display: grid;
     justify-self: center;
-    margin-left: 2vw;
+    grid-template-columns: 10vw auto;
     margin-top: 4vh;
     height: 80vh;
+    width: 68vw;
     color: white;
 }
 
 .storyName {
     display: grid;
-    border-bottom: 1px solid black;
-    width: 20vw;
-    justify-self: center;
+    grid-column: 2/2;
+    width: 50vw;
+    justify-self: flex-end;
     font-size: 3.5vh;
+    align-self: center;
 }
 
-.storyImage {
+.logChat{
     display: grid;
-    height: 5vh;
-    width: 60vw;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    border-radius: 2vh;
+    border: 1px solid white;
+    width: 16vw;
+    height: 50vh;
+    align-self: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+    color: #61dafb;
+    font-size: 2vh;
+    justify-items: flex-start;
+}
+
+.message{
+    margin: 0.5vh;
 }
 
 .storyText {
     display: grid;
     border: 2px solid black;
-    height: 25vh;
+    height: 30vh;
+    width: 50vw;
+    justify-self: flex-end;
     align-items: center;
+    align-self: center;
     border-radius: 2vh;
     color: white;
     background-image: url("../image/backgroundButtonKobold.jpg");
@@ -175,8 +188,11 @@ button {
 
 .storyButtons {
     display: grid;
+    grid-column: 2/2;
     justify-content: center;
-    align-content: center;
+    justify-self: flex-end;
+    width: 50vw;
+    align-content: flex-start;
     grid-template-rows: auto;
     grid-template-columns: 15vw 15vw 15vw;
 }

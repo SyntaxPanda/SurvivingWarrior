@@ -203,27 +203,30 @@ export default function GamePage() {
             if (kobold1.life > 0) {
                 setKobold1({...kobold1, life: kobold1.life - character.damage})
                 setCharacter({...character, life: character.life - kobold1.damage})
-                toast("You hit the Enemy for " + character.damage + " points.")
-                toast("The Enemy hit u for " + kobold1.damage + " points.")
-                if(character.doubleHitReload > 0){
+                if (character.doubleHitReload > 0) {
                     setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                 }
+                const hitLog = "You hit the Enemy for " + character.damage + " points."
+                const getHitLog = "The Enemy hit u for " + kobold1.damage + " points."
+                setGameLog(prevString => [...prevString, hitLog, getHitLog])
             } else if (kobold2.life > 0) {
                 setKobold2({...kobold2, life: kobold2.life - character.damage})
                 setCharacter({...character, life: character.life - kobold2.damage})
-                toast("You hit the Enemy for " + character.damage + " points.")
-                toast("The Enemy hit u for " + kobold2.damage + " points.")
-                if(character.doubleHitReload > 0){
+                if (character.doubleHitReload > 0) {
                     setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                 }
+                const hitLog = "You hit the Enemy for " + character.damage + " points."
+                const getHitLog = "The Enemy hit u for " + kobold2.damage + " points."
+                setGameLog(prevString => [...prevString, hitLog, getHitLog])
             } else if (kobold3.life > 0) {
                 setKobold3({...kobold3, life: kobold3.life - character.damage})
                 setCharacter({...character, life: character.life - kobold3.damage})
-                toast("You hit the Enemy for " + character.damage + " points.")
-                toast("The Enemy hit u for " + kobold3.damage + " points.")
-                if(character.doubleHitReload > 0){
+                if (character.doubleHitReload > 0) {
                     setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                 }
+                const hitLog = "You hit the Enemy for " + character.damage + " points."
+                const getHitLog = "The Enemy hit u for " + kobold3.damage + " points."
+                setGameLog(prevString => [...prevString, hitLog, getHitLog])
             }
         } else if (story.option1 === "Get Heal for Gold") {
             let price = Math.round(Math.floor(Math.random() * (60 - 1 + 25)))
@@ -276,15 +279,27 @@ export default function GamePage() {
             if (character.doubleHitReload === 0) {
                 if (kobold1.life > 0) {
                     setKobold1({...kobold1, life: kobold1.life - Math.round(character.damage * 1.5)})
-                    setCharacter({...character, life: character.life - kobold1.damage, doubleHitReload: character.doubleHitReload +3})
+                    setCharacter({
+                        ...character,
+                        life: character.life - kobold1.damage,
+                        doubleHitReload: character.doubleHitReload + 3
+                    })
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
                 } else if (kobold2.life > 0) {
                     setKobold2({...kobold2, life: kobold2.life - Math.round(character.damage * 1.5)})
-                    setCharacter({...character, life: character.life - kobold2.damage, doubleHitReload: character.doubleHitReload +3})
+                    setCharacter({
+                        ...character,
+                        life: character.life - kobold2.damage,
+                        doubleHitReload: character.doubleHitReload + 3
+                    })
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
                 } else if (kobold3.life > 0) {
                     setKobold3({...kobold3, life: kobold3.life - Math.round(character.damage * 1.5)})
-                    setCharacter({...character, life: character.life - kobold3.damage, doubleHitReload: character.doubleHitReload +3})
+                    setCharacter({
+                        ...character,
+                        life: character.life - kobold3.damage,
+                        doubleHitReload: character.doubleHitReload + 3
+                    })
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
                 }
             }
@@ -339,7 +354,7 @@ export default function GamePage() {
                             pots: character.pots - 1
                         })
                         toast("The Enemy hit u for " + kobold1.damage + " points.")
-                        if(character.doubleHitReload > 0){
+                        if (character.doubleHitReload > 0) {
                             setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                         }
                     } else {
@@ -350,7 +365,7 @@ export default function GamePage() {
                         })
                         toast("The Enemy hit u for " + kobold1.damage + " points.")
                         toast("You heal ur self for " + character.healPower + " hp.")
-                        if(character.doubleHitReload > 0){
+                        if (character.doubleHitReload > 0) {
                             setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                         }
                     }
@@ -358,7 +373,7 @@ export default function GamePage() {
                     setCharacter({...character, life: character.life - kobold1.damage})
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
                     toast("You have max life or not more Pots and cant heal.")
-                    if(character.doubleHitReload > 0){
+                    if (character.doubleHitReload > 0) {
                         setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                     }
                 }
@@ -371,7 +386,7 @@ export default function GamePage() {
                             pots: character.pots - 1
                         })
                         toast("The Enemy hit u for " + kobold2.damage + " points.")
-                        if(character.doubleHitReload > 0){
+                        if (character.doubleHitReload > 0) {
                             setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                         }
                     } else {
@@ -382,7 +397,7 @@ export default function GamePage() {
                         })
                         toast("The Enemy hit u for " + kobold2.damage + " points.")
                         toast("You heal ur self for " + character.healPower + " hp.")
-                        if(character.doubleHitReload > 0){
+                        if (character.doubleHitReload > 0) {
                             setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                         }
                     }
@@ -390,7 +405,7 @@ export default function GamePage() {
                     setCharacter({...character, life: character.life - kobold2.damage})
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
                     toast("You have max life or no more Pots and cant heal.")
-                    if(character.doubleHitReload > 0){
+                    if (character.doubleHitReload > 0) {
                         setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                     }
                 }
@@ -403,7 +418,7 @@ export default function GamePage() {
                             pots: character.pots - 1
                         })
                         toast("The Enemy hit u for " + kobold3.damage + " points.")
-                        if(character.doubleHitReload > 0){
+                        if (character.doubleHitReload > 0) {
                             setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                         }
                     } else {
@@ -414,7 +429,7 @@ export default function GamePage() {
                         })
                         toast("The Enemy hit u for " + kobold3.damage + " points.")
                         toast("You heal ur self for " + character.healPower + " hp.")
-                        if(character.doubleHitReload > 0){
+                        if (character.doubleHitReload > 0) {
                             setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                         }
                     }
@@ -422,7 +437,7 @@ export default function GamePage() {
                     setCharacter({...character, life: character.life - kobold3.damage})
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
                     toast("You have max life or no more Pots and cant heal.")
-                    if(character.doubleHitReload > 0){
+                    if (character.doubleHitReload > 0) {
                         setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
                     }
                 }
@@ -850,9 +865,12 @@ export default function GamePage() {
             if (user.goldCounter >= 1000000) {
                 user.achievements[24].reached = true
                 setUser({...user, achievementPoints: user.achievementPoints + 5, skillPoints: user.skillPoints + 1})
+                setGameLog([""])
             }
         }
     }
+
+    const [gameLog, setGameLog] = useState<string[]>([])
 
     return (
         <div className={"gamePageBox"}>
@@ -944,7 +962,12 @@ export default function GamePage() {
                 <div className={"storyName"}>
                     {story.name}
                 </div>
-                <div className={"storyImage"}>
+                <div className={"logChat"}>
+                    {gameLog.map((message) =>(
+                        <div className={"message"}>
+                            {message}
+                        </div>
+                    ))}
                 </div>
                 <div className={"storyText"}>
                     {story.storyText}
@@ -956,8 +979,14 @@ export default function GamePage() {
                         </button>
                     </div>
                     <div className={"button2"}>
-                        <button
-                            onClick={onClickGetNextStoryChapterOption2}>{story.option2}</button>
+                        <button onClick={onClickGetNextStoryChapterOption2}>
+                            {story.option2 !== "DoubleHit"}{" "}
+                            {story.option2 === "DoubleHit" && character.doubleHitReload === 0 ? (
+                                <span>{story.option2}</span>
+                            ) : (
+                                <span style={{ color: "gray" }}>{story.option2}</span>
+                            )}
+                        </button>
                     </div>
                     <div className={"button3"}>
                         <button
