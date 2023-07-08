@@ -157,22 +157,21 @@ export default function GamePage() {
 
     function allEnemyDead() {
         setUser({...user, goldCounter: user.goldCounter + kobold1.gold + kobold2.gold + kobold3.gold})
-        if (story.id === "11-1" || "11-2" || "11-3" || "12-1" || "12-2" || "12-3" || "13-1" || "13-2" || "13-3" || "16-1" || "16-2" || "16-3" || "15-1" || "15-2" || "15-3" || "17-1" || "17-2" || "17-3" || "19-1" || "19-2" || "19-3") {
+        if (story.id === "11-1" || story.id === "11-2" ||story.id === "11-3" ||story.id === "12-1" ||story.id === "12-2" || story.id ==="12-3" ||story.id === "13-1" ||story.id === "13-2" ||story.id === "13-3" ||story.id === "16-1" || story.id ==="16-2" || story.id ==="16-3" ||story.id === "15-1" ||story.id === "15-2" ||story.id === "15-3" ||story.id === "17-1" ||story.id === "17-2" ||story.id === "17-3" ||story.id === "19-1" ||story.id === "19-2" ||story.id === "19-3") {
             setCharacter({
                 ...character,
                 gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
                 exp: character.exp + (4 * kobolds.length)
             })
-        } else if (story.id === "10-1" || "10-2" || "10-3" || "10-4") {
+        } else if (story.id === "11") {
             setCharacter({
                 ...character,
                 gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
                 level: character.level + 1,
                 skillPoints: character.skillPoints + 3,
-                maxLife: character.maxLife + 3,
+                maxLife: character.maxLife + 2,
                 damage: character.damage + 1
             })
-            setUser({...user, levelCounter: user.levelCounter + 1})
         } else {
             setCharacter({
                 ...character,
@@ -308,6 +307,7 @@ export default function GamePage() {
             if (character.gold >= price) {
                 setCharacter({...character, gold: character.gold - price, pots: character.maxPots})
                 toast("U fill up all potions for " + price + " Gold")
+                setGame({...game, storyCounter: game.storyCounter + 1})
             } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
@@ -580,7 +580,7 @@ export default function GamePage() {
                 level: character.level + 1,
                 exp: character.exp - 12,
                 skillPoints: character.skillPoints + 3,
-                maxLife: character.maxLife + 3,
+                maxLife: character.maxLife + 2,
                 damage: character.damage + 1
             })
             setUser({...user, levelCounter: user.levelCounter + 1})
@@ -896,7 +896,7 @@ export default function GamePage() {
                     LIFE: {character.life} / {character.maxLife}
                 </div>
                 <div className={"expBox"}>
-                    EXP: {character.exp} / 15
+                    EXP: {character.exp} / 12
                 </div>
             </div>
             <div className={"storyBox"}>
