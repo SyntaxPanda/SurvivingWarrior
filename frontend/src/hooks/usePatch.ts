@@ -69,7 +69,7 @@ export default function usePatch() {
         },
         {
             version: "0.4.7", description:
-                "· Add a LogChatWindow for better view how much damage character and enemy get"
+                "· Add a LogChatWindow for a better view how much damage character and enemy get"
             , date: "08.07.2023"
         }]
 
