@@ -66,6 +66,11 @@ export default function usePatch() {
                 "-· Character get now 2 maxLife, before 3 when come level up" +
                 "-· Block is now double hit(character damage * 1.5)"
             , date: "08.07.2023"
+        },
+        {
+            version: "0.4.7", description:
+                "· Add a LogChatWindow for better view how much damage character and enemy get"
+            , date: "08.07.2023"
         }]
 
     //character klasse, z.b. krieger und magier damit sie statt block dann feuerball und doppelhit
