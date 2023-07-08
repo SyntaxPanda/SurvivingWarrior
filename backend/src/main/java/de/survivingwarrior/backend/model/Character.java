@@ -23,4 +23,5 @@ public class Character {
     private int pots;
     private int maxPots;
     private int gold;
+    private int doubleHitReload;
 }

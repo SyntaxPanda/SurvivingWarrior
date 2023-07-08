@@ -23,6 +23,7 @@ export default function GamePage() {
 
     const [character, setCharacter] =
         useState<Character>({
+            doubleHitReload: 0,
             maxPots: 0,
             maxLife: 0,
             skillPoints: 0,
@@ -111,7 +112,8 @@ export default function GamePage() {
                         id: response.data.id,
                         gold: response.data.gold,
                         healPower: response.data.healPower,
-                        name: response.data.name
+                        name: response.data.name,
+                        doubleHitReload: response.data.doubleHitReload
                     })
                 } else {
                     setCharacter(response.data);
@@ -157,7 +159,7 @@ export default function GamePage() {
 
     function allEnemyDead() {
         setUser({...user, goldCounter: user.goldCounter + kobold1.gold + kobold2.gold + kobold3.gold})
-        if (story.id === "11-1" || story.id === "11-2" ||story.id === "11-3" ||story.id === "12-1" ||story.id === "12-2" || story.id ==="12-3" ||story.id === "13-1" ||story.id === "13-2" ||story.id === "13-3" ||story.id === "16-1" || story.id ==="16-2" || story.id ==="16-3" ||story.id === "15-1" ||story.id === "15-2" ||story.id === "15-3" ||story.id === "17-1" ||story.id === "17-2" ||story.id === "17-3" ||story.id === "19-1" ||story.id === "19-2" ||story.id === "19-3") {
+        if (story.id === "11-1" || story.id === "11-2" || story.id === "11-3" || story.id === "12-1" || story.id === "12-2" || story.id === "12-3" || story.id === "13-1" || story.id === "13-2" || story.id === "13-3" || story.id === "16-1" || story.id === "16-2" || story.id === "16-3" || story.id === "15-1" || story.id === "15-2" || story.id === "15-3" || story.id === "17-1" || story.id === "17-2" || story.id === "17-3" || story.id === "19-1" || story.id === "19-2" || story.id === "19-3") {
             setCharacter({
                 ...character,
                 gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
@@ -203,16 +205,25 @@ export default function GamePage() {
                 setCharacter({...character, life: character.life - kobold1.damage})
                 toast("You hit the Enemy for " + character.damage + " points.")
                 toast("The Enemy hit u for " + kobold1.damage + " points.")
+                if(character.doubleHitReload > 0){
+                    setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                }
             } else if (kobold2.life > 0) {
                 setKobold2({...kobold2, life: kobold2.life - character.damage})
                 setCharacter({...character, life: character.life - kobold2.damage})
                 toast("You hit the Enemy for " + character.damage + " points.")
                 toast("The Enemy hit u for " + kobold2.damage + " points.")
+                if(character.doubleHitReload > 0){
+                    setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                }
             } else if (kobold3.life > 0) {
                 setKobold3({...kobold3, life: kobold3.life - character.damage})
                 setCharacter({...character, life: character.life - kobold3.damage})
                 toast("You hit the Enemy for " + character.damage + " points.")
                 toast("The Enemy hit u for " + kobold3.damage + " points.")
+                if(character.doubleHitReload > 0){
+                    setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                }
             }
         } else if (story.option1 === "Get Heal for Gold") {
             let price = Math.round(Math.floor(Math.random() * (60 - 1 + 25)))
@@ -253,6 +264,7 @@ export default function GamePage() {
             if (character.gold >= price) {
                 setCharacter({...character, gold: character.gold - price, damage: character.damage + 4})
                 toast("U got 4 more dmg for " + price + " Gold.")
+                setGame({...game, storyCounter: game.storyCounter + 1})
             } else {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
@@ -260,24 +272,26 @@ export default function GamePage() {
     }
 
     function onClickGetNextStoryChapterOption2() {
-        if (story.option2 === "Block") {
-            if (kobold1.life > 0) {
-                let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
-                setCharacter({...character, life: character.life - (kobold1.damage - block)})
-                toast("The Enemy hit u for " + (kobold1.damage - block) + " points. U blocked " + block + " damage.")
-            } else if (kobold2.life > 0) {
-                let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
-                setCharacter({...character, life: character.life - (kobold2.damage - block)})
-                toast("The Enemy hit u for " + (kobold2.damage - block) + " points. U blocked " + block + " damage.")
-            } else if (kobold3.life > 0) {
-                let block = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
-                setCharacter({...character, life: character.life - (kobold3.damage - block)})
-                toast("The Enemy hit u for " + (kobold3.damage - block) + " points. U blocked " + block + " damage.")
+        if (story.option2 === "DoubleHit") {
+            if (character.doubleHitReload === 0) {
+                if (kobold1.life > 0) {
+                    setKobold1({...kobold1, life: kobold1.life - Math.round(character.damage * 1.5)})
+                    setCharacter({...character, life: character.life - kobold1.damage, doubleHitReload: character.doubleHitReload +3})
+                    toast("The Enemy hit u for " + kobold1.damage + " points.")
+                } else if (kobold2.life > 0) {
+                    setKobold2({...kobold2, life: kobold2.life - Math.round(character.damage * 1.5)})
+                    setCharacter({...character, life: character.life - kobold2.damage, doubleHitReload: character.doubleHitReload +3})
+                    toast("The Enemy hit u for " + kobold2.damage + " points.")
+                } else if (kobold3.life > 0) {
+                    setKobold3({...kobold3, life: kobold3.life - Math.round(character.damage * 1.5)})
+                    setCharacter({...character, life: character.life - kobold3.damage, doubleHitReload: character.doubleHitReload +3})
+                    toast("The Enemy hit u for " + kobold3.damage + " points.")
+                }
             }
         } else if (story.option2 === "Get damage for Gold") {
-            let price = Math.round(Math.floor(Math.random() * (30 - 1 + 10)))
+            let price = Math.round(Math.random() * (30 - 1 + 10))
             if (character.gold >= price) {
-                let getDamage = Math.round(Math.floor(Math.random() * (4 - 1 + 3)))
+                let getDamage = Math.round(Math.random() * (4 - 1 + 3))
                 setCharacter({...character, damage: character.damage + getDamage, gold: character.gold - price})
                 toast("U got " + getDamage + " max damage and pay " + price + " Gold for this")
                 setGame({...game, storyCounter: game.storyCounter + 1})
@@ -325,6 +339,9 @@ export default function GamePage() {
                             pots: character.pots - 1
                         })
                         toast("The Enemy hit u for " + kobold1.damage + " points.")
+                        if(character.doubleHitReload > 0){
+                            setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                        }
                     } else {
                         setCharacter({
                             ...character,
@@ -333,11 +350,17 @@ export default function GamePage() {
                         })
                         toast("The Enemy hit u for " + kobold1.damage + " points.")
                         toast("You heal ur self for " + character.healPower + " hp.")
+                        if(character.doubleHitReload > 0){
+                            setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                        }
                     }
                 } else {
                     setCharacter({...character, life: character.life - kobold1.damage})
                     toast("The Enemy hit u for " + kobold1.damage + " points.")
                     toast("You have max life or not more Pots and cant heal.")
+                    if(character.doubleHitReload > 0){
+                        setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                    }
                 }
             } else if (kobold2.life > 0) {
                 if (character.life < character.maxLife && character.pots > 0) {
@@ -348,6 +371,9 @@ export default function GamePage() {
                             pots: character.pots - 1
                         })
                         toast("The Enemy hit u for " + kobold2.damage + " points.")
+                        if(character.doubleHitReload > 0){
+                            setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                        }
                     } else {
                         setCharacter({
                             ...character,
@@ -356,11 +382,17 @@ export default function GamePage() {
                         })
                         toast("The Enemy hit u for " + kobold2.damage + " points.")
                         toast("You heal ur self for " + character.healPower + " hp.")
+                        if(character.doubleHitReload > 0){
+                            setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                        }
                     }
                 } else {
                     setCharacter({...character, life: character.life - kobold2.damage})
                     toast("The Enemy hit u for " + kobold2.damage + " points.")
                     toast("You have max life or no more Pots and cant heal.")
+                    if(character.doubleHitReload > 0){
+                        setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                    }
                 }
             } else if (kobold3.life > 0) {
                 if (character.life < character.maxLife && character.pots > 0) {
@@ -371,6 +403,9 @@ export default function GamePage() {
                             pots: character.pots - 1
                         })
                         toast("The Enemy hit u for " + kobold3.damage + " points.")
+                        if(character.doubleHitReload > 0){
+                            setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                        }
                     } else {
                         setCharacter({
                             ...character,
@@ -379,11 +414,17 @@ export default function GamePage() {
                         })
                         toast("The Enemy hit u for " + kobold3.damage + " points.")
                         toast("You heal ur self for " + character.healPower + " hp.")
+                        if(character.doubleHitReload > 0){
+                            setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                        }
                     }
                 } else {
                     setCharacter({...character, life: character.life - kobold3.damage})
                     toast("The Enemy hit u for " + kobold3.damage + " points.")
                     toast("You have max life or no more Pots and cant heal.")
+                    if(character.doubleHitReload > 0){
+                        setCharacter({...character, doubleHitReload: character.doubleHitReload - 1})
+                    }
                 }
             }
         } else if (story.option3 === "Dont buy something") {

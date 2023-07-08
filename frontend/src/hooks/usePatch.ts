@@ -63,7 +63,8 @@ export default function usePatch() {
                 "· After kill a Dragon, character get lvl up" +
                 "-· In story chapter 2 u get now 4 exp from enemy, before 3" +
                 "-· If character get level, he get 3 maxLife, before 0 and 1 damage, before 0" +
-                "-· Character get now 2 maxLife, before 3 when come level up"
+                "-· Character get now 2 maxLife, before 3 when come level up" +
+                "-· Block is now double hit(character damage * 1.5)"
             , date: "08.07.2023"
         }]
 
@@ -76,6 +77,8 @@ export default function usePatch() {
     //Bug Page um bugs zu melden und abhacken lassen damit andere sehen könne ob der Bug bearbeitet wurde
     //infos zu jeder page bzw jeden button
     //animation für hit am mob und char
+
+    //!!!!!!ChangeLog für die kampf werte wie im chat bei wow!!!!!!! dafür keine toast mehr für die anzeige
 
     //multiplayer???
 
