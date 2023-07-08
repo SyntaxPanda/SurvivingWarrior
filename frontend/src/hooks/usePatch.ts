@@ -59,5 +59,6 @@ export default function usePatch() {
             , date: "08.07.2023"
         }]
 
+
     return {patchNotes}
 }
