@@ -163,14 +163,14 @@ export default function GamePage() {
             setCharacter({
                 ...character,
                 gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
-                exp: character.exp + (4 * kobolds.length)
+                exp: character.exp + (3 * kobolds.length)
             })
         } else if (story.id === "11") {
             setCharacter({
                 ...character,
                 gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
                 level: character.level + 1,
-                skillPoints: character.skillPoints + 3,
+                skillPoints: character.skillPoints + 2,
                 maxLife: character.maxLife + 2,
                 damage: character.damage + 1
             })
@@ -178,7 +178,7 @@ export default function GamePage() {
             setCharacter({
                 ...character,
                 gold: character.gold + kobold1.gold + kobold2.gold + kobold3.gold,
-                exp: character.exp + (3 * kobolds.length)
+                exp: character.exp + (2 * kobolds.length)
             })
         }
         toast("U got " + (kobold1.gold + kobold2.gold + kobold3.gold) + " Gold and " + kobolds.length * 3 + " Exp")
@@ -448,7 +448,7 @@ export default function GamePage() {
             setCharacter({
                 ...character, maxLife: character.maxLife + 5,
                 damage: character.damage + 5,
-                life: character.maxLife,
+                life: character.maxLife + 5,
                 pots: character.maxPots
             })
             setGame({...game, storyCounter: game.storyCounter + 1})
@@ -635,7 +635,7 @@ export default function GamePage() {
                 ...character,
                 level: character.level + 1,
                 exp: character.exp - 12,
-                skillPoints: character.skillPoints + 3,
+                skillPoints: character.skillPoints + 2,
                 maxLife: character.maxLife + 2,
                 damage: character.damage + 1
             })
@@ -652,8 +652,8 @@ export default function GamePage() {
         if (character.skillPoints > 0) {
             setCharacter({
                 ...character,
-                life: character.life + 3,
-                maxLife: character.maxLife + 3,
+                life: character.life + 2,
+                maxLife: character.maxLife + 2,
                 skillPoints: character.skillPoints - 1
             })
         }

@@ -69,7 +69,10 @@ export default function usePatch() {
         },
         {
             version: "0.4.7", description:
-                "· Add a LogChatWindow for a better view how much damage character and enemy get"
+                "· Add a LogChatWindow for a better view how much damage character and enemy get" +
+                "-· Change exp rate of enemy chapter 1 from 3 to 2 and chapter 2 from 4 to 3" +
+                "-· Change life per skill point from 3 to 2" +
+                "-· Change how much skill points for lvl characters got from 3 to 2"
             , date: "08.07.2023"
         }]
 
