@@ -50,7 +50,12 @@ export default function usePatch() {
             version: "0.4.5", description:
                 "· Balancing for story chapter 2" +
                 "-· Dragons now stronger" +
-                "-· Better design for mobile user"
+                "-· Better design for mobile user" +
+                "-· Change exp needed for lvl from 15 to 12" +
+                "-· Change how much life u got for 1 skill point from 1 to 3" +
+                "-· Change character life from 50 to 55" +
+                "-· Change character damage from 4 to 5" +
+                "-· Change character heal power from 5 to 7"
             , date: "08.07.2023"
         }]
 
