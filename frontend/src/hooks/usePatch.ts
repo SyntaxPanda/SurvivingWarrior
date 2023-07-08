@@ -67,7 +67,6 @@ export default function usePatch() {
             , date: "08.07.2023"
         }]
 
-
     //character klasse, z.b. krieger und magier damit sie statt block dann feuerball und doppelhit
 
     //story weiter ausbauen
