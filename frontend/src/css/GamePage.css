@@ -165,10 +165,12 @@ button {
     color: #61dafb;
     font-size: 2vh;
     justify-items: flex-start;
+    align-content: flex-start;
 }
 
 .message{
     margin: 0.5vh;
+    font-size: 2vh;
 }
 
 .storyText {

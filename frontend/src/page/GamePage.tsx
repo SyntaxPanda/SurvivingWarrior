@@ -963,7 +963,7 @@ export default function GamePage() {
                     {story.name}
                 </div>
                 <div className={"logChat"}>
-                    {gameLog.map((message) =>(
+                    {gameLog.reverse().map((message) =>(
                         <div className={"message"}>
                             {message}
                         </div>
