@@ -57,6 +57,13 @@ export default function usePatch() {
                 "-· Change character damage from 4 to 5" +
                 "-· Change character heal power from 5 to 7"
             , date: "08.07.2023"
+        },
+        {
+            version: "0.4.6", description:
+                "· After kill a Dragon, character get lvl up" +
+                "-· In story chapter 2 u get now 4 exp from enemy, before 3" +
+                "-· If character get level, he get 3 maxLife, before 0 and 1 damage, before 0"
+            , date: "08.07.2023"
         }]
 
 
