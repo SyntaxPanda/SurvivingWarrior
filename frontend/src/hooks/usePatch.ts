@@ -45,6 +45,13 @@ export default function usePatch() {
             version: "0.4.4", description:
                 "· Leaderboard for DragonCounter, AchievementPoints, LevelCounter and GoldCounter"
             , date: "06.07.2023"
+        },
+        {
+            version: "0.4.5", description:
+                "· Balancing for story chapter 2" +
+                "-· Dragons now stronger" +
+                "-· Better design for mobile user"
+            , date: "08.07.2023"
         }]
 
     return {patchNotes}

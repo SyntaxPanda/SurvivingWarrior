@@ -202,9 +202,9 @@ export default function GamePage() {
                 toast("The Enemy hit u for " + kobold3.damage + " points.")
             }
         } else if (story.option1 === "Get Heal for Gold") {
-            let price = Math.round(Math.floor(Math.random() * (45 - 1 + 25)))
+            let price = Math.round(Math.floor(Math.random() * (60 - 1 + 25)))
             if (character.gold >= price) {
-                let getMaxLife = Math.round(Math.floor(Math.random() * (30 - 1 + 15)))
+                let getMaxLife = Math.round(Math.floor(Math.random() * (20 - 1 + 15)))
                 if((character.life + getMaxLife) > character.maxLife){
                     setCharacter({...character, life: character.maxLife, gold: character.gold - price})
                     toast("U heal up to full life for " + price + " Gold")
@@ -236,7 +236,7 @@ export default function GamePage() {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
         }else if(story.option1 === "Get 4 damage"){
-            let price = Math.round(Math.floor(Math.random() * (80 - 1 + 55)))
+            let price = Math.round(Math.floor(Math.random() * (40 - 1 + 55)))
             if(character.gold >= price){
                 setCharacter({...character, gold: character.gold - price, damage: character.damage + 4})
                 toast("U got 4 more dmg for " + price + " Gold.")
@@ -262,9 +262,9 @@ export default function GamePage() {
                 toast("The Enemy hit u for " + (kobold3.damage - block) + " points. U blocked " + block + " damage.")
             }
         } else if (story.option2 === "Get damage for Gold") {
-            let price = Math.round(Math.floor(Math.random() * (10 - 1 + 10)))
+            let price = Math.round(Math.floor(Math.random() * (30 - 1 + 10)))
             if (character.gold >= price) {
-                let getDamage = Math.round(Math.floor(Math.random() * (6 - 1 + 1)))
+                let getDamage = Math.round(Math.floor(Math.random() * (4 - 1 + 3)))
                 setCharacter({...character, damage: character.damage + getDamage, gold: character.gold - price})
                 toast("U got " + getDamage + " max damage and pay " + price + " Gold for this")
                 setGame({...game, storyCounter: game.storyCounter + 1})
@@ -290,7 +290,7 @@ export default function GamePage() {
                 toast("U have not enough Gold to buy this for " + price + " Gold")
             }
         }else if(story.option2 === "Fill all ur Potions"){
-            let price = Math.round(Math.floor(Math.random() * (120 - 1 + 85)))
+            let price = Math.round(Math.floor(Math.random() * (40 - 1 + 85)))
             if(character.gold >= price){
                 setCharacter({...character, gold: character.gold - price, pots: character.maxPots})
                 toast("U fill up all potions for " + price + " Gold")
