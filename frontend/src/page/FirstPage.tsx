@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useNavigate} from "react-router-dom";
 import "../css/FirstPage.css"
-import {toast, ToastContainer} from "react-toastify";
+import {ToastContainer} from "react-toastify";
 
 export default function FirstPage() {
     const navigate = useNavigate()
