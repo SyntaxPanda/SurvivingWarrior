@@ -11,4 +11,5 @@ export type Character = {
     pots:number,
     maxPots:number,
     gold:number,
+    doubleHitReload:number;
 }

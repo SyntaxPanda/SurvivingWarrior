@@ -16,7 +16,7 @@ export default function StartPage() {
     const [games, setGames] =
         useState<Game[]>([])
 
-    const[username, setUsername] =
+    const [username, setUsername] =
         useState("")
 
     function onClickNavigateToNewGamePage() {
@@ -27,7 +27,8 @@ export default function StartPage() {
         useState<UserDTO>({
             achievementPoints: 0,
             skillPoints: 0,
-            dragonCounter: 0, levelCounter: 0, goldCounter: 0, id: "", achievements: [], userName: ""})
+            dragonCounter: 0, levelCounter: 0, goldCounter: 0, id: "", achievements: [], username: ""
+        })
 
     function setUserIfLogin() {
         axios.get("/api/user/username")
@@ -77,14 +78,23 @@ export default function StartPage() {
         }
     };
 
-    function goToPatchNotePage(){
+    function goToPatchNotePage() {
         navigate("/patchNoteLogin")
+    }
+
+    function getLeaderBoard() {
+        navigate("/leaderboard")
     }
 
     return (
         <div className={"startPage"}>
             <div className={"NewGameButton"}>
-                <button onClick={onClickNavigateToNewGamePage}>New Game</button>
+                <div className={"newGame"}>
+                    <button onClick={onClickNavigateToNewGamePage}>New Game</button>
+                </div>
+                <div className={"getLeaderBoardButton"}>
+                    <button onClick={getLeaderBoard}>Leaderboard</button>
+                </div>
             </div>
             <div className={"loadGameButton"}>
                 <button onClick={openLoadGameModal}>Load Game</button>
@@ -132,7 +142,8 @@ export default function StartPage() {
                         return (
                             <div className={frameClassName} key={achievement.id}>
                                 <div className={"achievementContent"}>
-                                    {achievement.name} <div className={"infosAchievement"}>{achievement.description}</div>
+                                    {achievement.name}
+                                    <div className={"infosAchievement"}>{achievement.description}</div>
                                 </div>
                             </div>
                         );

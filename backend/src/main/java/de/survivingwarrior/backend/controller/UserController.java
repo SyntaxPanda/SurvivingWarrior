@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -55,5 +56,10 @@ public class UserController {
     @PutMapping("/achievement/reached")
     public void saveUser(@RequestBody UserA userA){
         userService.saveUser(userA);
+    }
+
+    @GetMapping("/all")
+    public List<UserDTO> getAllUser(){
+        return userService.getAllUser();
     }
 }

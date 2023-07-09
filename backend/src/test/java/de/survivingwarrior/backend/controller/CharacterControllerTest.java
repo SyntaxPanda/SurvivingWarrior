@@ -42,7 +42,7 @@ class CharacterControllerTest {
                                     "level": 1,
                                     "exp": 0,
                                     "skillPoints": 10,
-                                    "healPower": 5,
+                                    "healPower": 7,
                                     "pots": 5,
                                     "maxPots": 5
                                 }"""
@@ -82,7 +82,7 @@ class CharacterControllerTest {
                                     "level": 1,
                                     "exp": 0,
                                     "skillPoints": 10,
-                                    "healPower": 5,
+                                    "healPower": 7,
                                     "pots": 5,
                                     "maxPots": 5
                                 }"""
