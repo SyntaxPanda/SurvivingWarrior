@@ -872,6 +872,15 @@ export default function GamePage() {
 
     const [gameLog, setGameLog] = useState<string[]>([])
 
+    const[tutorialModal ,setTutorialModal] = useState(false)
+    function goToTutorialModal(){
+        setTutorialModal(true)
+    }
+
+    function closeTutorialModal(){
+        setTutorialModal(false)
+    }
+
     return (
         <div className={"gamePageBox"}>
             <Modal className={"modalMenu"} isOpen={isOpen}>
@@ -902,8 +911,24 @@ export default function GamePage() {
                         <button onClick={closeSaveGameModal}>Back</button>
                     </div>
                 </Modal>
+
+                <Modal className={"modalTutorial"} isOpen={tutorialModal}>
+                   <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div className={"buttonCloseTutorial"}>
+                        <button onClick={closeTutorialModal}>Back</button>
+                    </div>
+                </Modal>
+
                 <button onClick={goToMenu}>Menu</button>
-                <button onClick={closeModal}>close</button>
+                <button onClick={goToTutorialModal}>How to Play</button>
+                <button onClick={closeModal}>Close</button>
             </Modal>
             <div className={"header"}>
                 <div className={"menu"}>
