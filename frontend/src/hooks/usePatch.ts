@@ -76,17 +76,13 @@ export default function usePatch() {
             , date: "08.07.2023"
         }]
 
-    //character klasse, z.b. krieger und magier damit sie statt block dann feuerball und doppelhit
 
     //story weiter ausbauen
 
-    //Krieger hat dann doppelhit, muss aber danach 3 runden abklingen haben auf der fähigkeit
     //paar neue achievements (für heal power, trank Anzahl, gesamt geheilter betrag, höllen wesen getötet)
     //Bug Page um bugs zu melden und abhacken lassen damit andere sehen könne ob der Bug bearbeitet wurde
     //infos zu jeder page bzw jeden button
     //animation für hit am mob und char
-
-    //!!!!!!ChangeLog für die kampf werte wie im chat bei wow!!!!!!! dafür keine toast mehr für die anzeige
 
     //multiplayer???
 
