@@ -872,12 +872,13 @@ export default function GamePage() {
 
     const [gameLog, setGameLog] = useState<string[]>([])
 
-    const[tutorialModal ,setTutorialModal] = useState(false)
-    function goToTutorialModal(){
+    const [tutorialModal, setTutorialModal] = useState(false)
+
+    function goToTutorialModal() {
         setTutorialModal(true)
     }
 
-    function closeTutorialModal(){
+    function closeTutorialModal() {
         setTutorialModal(false)
     }
 
@@ -913,14 +914,27 @@ export default function GamePage() {
                 </Modal>
 
                 <Modal className={"modalTutorial"} isOpen={tutorialModal}>
-                   <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                    <div className={"rowOne"}>
+                        <div className={"menuInfo"}>
+                            Save, Menu und HowToPlay Page
+                        </div>
+                        <div className={"enemyInfo"}>
+                            Oben Name vom Feind, unten Leben
+                        </div>
+                        <div className={"lifeExpInfo"}>
+                            Rot ist Life/MaxLife, Blau Exp/MaxExp
+                        </div>
+                    </div>
+                    <div className={"rowTwo"}>
+                        <div className={"gameNameInfo"}></div>
+                        <div className={"characterNameInfo"}></div>
+                    </div>
+                    <div className={"rowThree"}></div>
+                    <div className={"rowFour"}></div>
+                    <div className={"rowFive"}></div>
+                    <div className={"rowSix"}></div>
+                    <div className={"rowSeven"}></div>
+                    <div className={"rowEight"}></div>
                     <div className={"buttonCloseTutorial"}>
                         <button onClick={closeTutorialModal}>Back</button>
                     </div>
@@ -988,7 +1002,7 @@ export default function GamePage() {
                     {story.name}
                 </div>
                 <div className={"logChat"}>
-                    {gameLog.reverse().map((message) =>(
+                    {gameLog.reverse().map((message) => (
                         <div className={"message"}>
                             {message}
                         </div>
@@ -1009,7 +1023,7 @@ export default function GamePage() {
                             {story.option2 === "DoubleHit" && character.doubleHitReload === 0 ? (
                                 <span>{story.option2}</span>
                             ) : (
-                                <span style={{ color: "gray" }}>{story.option2}</span>
+                                <span style={{color: "gray"}}>{story.option2}</span>
                             )}
                         </button>
                     </div>

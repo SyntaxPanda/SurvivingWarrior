@@ -79,9 +79,12 @@ export default function usePatch() {
 
     //story weiter ausbauen
 
-    //paar neue achievements (für heal power, trank Anzahl, gesamt geheilter betrag, höllen wesen getötet)
+    //in den story.option für new game +1 eine if(character.n0 === true){alles +3}
+    //im new game seite ein button um alle für n1 verfügbaren chars an zeigen zu lassen.
+    //n0 wird auf true gesetzt wenn story.id === "21"
+
+    //paar neue achievements (für heal power, trank Anzahl, gesamt geheilter betrag, höllen wesen getötet, n0 durch, n1 durch)
     //Bug Page um bugs zu melden und abhacken lassen damit andere sehen könne ob der Bug bearbeitet wurde
-    //infos zu jeder page bzw jeden button
     //animation für hit am mob und char
 
     //multiplayer???

@@ -340,7 +340,87 @@ button {
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
     background-position: center;
-    grid-template-rows: auto auto auto auto auto auto auto auto;
+    grid-template-rows: 13vh 9vh 13vh 10vh 9vh 9vh 8vh 25vh;
+}
+
+.rowOne{
+    display: grid;
+    border-bottom: 1px solid white;
+    grid-template-columns: 11vw auto auto;
+}
+
+.menuInfo{
+    display: grid;
+    width: 8vw;
+    margin-left: 11vw;
+    border: 1px solid white;
+    color: white;
+    font-size: 2.7vh;
+    height: 12vh;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+}
+.enemyInfo{
+    display: grid;
+    width: 7vw;
+    margin-left: 22vw;
+    border: 1px solid white;
+    color: white;
+    font-size: 2.7vh;
+    align-self: center;
+    height: 12vh;
+    align-content: center;
+    justify-content: center;
+}
+.lifeExpInfo{
+    display: grid;
+    width: 10vw;
+    border: 1px solid white;
+    color: white;
+    height: 12vh;
+    font-size: 2.7vh;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.rowTwo{
+    display: grid;
+    border-bottom: 1px solid white;
+    grid-template-columns: 50vw 50vw;
+}
+.gameNameInfo{
+    display: grid;
+    border: 1px white solid;
+    width: 15vw;
+    justify-self: center;
+}
+.characterNameInfo{
+    display: grid;
+    border: 1px white solid;
+    justify-self: flex-end;
+    width: 15vw;
+    margin-right: 22vw;
+}
+
+.rowThree{
+    border-bottom: 1px solid white;
+}
+.rowFour{
+    border-bottom: 1px solid white;
+}
+.rowFive{
+    border-bottom: 1px solid white;
+}
+.rowSix{
+    border-bottom: 1px solid white;
+}
+.rowSeven{
+    border-bottom: 1px solid white;
+}
+.rowEight{
+    border-bottom: 1px solid white;
 }
 
 .buttonCloseTutorial{
