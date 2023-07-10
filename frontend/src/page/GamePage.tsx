@@ -919,22 +919,66 @@ export default function GamePage() {
                             Save, Menu und HowToPlay Page
                         </div>
                         <div className={"enemyInfo"}>
-                            Oben Name vom Feind, unten Leben
+                            Oben Feind Name, unten Leben
                         </div>
                         <div className={"lifeExpInfo"}>
                             Rot ist Life/MaxLife, Blau Exp/MaxExp
                         </div>
                     </div>
                     <div className={"rowTwo"}>
-                        <div className={"gameNameInfo"}></div>
-                        <div className={"characterNameInfo"}></div>
+                        <div className={"gameNameInfo"}>
+                            Name vom Spiel
+                        </div>
+                        <div className={"characterNameInfo"}>
+                            Character Name
+                        </div>
                     </div>
-                    <div className={"rowThree"}></div>
-                    <div className={"rowFour"}></div>
-                    <div className={"rowFive"}></div>
-                    <div className={"rowSix"}></div>
-                    <div className={"rowSeven"}></div>
-                    <div className={"rowEight"}></div>
+                    <div className={"rowThree"}>
+                        <div className={"gameLogInfo"}>
+                            Hier stehen alle infos die während des Spiels passieren
+                        </div>
+                        <div className={"charLevelPointsInfo"}>
+                            Character Level und
+                            Skill Points zum verteilen auf die Werte darunter
+                        </div>
+                    </div>
+                    <div className={"rowFour"}>
+                        <div className={"storyTextInfo"}>
+                            In diesem Feld stehen alle Storylines
+                        </div>
+                        <div className={"lifeWerteInfo"}>
+                            Das leben was der Character hat, auf dem + kann der Wert erhöht werden
+                        </div>
+                    </div>
+                    <div className={"rowFive"}>
+                        <div className={"damageWerteInfo"}>
+                            Der Schaden vom Character, auf dem + kann der Wert erhöht werden
+                        </div>
+                    </div>
+                    <div className={"rowSix"}>
+                        <div className={"healPowerWerteInfo"}>
+                            Die Menge die ein Pot heilt, auf dem + kann der Wert erhöht werden
+                        </div>
+                    </div>
+                    <div className={"rowSeven"}>
+                        <div className={"maximalePotsInfo"}>
+                        So viele Pots hat der Character
+                        </div>
+                    </div>
+                    <div className={"rowEight"}>
+                        <div className={"hitButtonInfo"}>
+                            Fügt Gegnern Schaden in Höhe vom damage zu
+                        </div>
+                        <div className={"doubleHitButtonInfo"}>
+                            Fügt Gegnern 1,5fachen Schaden zu
+                        </div>
+                        <div className={"healPotButtonInfo"}>
+                            Zum heilen des Spielers, Anzahl steht dabei
+                        </div>
+                        <div className={"goldWertInfo"}>
+                            Die Menge an Gold der Character besitzt, Gold zum kaufen von sachen beim händler benutzt
+                        </div>
+                    </div>
                     <div className={"buttonCloseTutorial"}>
                         <button onClick={closeTutorialModal}>Back</button>
                     </div>

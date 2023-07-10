@@ -345,7 +345,6 @@ button {
 
 .rowOne{
     display: grid;
-    border-bottom: 1px solid white;
     grid-template-columns: 11vw auto auto;
 }
 
@@ -356,7 +355,7 @@ button {
     border: 1px solid white;
     color: white;
     font-size: 2.7vh;
-    height: 12vh;
+    height: 13vh;
     align-self: center;
     align-content: center;
     justify-content: center;
@@ -367,9 +366,9 @@ button {
     margin-left: 22vw;
     border: 1px solid white;
     color: white;
-    font-size: 2.7vh;
+    font-size: 2.3vh;
     align-self: center;
-    height: 12vh;
+    height: 13vh;
     align-content: center;
     justify-content: center;
 }
@@ -387,7 +386,6 @@ button {
 
 .rowTwo{
     display: grid;
-    border-bottom: 1px solid white;
     grid-template-columns: 50vw 50vw;
 }
 .gameNameInfo{
@@ -395,6 +393,11 @@ button {
     border: 1px white solid;
     width: 15vw;
     justify-self: center;
+    color: white;
+    justify-items: center;
+    align-items: center;
+    font-size: 2.8vh;
+    margin-left: 14vw;
 }
 .characterNameInfo{
     display: grid;
@@ -402,24 +405,106 @@ button {
     justify-self: flex-end;
     width: 15vw;
     margin-right: 22vw;
+    color: white;
+    align-items: center;
+    justify-items: center;
+    font-size: 2.8vh;
 }
 
 .rowThree{
-    border-bottom: 1px solid white;
+    display: grid;
+    grid-template-columns: 50vw 50vw;
 }
+.gameLogInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 15vw;
+    margin-left: 17vw;
+    font-size: 2.8vh;
+    justify-items: center;
+    align-items: center;
+}
+.charLevelPointsInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 15vw;
+    margin-left: 10vw;
+    font-size: 2.8vh;
+    justify-items: center;
+    align-items: center;
+}
+
 .rowFour{
-    border-bottom: 1px solid white;
+    display: grid;
+    grid-template-columns: 50vw 50vw;
 }
+.storyTextInfo{
+display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    justify-self: flex-end;
+    font-size: 2.8vh;
+    justify-items: center;
+    align-items: center;
+}
+.lifeWerteInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    margin-left: 5vw;
+    font-size: 2.8vh;
+}
+
 .rowFive{
-    border-bottom: 1px solid white;
+    display: grid;
+    grid-template-columns: 100vw;
 }
+.damageWerteInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    margin-right: 21vw;
+    font-size: 2.5vh;
+    justify-self: flex-end;
+}
+
 .rowSix{
-    border-bottom: 1px solid white;
+    display: grid;
+    grid-template-columns: 100vw;
 }
+.healPowerWerteInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    margin-right: 24.9vw;
+    font-size: 2.5vh;
+    justify-self: flex-end;
+}
+
 .rowSeven{
+    display: grid;
+    grid-template-columns: 100vw;
     border-bottom: 1px solid white;
 }
+.maximalePotsInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    margin-right: 24.9vw;
+    font-size: 2.8vh;
+    justify-self: flex-end;
+}
+
 .rowEight{
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
     border-bottom: 1px solid white;
 }
 
