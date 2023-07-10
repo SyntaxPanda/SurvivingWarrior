@@ -2,6 +2,11 @@
     display: grid;
     width: 100vw;
     height: 100vh;
+    background-image: url("../image/NewGamePage.jpg");
+    background-position: center;
+    background-size: 100vw 100vh;
+    overflow: auto;
+
 }
 
 .patch{
@@ -16,6 +21,7 @@
     display: grid;
     border: 1px solid white;
     margin-bottom: 2vh;
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .buttonBackPatchPage{
