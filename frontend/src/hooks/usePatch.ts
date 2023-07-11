@@ -74,19 +74,25 @@ export default function usePatch() {
                 "-· Change life per skill point from 3 to 2" +
                 "-· Change how much skill points for lvl characters got from 3 to 2"
             , date: "08.07.2023"
+        },
+        {
+            version: "0.4.8", description:
+                "· HowToPlay Page for new User, find in game on menu button" +
+                "-· All moves add to gameLog" +
+                "-· Cant skill MaxPots now but u got every level up 1 maxPot"
+            , date: "11.07.2023"
         }]
 
-    //character klasse, z.b. krieger und magier damit sie statt block dann feuerball und doppelhit
 
     //story weiter ausbauen
 
-    //Krieger hat dann doppelhit, muss aber danach 3 runden abklingen haben auf der fähigkeit
-    //paar neue achievements (für heal power, trank Anzahl, gesamt geheilter betrag, höllen wesen getötet)
-    //Bug Page um bugs zu melden und abhacken lassen damit andere sehen könne ob der Bug bearbeitet wurde
-    //infos zu jeder page bzw jeden button
-    //animation für hit am mob und char
+    //in den story.option für new game +1 eine if(character.n0 === true){alles +3}
+    //im new game seite ein button um alle für n1 verfügbaren chars an zeigen zu lassen.
+    //n0 wird auf true gesetzt wenn story.id === "21"
 
-    //!!!!!!ChangeLog für die kampf werte wie im chat bei wow!!!!!!! dafür keine toast mehr für die anzeige
+    //paar neue achievements (für heal power, trank Anzahl, gesamt geheilter betrag, höllen wesen getötet, n0 durch, n1 durch)
+    //Bug Page um bugs zu melden und abhacken lassen damit andere sehen könne ob der Bug bearbeitet wurde
+    //animation für hit am mob und char
 
     //multiplayer???
 

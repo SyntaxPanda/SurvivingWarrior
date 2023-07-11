@@ -332,6 +332,223 @@ button {
     width: 1vw;
 }
 
+.modalTutorial{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../image/tutorial.png");
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    grid-template-rows: 13vh 9vh 13vh 10vh 9vh 9vh 8vh 25vh;
+}
+
+.rowOne{
+    display: grid;
+    grid-template-columns: 11vw auto auto;
+}
+
+.menuInfo{
+    display: grid;
+    width: 8vw;
+    margin-left: 11vw;
+    border: 1px solid white;
+    color: white;
+    font-size: 2.7vh;
+    height: 13vh;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+}
+.enemyInfo{
+    display: grid;
+    width: 7vw;
+    margin-left: 22vw;
+    border: 1px solid white;
+    color: white;
+    font-size: 2.3vh;
+    align-self: center;
+    height: 13vh;
+    align-content: center;
+    justify-content: center;
+}
+.lifeExpInfo{
+    display: grid;
+    width: 10vw;
+    border: 1px solid white;
+    color: white;
+    height: 12vh;
+    font-size: 2.7vh;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.rowTwo{
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+}
+.gameNameInfo{
+    display: grid;
+    border: 1px white solid;
+    width: 15vw;
+    justify-self: center;
+    color: white;
+    justify-items: center;
+    align-items: center;
+    font-size: 2.8vh;
+    margin-left: 14vw;
+}
+.characterNameInfo{
+    display: grid;
+    border: 1px white solid;
+    justify-self: flex-end;
+    width: 15vw;
+    margin-right: 22vw;
+    color: white;
+    align-items: center;
+    justify-items: center;
+    font-size: 2.8vh;
+}
+
+.rowThree{
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+}
+.gameLogInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 15vw;
+    margin-left: 17vw;
+    font-size: 2.8vh;
+    justify-items: center;
+    align-items: center;
+}
+.charLevelPointsInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 15vw;
+    margin-left: 10vw;
+    font-size: 2.8vh;
+    justify-items: center;
+    align-items: center;
+}
+
+.rowFour{
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+}
+.storyTextInfo{
+display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    justify-self: flex-end;
+    font-size: 2.8vh;
+    justify-items: center;
+    align-items: center;
+}
+.lifeWerteInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    margin-left: 5vw;
+    font-size: 2.8vh;
+}
+
+.rowFive{
+    display: grid;
+    grid-template-columns: 100vw;
+}
+.damageWerteInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    margin-right: 21vw;
+    font-size: 2.5vh;
+    justify-self: flex-end;
+}
+
+.rowSix{
+    display: grid;
+    grid-template-columns: 100vw;
+}
+.healPowerWerteInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    margin-right: 24.9vw;
+    font-size: 2.5vh;
+    justify-self: flex-end;
+}
+
+.rowSeven{
+    display: grid;
+    grid-template-columns: 100vw;
+}
+.maximalePotsInfo{
+    display: grid;
+    border: 1px solid white;
+    color: white;
+    width: 20vw;
+    margin-right: 24.9vw;
+    font-size: 2.8vh;
+    justify-self: flex-end;
+}
+
+.rowEight{
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+}
+.hitButtonInfo{
+    display: grid;
+    color: white;
+    border: 1px white solid;
+    width: 15vw;
+    height: 10vh;
+    justify-self: center;
+    align-self: center;
+    align-items: center;
+    font-size: 2.5vh;
+}
+.doubleHitButtonInfo{
+    display: grid;
+    color: white;
+    border: 1px solid white;
+    width: 15vw;
+    height: 4vw;
+    font-size: 2.5vh;
+    margin-left: 12vw;
+}
+.healPotButtonInfo{
+    display: grid;
+    color: white;
+    border: 1px white solid;
+    width: 17vw;
+    height: 6vh;
+    margin-left: 2vw;
+    align-self: flex-end;
+    font-size: 2.5vh;
+}
+.goldWertInfo{
+    display: grid;
+    color: white;
+    border: 1px solid white;
+    width: 19vw;
+    height: 14.6vh;
+    align-self: flex-end;
+    font-size: 2.5vh;
+}
+
+.buttonCloseTutorial{
+
+}
+
 .characterPotBox {
     display: grid;
     grid-template-columns: 12vw 4vw 4vw;

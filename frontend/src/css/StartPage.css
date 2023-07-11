@@ -229,7 +229,9 @@ svg {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: url("../image/backgroundButtonKobold.jpg");
+    background-image: url("../image/NewGamePage.jpg");
+    background-position: center;
+    background-size: 100vw 100vh;
 }
 
 .achievementGrid{
@@ -243,7 +245,7 @@ svg {
     border: 2px solid;
     animation: rainbowBorder 2s linear infinite;
     color: #61dafb;
-    background-image: url("../image/backgroundButtonKobold.jpg");
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 @keyframes rainbowBorder {
@@ -261,7 +263,7 @@ svg {
     border: 2px solid #ffffff;
     animation: none;
     color: #61dafb;
-    background-image: url("../image/backgroundButtonKobold.jpg");
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 @keyframes rotation {
