@@ -490,7 +490,6 @@ display: grid;
 .rowSeven{
     display: grid;
     grid-template-columns: 100vw;
-    border-bottom: 1px solid white;
 }
 .maximalePotsInfo{
     display: grid;
@@ -505,7 +504,45 @@ display: grid;
 .rowEight{
     display: grid;
     grid-template-columns: 25vw 25vw 25vw 25vw;
-    border-bottom: 1px solid white;
+}
+.hitButtonInfo{
+    display: grid;
+    color: white;
+    border: 1px white solid;
+    width: 15vw;
+    height: 10vh;
+    justify-self: center;
+    align-self: center;
+    align-items: center;
+    font-size: 2.5vh;
+}
+.doubleHitButtonInfo{
+    display: grid;
+    color: white;
+    border: 1px solid white;
+    width: 15vw;
+    height: 4vw;
+    font-size: 2.5vh;
+    margin-left: 12vw;
+}
+.healPotButtonInfo{
+    display: grid;
+    color: white;
+    border: 1px white solid;
+    width: 17vw;
+    height: 6vh;
+    margin-left: 2vw;
+    align-self: flex-end;
+    font-size: 2.5vh;
+}
+.goldWertInfo{
+    display: grid;
+    color: white;
+    border: 1px solid white;
+    width: 19vw;
+    height: 14.6vh;
+    align-self: flex-end;
+    font-size: 2.5vh;
 }
 
 .buttonCloseTutorial{
