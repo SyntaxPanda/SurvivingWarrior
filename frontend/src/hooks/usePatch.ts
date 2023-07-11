@@ -74,6 +74,13 @@ export default function usePatch() {
                 "-· Change life per skill point from 3 to 2" +
                 "-· Change how much skill points for lvl characters got from 3 to 2"
             , date: "08.07.2023"
+        },
+        {
+            version: "0.4.8", description:
+                "· HowToPlay Page for new User, find in game on menu button" +
+                "-· All moves add to gameLog" +
+                "-· Cant skill MaxPots now but u got every level up 1 maxPot"
+            , date: "11.07.2023"
         }]
 
 
